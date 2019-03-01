@@ -1,5 +1,4 @@
 const uuid = require('uuid')
-var i=1
 // The User Model
 class User {
     
@@ -7,7 +6,7 @@ class User {
         this.name = name;
         this.email = email
         this.password = password
-        this.id = ""+i++;
+        this.id = uuid.v4(); //edited id initialization
     };
 };
 
