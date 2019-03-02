@@ -1,4 +1,4 @@
-const User = require('../api/User')
+const User = require('../models/User')
 class Admin extends User{
     constructor(name,age,dateJoined,email,password)
     {   super(name,email,password);
