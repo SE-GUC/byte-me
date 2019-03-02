@@ -3,7 +3,6 @@ class Schedule {
         this.time=time;
         this.date=date;
         this.booked=false;
-        this.requested=false;
     };
 }
 

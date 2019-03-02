@@ -36,11 +36,11 @@ const schedules=[
     new Schedule("8:00 PM to 9:00 AM", 15/10/2005)
 ];
 const rooms=[
-    new Room(405,schedules,"100 EGP per hour"),
-    new Room(406,schedules,"120 EGP per hour"),
-    new Room(407,schedules,"180 EGP per hour"),
-    new Room(408,schedules,"200 EGP per hour"),
-    new Room(409,schedules,"100 EGP per hour")
+    new Room(405,schedules,"100 EGP per hour",50),
+    new Room(406,schedules,"120 EGP per hour",50),
+    new Room(407,schedules,"180 EGP per hour",50),
+    new Room(408,schedules,"200 EGP per hour",50),
+    new Room(409,schedules,"100 EGP per hour",50)
 ]
 const COworkingS = [
     new COworking('q@w.com', 'qqqq',"name1","location1",14/10/2005, "9:00 AM to 9:00 PM", ["ff","gg"],["ff","gg"],
@@ -123,67 +123,81 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
     const COID = req.params.id 
     const space = COworkingS.find(space => space.id === COID)
-    const index = COworkingS.indexOf(space)
-    COworkingS.splice(index,1)
-    res.send(COworkingS)
+    if(space===undefined){
+        res.send("This ID is incorrect")
+    }
+    else{
+        const index = COworkingS.indexOf(space)
+        COworkingS.splice(index,1)
+        res.send(COworkingS)
+    }
 });
 
-router.post('/', (req, res) => {
-    const email = req.body.email
-    const password = req.body.password
-    const name = req.body.name
-    const location = req.body.location
-    const joinDate = req.body.joinDate
-    const openingHours = req.body.openingHours
-    const equipments = req.body.equipments
-    const classicBasics = req.body.classicBasics
-    const seating = req.body.seating
-    const tour = req.body.tour
-    const facilities = req.body.facilities
-    const rooms = req.body.rooms
-    const plans = req.body.plans
-    const availability = req.body.availability
+router.put('/:id', (req, res) => {
+    const COid = req.params.id
+    const space = COworkingS.find(space => space.id === COid)
+    if(space===undefined){
+        res.send("This ID is incorrect")
+    }
+    else{
+        const email = req.body.email
+        const password = req.body.password
+        const name = req.body.name
+        const location = req.body.location
+        const joinDate = req.body.joinDate
+        const openingHours = req.body.openingHours
+        const equipments = req.body.equipments
+        const classicBasics = req.body.classicBasics
+        const seating = req.body.seating
+        const tour = req.body.tour
+        const facilities = req.body.facilities
+        const rooms = req.body.rooms
+        const plans = req.body.plans
+        const availability = req.body.availability
 
-	const schema = {
-        email: Joi.string().email().required(),
-        password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
-        name: Joi.string().min(3).required(),
-        location: Joi.string().required(),
-        joinDate: Joi.string().required(),
-        openingHours: Joi.string().required(),
-        equipments: Joi.array().items(Joi.string()),
-        classicBasics: Joi.array().items(Joi.string()), 
-        seating: Joi.array().items(Joi.string()),
-        tour: Joi.boolean().required(),
-        facilities: Joi.array().items(Joi.string()),
-        rooms: Joi.array().items(Joi.string()).required(),
-        plans: Joi.array().items(Joi.string()),
-        availability: Joi.string()
-	}
+        const schema = {
+            email: Joi.string().email().required(),
+            password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+            name: Joi.string().min(3).required(),
+            location: Joi.string().required(),
+            joinDate: Joi.string().required(),
+            openingHours: Joi.string().required(),
+            equipments: Joi.array().items(Joi.string()),
+            classicBasics: Joi.array().items(Joi.string()), 
+            seating: Joi.array().items(Joi.string()),
+            tour: Joi.boolean().required(),
+            facilities: Joi.array().items(Joi.string()),
+            rooms: Joi.array().items(Joi.string()).required(),
+            plans: Joi.array().items(Joi.string()),
+            availability: Joi.string()
+        }
 
-	const result = Joi.validate(req.body, schema);
+        const result = Joi.validate(req.body, schema);
 
-	if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+        if (result.error) return res.status(400).send({ error: result.error.details[0].message });
 
-	const newCOworking = {
-        id: uuid.v4(),
-        email,
-        password,
-        name,
-        location,
-        joinDate,
-        openingHours,
-        equipments,
-        classicBasics,
-        seating,
-        tour,
-        facilities,
-        rooms,
-        plans,
-        availability,
-	};
-    COworkingS.push(newCOworking);
-    res.send(COworkingS);
+        const newCOworking = {
+            id: uuid.v4(),
+            email,
+            password,
+            name,
+            location,
+            joinDate,
+            openingHours,
+            equipments,
+            classicBasics,
+            seating,
+            tour,
+            facilities,
+            rooms,
+            plans,
+            availability,
+        };
+        COworkingS.push(newCOworking);
+        res.send(COworkingS);
+    }
 });
+
+
 
 module.exports = router
