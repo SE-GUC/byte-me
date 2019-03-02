@@ -210,7 +210,24 @@ router.put('/:id/:id2',(req,res) =>{
     });
         
     })
-    router.delete('/api/partner/:id/:string', (req, res) => {
+router.get('/',(req,res) => res.json({ data: Vacancyarr }));
+router.get('/:id',(req,res) =>{
+    const vacID = req.params.id
+    const vac = Vacancyarr.find(Vacancyarr => Vacancyarr.id===vacID)
+    
+    if(vac===undefined ){
+        res.send("This id is incorrect")
+    }
+    else{
+     const description= vac.description
+     const duration=vac.duration
+     const members=vac.members
+     
+     res.send(`Description: ${description}<br><br>Duration: ${duration}<br><br>Members: ${members}`)
+    }
+    }
+)
+    router.delete('/:id/:string', (req, res) => {
         const partnerid = req.params.id
         const partner = Partners.find(partner => partner.id==partnerid)
         if(partner = undefined){
