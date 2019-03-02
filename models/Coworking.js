@@ -1,7 +1,7 @@
 const User = require('../models/User');
 class COworking {
     constructor(email, password, name, location, joinDate, openingHours, equipments, classicBasics, seating, tour, facilities, rooms, plans, availability) {
-        super(email,password,name);
+        super(name,email,password);
         this.location=location;
         this.joinDate=joinDate;
         this.openingHours=openingHours;
