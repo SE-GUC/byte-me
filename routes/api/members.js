@@ -197,60 +197,67 @@ router.post('/', (req, res) => {
 
 });
 
-router.put('/:id', (req, res) => {
-    const pid = req.params.id
-    const p = partnerco.find(p => p.id == pid)
-    if ( p === undefined)
-    {
-        res.send('this id is not correct')
+router.put('/:id',(req,res) => {
+    
+    const x = req.params.id
+    const y = users.find(y => y.id===x)
+    
+    if(y===undefined ){
+        res.send("This id is incorrect")
     }
-    else
-    {
-        const name = req.body.name
-        const age = req.body.age
-        const skills = req.body.skills
-        const interests = req.body.interests
-        const certificates=req.body.certificates
-        const events=req.body.events
-        const projects=req.body.projects
-        const reviews=req.body.reviews
-        const email=req.body.email
-        const password=req.body.password
-
-        const schema ={
-            name:Joi.string().min(3).required(),
-            age:Joi.number().required(),
-            skills:Joi.string().required(),
-            interests:Joi.string().required(),
-            certificates:Joi.string().required(),
-            events:Joi.string().required(),
-            projects:Joi.string().required(),
-            reviews:Joi.string().required(),
-            email:Joi.string().required(),
-            password:Joi.string().required(),
-        }
-
-       const results=Joi.validate(req.body, schema);
-       if (result.error) return res.status(400).send({error:result.error.details[0].message})
-
-        const newMem = {
-            name,
-            age,
-            skills,
-            interests,
-            certificates,
-            events,
-            projects,
-            reviews,
-            email,
-            password
-
-
-        };
-        return res.json({data:newMem});
+    else{
+       
+    const name=req.body.name
+    const email=req.body.email
+    const password=req.body.password
+    const skills=req.body.skills
+    const interests=req.body.interests
+    const certificates=req.body.certificates
+    const events=req.body.events
+    const projects=req.body.projects
+    const reviews=req.body.reviews
+    const age=req.body.age
+    const schema = {
+        name: Joi.string().min(3),
+        email:Joi.string().email(),
+        password:Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
+        skills:Joi.array().items(Joi.string()),
+        interests:Joi.array().items(Joi.string()),
+        certificates:Joi.array().items(Joi.string()),
+        events:Joi.array().items(Joi.string()),
+        projects:Joi.array().items(Joi.string()),
+        reviews:Joi.array().items(Joi.string()),
+		age: Joi.array().items(Joi.string()),
     }
-
-});
+    const result = Joi.validate(req.body, schema);
+    if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+    
+  
+   y.name=name
+    y.email=email
+    y.password=password
+    y.skills=skills
+    y.interests=interests
+    y.certificates=certificates
+    y.events=events
+    y.projects=projects
+    y.reviews=reviews
+    y.age=age
+    users.push(y)
+    res.send(users);
+    /*function edit(name,email,password,skills,interests,certificates,events,projects,reviews,age){
+         y.name=getElementById("name").value
+         y.email=getElementById("email").value
+         y.password=getElementById("password").value
+         y.skills=getElementById("skills").value
+         y.interests=getElementById("interests").value
+         y.certificates=getElementById("certificates").value
+         y.events=getElementById("events").value
+         y.projects=getElementById("projects").value
+         y.reviews=getElementById("reviews").value
+         y.age=getElementById("age").value}*/ }
+     
+    });
 
 module.exports = router
 
