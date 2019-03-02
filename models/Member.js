@@ -1,5 +1,5 @@
-const User = require('../api/User')
-class member extends User{
+const User = require('../models/User')
+class Member extends User{
     constructor(name,age,skills,interests,certificates,events,projects,reviews,email,password)
     {   super(name,email,password);
         this.skills=skills;
@@ -13,4 +13,4 @@ class member extends User{
     
 }
 
-module.exports = member//---
+module.exports = Member
