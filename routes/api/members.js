@@ -2,7 +2,10 @@ const express = require('express');
 const uuid = require('uuid');
 const router = express.Router();
 
-const Member = require('../api/Member')
+const Member = require('../models/Member')
+const event = require ('../../models/Event');
+
+const COworkingS=require('../../routes/api/coworking')
 
 const users = [
     new Member("Ahmad Elkilany","20",["playing football","drawing"],["watch tv","play fifa","go to gym"],["Masterclass in js","certificate in java"]
@@ -14,6 +17,8 @@ const users = [
 ]
 
 router.get('/', (req, res) => res.json({ data: users }));
+
+router.get('/:id', (req, res) => res.json({ data: COworkingS }));
 
 router.get('/:id',(req,res) =>{ //As a member, I can view my profile information
     const memID = req.params.id
@@ -73,6 +78,179 @@ router.get('/:id',(req,res) =>{ //As a member, I can view my profile information
         `)
     }
 })
+
+router.post('/:id',(req,res) =>{
+    const memberrid = req.params.id
+    const member = User.find(users => users.id===memberid)
+   if(member===undefined)
+   {
+       res.send('You cannot post a new event! ')
+   }
+   else{
+       const evnt = req.body.evnt
+       const location = req.body.location
+       const date = req.body.date
+       const schema = {
+        name:Joi.string().required,
+        location: Joi.string().required,
+        date:Joi.string().required
+       }
+       const result = Joi.validate(req.body, schema);
+       if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+       const newEvent = new event(evnt,date,location)
+       member.events.push(newEvent)
+       res.send(users)
+   }
+});
+router.post('/:id',(req,res) =>{
+    const memberrid = req.params.id
+    const member = User.find(users => users.id===memberid)
+   if(member===undefined)
+   {
+       res.send('You cannot post a new event! ')
+   }
+   else{
+       const name = req.body.name
+       const location = req.body.location
+       const date = req.body.date
+       const schema = {
+        name:Joi.string().required,
+        location: Joi.string().required,
+        date:Joi.string().required
+       }
+       const result = Joi.validate(req.body, schema);
+       if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+       const newcourse = new course(name,date,location)
+       member.courses.push(newcourse)
+       res.send(users)
+   }
+});
+router.post('/:id',(req,res) =>{
+    const memberrid = req.params.id
+    const member = User.find(users => users.id===memberid)
+   if(member===undefined)
+   {
+       res.send('You cannot post a new event! ')
+   }
+   else{
+       const name = req.body.name
+       const location = req.body.location
+       const date = req.body.date
+       const schema = {
+        name:Joi.string().required,
+        location: Joi.string().required,
+        date:Joi.string().required
+       }
+       const result = Joi.validate(req.body, schema);
+       if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+       const newws = new workshop(name,date,location)
+       member.workshops.push(newws)
+       res.send(users)
+   }
+});
+
+router.post('/', (req, res) => {
+    const name = req.body.name
+    const age = req.body.age
+    const skills = req.body.skills
+    const interests = req.body.interests
+    const certificates=req.body.certificates
+    const events=req.body.events
+    const projects=req.body.projects
+    const reviews=req.body.reviews
+    const email=req.body.email
+    const password=req.body.password
+    
+    const schema ={
+        name:Joi.string().min(3).required(),
+        age:Joi.number().required(),
+        skills:Joi.string().required(),
+        interests:Joi.string().required(),
+        certificates:Joi.string().required(),
+        events:Joi.string().required(),
+        projects:Joi.string().required(),
+        reviews:Joi.string().required(),
+        email:Joi.string().required(),
+        password:Joi.string().required(),
+    }
+   
+   const results=Joi.validate(req.body, schema);
+   if (result.error) return res.status(400).send({error:result.error.details[0].message})
+   
+   
+   
+    const newMem = {
+        name,
+        age,
+        skills,
+        interests,
+        certificates,
+        events,
+        projects,
+        reviews,
+        email,
+        password
+        
+        
+    };
+    return res.json({data:newMem});
+
+});
+
+router.put('/:id', (req, res) => {
+    const pid = req.params.id
+    const p = partnerco.find(p => p.id == pid)
+    if ( p === undefined)
+    {
+        res.send('this id is not correct')
+    }
+    else
+    {
+        const name = req.body.name
+        const age = req.body.age
+        const skills = req.body.skills
+        const interests = req.body.interests
+        const certificates=req.body.certificates
+        const events=req.body.events
+        const projects=req.body.projects
+        const reviews=req.body.reviews
+        const email=req.body.email
+        const password=req.body.password
+
+        const schema ={
+            name:Joi.string().min(3).required(),
+            age:Joi.number().required(),
+            skills:Joi.string().required(),
+            interests:Joi.string().required(),
+            certificates:Joi.string().required(),
+            events:Joi.string().required(),
+            projects:Joi.string().required(),
+            reviews:Joi.string().required(),
+            email:Joi.string().required(),
+            password:Joi.string().required(),
+        }
+
+       const results=Joi.validate(req.body, schema);
+       if (result.error) return res.status(400).send({error:result.error.details[0].message})
+
+        const newMem = {
+            name,
+            age,
+            skills,
+            interests,
+            certificates,
+            events,
+            projects,
+            reviews,
+            email,
+            password
+
+
+        };
+        return res.json({data:newMem});
+    }
+
+});
 
 module.exports = router
 
