@@ -83,4 +83,8 @@ const MemberSchema = new Schema({
         required:true
     },
 })
+<<<<<<< HEAD
 module.exports = Member = mongoose.model('books', MemberSchema)
+=======
+module.exports = Member = mongoose.model('books', MemberSchema)
+>>>>>>> 35062bdd08496d47ce20ab9f41c9c22a3d2bdc9c

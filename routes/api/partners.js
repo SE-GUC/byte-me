@@ -4,7 +4,7 @@ const Joi = require('joi')
 const router = express.Router();
 
 
-const Partner = require('../../models/Partner')
+const Partner = require('../../models/Partner').default
 const Vacancy = require('../../models/Vacancy')
 const Event = require('../../models/Event')
 
@@ -32,6 +32,7 @@ router.delete('/:id',(req,res) =>{
     }
 });
 //userstory 3.5 post vacancy
+
 router.put('/:id',(req,res) =>{
     const partnerid = req.params.id
     var partner = Partners.find(Partners => Partners.id===partnerid)
@@ -116,8 +117,8 @@ router.put('/:id/:id2',(req,res) =>{
             field:Joi.string(),
             vacancies:Joi.array().items(Joi.string(), Joi.number()),
             pastprojects:Joi.array().items(Joi.string(), Joi.number()),
-            feedback:Joi.string();
-            age:Joi.number();
+            feedback:Joi.string(),
+            age:Joi.number()
         }
     
         const result = Joi.validate(req.body, schema);
@@ -183,8 +184,8 @@ router.put('/:id/:id2',(req,res) =>{
             field:Joi.string(),
             vacancies:Joi.array().items(Joi.string(), Joi.number()),
             pastprojects:Joi.array().items(Joi.string(), Joi.number()),
-            feedback:Joi.string();
-            age:Joi.number();
+            feedback:Joi.string(),
+            age:Joi.number()
         }
     
         const result = Joi.validate(req.body, schema);
@@ -192,22 +193,22 @@ router.put('/:id/:id2',(req,res) =>{
         if (result.error) return res.status(400).send({ error: result.error.details[0].message });
     
         const newPartner= {
-            p.name=name,
-            p.email=email,
-            p.password=password,
-            p.partners=partners,
-            p.boardmembers=boardmembers,
-            p.events=events,
-            p.field=field,
-            p.vacancies=vacancies,
-            p.pastprojects=pastprojects,
-            p.feedback=feedback,
-            p.age=age
+            p:name=name,
+            p:email=email,
+            p:password=password,
+            p:partners=partners,
+            p:boardmembers=boardmembers,
+            p:events=events,
+            p:field=field,
+            p:vacancies=vacancies,
+            p:pastprojects=pastprojects,
+            p:feedback=feedback,
+            p:age=age
         };
         partners.push(newPartner)
         return res.json({ data: newPartner });
       
-    });
+    };
         
     })
 router.get('/',(req,res) => res.json({ data: Vacancyarr }));
