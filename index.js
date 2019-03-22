@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose')
 
 const coworkingSpace = require('./routes/api/coworkings')
 const partner = require('./routes/api/partners')
@@ -7,6 +8,16 @@ const admin = require('./routes/api/admins')
 
 const app = express()
 app.use(express.json())
+
+//Db config 
+const db = require('./config/keys').mongoURI
+
+//connect to mongo
+mongoose
+    .connect(db)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log(err))
+
 
 app.get('/', (req, res) => {
     res.send(`<h1>Welcome to Lirten Hub</h1>
@@ -18,10 +29,10 @@ app.get('/', (req, res) => {
 })
 
 // Direct routes to appropriate files 
-app.use('/api/coworkings', coworkingSpace)
-app.use('/api/partners', partner)
-app.use('/api/members', member)
-app.use('/api/admins', admin)
+app.use('/api/coworkings', coworkingSpaces)
+app.use('/api/partners', partners)
+app.use('/api/members', members)
+app.use('/api/admins', admins)
 
 // Handling 404
 app.use((req, res) => {
