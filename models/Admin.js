@@ -1,11 +1,33 @@
-const User = require('../models/User')
-class Admin extends User{
-    constructor(name,age,dateJoined,email,password)
-    {   super(name,email,password);
-        this.dateJoined = dateJoined
-        this.age=age;
-    }
-    
-}
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+// Create the schema
+const AdminSchema = new Schema({
+    id: {
+        type: Number,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String, 
+        required: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type : String,
+        required : true
+    },
+    requestID:{
+        type : Number,
+        required : false
+    },
+   
 
-module.exports = Admin
+})
+
+module.exports = Admin = mongoose.model('Admins', AdminSchema)

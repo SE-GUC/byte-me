@@ -1,19 +1,40 @@
-const User = require('../models/User');
-class COworking {
-    constructor(email, password, name, location, joinDate, openingHours, equipments, classicBasics, seating, tour, facilities, rooms, plans, availability) {
-        super(name,email,password);
-        this.location=location;
-        this.joinDate=joinDate;
-        this.openingHours=openingHours;
-        this.equipments=equipments;
-        this.classicBasics=classicBasics;
-        this.seating=seating;
-        this.tour=tour;
-        this.facilities=facilities;
-        this.rooms=rooms;
-        this.plans=plans;
-        this.availability=availability;
-    };
-}
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+// Create the schema
+const CoworkingSchema = new Schema({
+    id: {
+        type: Number,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String, 
+        required: true
+    },
+    rooms: {
+        type: [String],
+        required: true
+    },
+    status: {
+        type : boolean,
+        required : true
+    },
+    facilities:{
+        type : [String],
+        required : true
+    },
+    businessPlan : {
+        type: String,
+        required : true
+    }
 
-module.exports = COworking
+})
+
+module.exports = Coworking = mongoose.model('PartnerCoWorkings', CoworkingSchema)
