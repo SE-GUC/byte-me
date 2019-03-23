@@ -1,9 +1,3 @@
-// const express = require('express')
-// const router = express.Router()
-// // We will be connecting using database 
-// const COworking = require('../../models/COworking')
-// const Room= require('../../models/Room')
-// const validator = require('../../validations/coworkingsvValidations')
 const express = require('express')
 const router = express.Router()
 
