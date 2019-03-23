@@ -1,18 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
 const Event = require('../../models/Event')
 const validator = require('../../validations/eventValidations')
 
 //Get all events
-router.get('/', async (req,res) => {
-    const events = await Event.find()
-    res.json({data: events})
-})
-
-
-//As a member , my profile should be updated when i create an event
-//Get all vacancies
 router.get('/', async (req,res) => {
     const events = await Event.find()
     res.json({data: events})
@@ -32,4 +23,16 @@ router.put('/:id', async (req,res) => {
         console.log(error)
     }  
  })
+ router.delete('/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const deletedevent = await Event.findByIdAndRemove(id)
+     res.json({msg:'event was deleted successfully', data: deletedevent})
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ })
+
  module.exports = router
