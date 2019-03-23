@@ -1,81 +1,67 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const Event = require('../models/Event')
 // Create the schema
 const MemberSchema = new Schema({
     firstName: {
         type: String,
         required: true
     },
-
     lastName: {
         type: String,
         required: true
     },
-
     email: {
         type: String,
         required: true
     },
     expiryDate: {
         type: Date,
-        required: true
-
+        required: false
     },
-
     dateOfBirth: {
         type: Date,
         required:true
     },
-
     age:{
         type: Number,
-        required:true
+        required:false
     },
-
     skills:{
         type: [String],
         required:false
     },
-
     interests: {
         type: [String],
         required:false
     },
-
     password: {
         type: String,
         required:true
     },
-
     pastEventsAttended:{
         type: [String],
         required:false
     },
-
     contractTime:{
         type: String,
-        required:true
-
+        required:false
     },
     contractLocation:{
         type:String,
-        required:true
+        required:false
     },
-
     workCompleted:{
         type:[String],
-        required:true
+        required:false
     },
-
     reviews:{
         type:[String],
-        required:true
+        required:false
     },
-
     status:{
-        type: Boolean,
-        required:true
+        type:String,
+        required:true,
+        default: "Pending"
     }
 })
 module.exports = Member = mongoose.model('members', MemberSchema)

@@ -1,8 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
-
-
 
 // We will be connecting using database 
 const Coworking = require('../../models/Coworking')
