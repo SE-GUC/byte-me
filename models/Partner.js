@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
 const PartnerSchema = new Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     organizationName: {
         type: String,
         required: true
@@ -41,6 +37,11 @@ const PartnerSchema = new Schema({
     vacancyID : {
         type: [Number],
         required : false
+    },
+    status:{
+        type: String,
+        required: true,
+        default: "Pending"
     }
 
 })

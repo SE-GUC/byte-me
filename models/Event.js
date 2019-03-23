@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
 const EventSchema = new Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     type: {
         type: String,
         required: true
@@ -14,7 +10,6 @@ const EventSchema = new Schema({
         type: String,
         required: true
     },
-    
     eventDescription: {
         type: String,
         required: true
@@ -39,8 +34,6 @@ const EventSchema = new Schema({
         type : String,
         required : true
     }
-    
-
 })
 
 module.exports = Event = mongoose.model('Events', EventSchema)

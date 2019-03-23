@@ -1,12 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
-
-
 
 // We will be connecting using database 
-const COworking = require('../../models/COworking')
-const Room= require('../../models/Room')
+const Coworking = require('../../models/Coworking')
 const validator = require('../../validations/Validations')
 
 router.get('/', (req, res) => res.json({ data: COworkingS }))
@@ -17,7 +13,7 @@ router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
      const coworking = await Coworking.findOne({id})
-     if(!bocoworkingok) return res.status(404).send({error: 'partner coworking space does not exist'})
+     if(!coworking) return res.status(404).send({error: 'partner coworking space does not exist'})
      const isValidated = validator.updateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
      const updatedcoworking = await Coworking.updateOne(req.body)
