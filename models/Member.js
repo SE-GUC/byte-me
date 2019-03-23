@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
 const MemberSchema = new Schema({
+<<<<<<< HEAD
+=======
+    
+
+>>>>>>> salmadev
     firstName: {
         type: String,
         required: true
@@ -59,9 +64,17 @@ const MemberSchema = new Schema({
         required:false
     },
     status:{
+<<<<<<< HEAD
         type:String,
         required:true,
         default: "Pending"
     }
+=======
+        type: Boolean,
+        required:true
+        
+    },
+    
+>>>>>>> salmadev
 })
 module.exports = Member = mongoose.model('members', MemberSchema)

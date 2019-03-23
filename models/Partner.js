@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
 const PartnerSchema = new Schema({
+<<<<<<< HEAD
+=======
+    
+>>>>>>> salmadev
     organizationName: {
         type: String,
         required: true
