@@ -3,11 +3,6 @@ const Schema = mongoose.Schema
 const Event = require('../models/Event')
 // Create the schema
 const MemberSchema = new Schema({
-    ID: {
-        type: Number,
-        required: true
-    },
-
     firstName: {
         type: String,
         required: true
@@ -79,12 +74,8 @@ const MemberSchema = new Schema({
     },
 
     status:{
-        type: boolean,
+        type: Boolean,
         required:true
-    },
-    myEvents:{
-        type : [Event],
-        required : false
     }
 })
 module.exports = Member = mongoose.model('members', MemberSchema)
