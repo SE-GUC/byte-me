@@ -79,7 +79,7 @@ const MemberSchema = new Schema({
     },
 
     status:{
-        type: boolean,
+        type: Boolean,
         required:true
     },
     myEvents:{

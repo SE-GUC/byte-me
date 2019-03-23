@@ -5,11 +5,11 @@ const router = express.Router()
 
 // We will be connecting using database 
 const COworking = require('../../models/COworking')
-const Room= require('../../models/Room')
-const Schedule= require('../../models/Schedule')
+//const Room= require('../../models/Room')
+//const Schedule= require('../../models/Schedule')
 
 // temporary data created as if it was pulled out of the database ...
-const schedules=[ 
+/*const schedules=[ 
     new Schedule("9:00 AM to 10:00 AM", 14/10/2005),
     new Schedule("10:00 AM to 11:00 AM", 14/10/2005),
     new Schedule("11:00 AM to 12:00 PM", 14/10/2005),
@@ -35,14 +35,14 @@ const schedules=[
     new Schedule("7:00 PM to 8:00 AM", 15/10/2005),
     new Schedule("8:00 PM to 9:00 AM", 15/10/2005)
 ];
-const rooms=[
+/*const rooms=[
     new Room(405,schedules,"100 EGP per hour",50),
     new Room(406,schedules,"120 EGP per hour",50),
     new Room(407,schedules,"180 EGP per hour",50),
     new Room(408,schedules,"200 EGP per hour",50),
     new Room(409,schedules,"100 EGP per hour",50)
-]
-const COworkingS = [
+]*/
+/*const COworkingS = [
     new COworking('q@w.com', 'qqqq',"name1","location1",14/10/2005, "9:00 AM to 9:00 PM", ["ff","gg"],["ff","gg"],
     ["ff","gg"],true,["ff","gg"],rooms,["ff","gg"],"online"),
     new COworking('qq@ww.com', 'qqqqq',"name1","location1",14/10/2005, "9:00 AM to 9:00 PM", ["ff","gg"],["ff","gg"],
@@ -51,7 +51,7 @@ const COworkingS = [
     ["ff","gg"],true,["ff","gg"],rooms,["ff","gg"],"online"),
     new COworking('wq@qw.com', 'ddqqqq',"name1","location1",14/10/2005, "9:00 AM to 9:00 PM", ["ff","gg"],["ff","gg"],
     ["ff","gg"],true,["ff","gg"],rooms,["ff","gg"],"online"),
-];
+];*/
 
 router.get('/', (req, res) => res.json({ data: COworkingS }))
 
