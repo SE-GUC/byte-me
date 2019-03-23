@@ -3,7 +3,6 @@ const Joi = require('joi')
 module.exports = {
     createValidation: request => {
         const createSchema = {
-            id: Joi.number().min(1).max(50),
             ownedBy: Joi.string().min(3).max(100).required(),
             description: Joi.string().min(1).max(3000).required(),
             duration: Joi.string().min(1).max(200).required(),
