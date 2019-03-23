@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
 const VacancySchema = new Schema({
-
     ownedBy: {
         type: String,
         required: true
