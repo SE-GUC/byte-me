@@ -60,17 +60,9 @@ const MemberSchema = new Schema({
         required:false
     },
     status:{
-<<<<<<< HEAD
         type:String,
         required:true,
         default: "Pending"
     }
-=======
-        type: Boolean,
-        required:true
-        
-    },
-    
->>>>>>> salmadev
 })
 module.exports = Member = mongoose.model('members', MemberSchema)
