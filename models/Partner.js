@@ -43,7 +43,7 @@ const PartnerSchema = new Schema({
         required: true,
         default: "Pending"
     }
-
+    
 })
 
 module.exports = Partner = mongoose.model('Partners', PartnerSchema)
