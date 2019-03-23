@@ -1,3 +1,9 @@
+// const express = require('express')
+// const router = express.Router()
+// // We will be connecting using database 
+// const COworking = require('../../models/COworking')
+// const Room= require('../../models/Room')
+// const validator = require('../../validations/coworkingsvValidations')
 const express = require('express')
 const router = express.Router()
 
@@ -8,7 +14,25 @@ const validator = require('../../validations/coworkingValidations')
 
 router.get('/', (req, res) => res.json({ data: COworkingS }))
 
+router.get('/', async (req,res) => {
+    const coworkings = await COworking.find()
+    res.json({data: coworkings})
+})
 
+
+
+router.post('/', async (req,res) => {
+   try {
+    const isValidated = validator.createValidation(req.body)
+    if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+    const newCOworking = await COworking.create(req.body)
+    res.json({msg:'Coworker was created successfully', data: newCOworking})
+   }
+   catch(error) {
+       // We will be handling the error later
+       console.log(error)
+   }  
+})
 // Update coworking
 router.put('/:id', async (req,res) => {
     try {
