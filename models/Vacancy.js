@@ -31,7 +31,7 @@ const VacancySchema = new Schema({
         required : true
     },
     dailyHours : {
-        type: [Number],
+        type: Number,
         required : true
     },
     endDate : {
