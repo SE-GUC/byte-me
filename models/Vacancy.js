@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const Member = require('../models/Member')
+// const Member = require('../models/Member')
 // Create the schema
 const VacancySchema = new Schema({
     id: {
@@ -32,17 +32,17 @@ const VacancySchema = new Schema({
         required : true
     },
     dailyHours : {
-        type: [Number],
+        type: Number,
         required : true
     },
     endDate : {
         type : Date,
         required : true
     },
-    applicants:{
-      type: [Member],
-      required : false
-    }
+        // applicants:{
+        //   type: [Member],
+        //   required : false
+        // }
 
 })
 
