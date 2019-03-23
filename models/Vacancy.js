@@ -3,10 +3,7 @@ const Schema = mongoose.Schema
 const Member = require('../models/Member')
 // Create the schema
 const VacancySchema = new Schema({
-    id: {
-        type: Number,
-        required: true
-    },
+   
     ownedBy: {
         type: String,
         required: true
@@ -40,7 +37,7 @@ const VacancySchema = new Schema({
         required : true
     },
     applicants:{
-      type: [Member],
+      type: [String],
       required : false
     }
 

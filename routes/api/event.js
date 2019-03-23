@@ -5,6 +5,11 @@ const mongoose = require('mongoose')
 const Event = require('../../models/Event')
 const validator = require('../../validations/eventValidations')
 
+//Get all events
+router.get('/', async (req,res) => {
+    const events = await Event.find()
+    res.json({data: events})
+})
 
 
 //As a member , my profile should be updated when i create an event
