@@ -1,59 +1,86 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const Event = require('../models/Event')
 // Create the schema
-//ID????
 const MemberSchema = new Schema({
-    fname: {
+    ID: {
+        type: Number,
+        required: true
+    },
+
+    firstName: {
         type: String,
         required: true
     },
-    lname: {
+
+    lastName: {
         type: String,
         required: true
     },
+
     email: {
         type: String,
         required: true
     },
-    expiringDate: {
-        type: Date
-    },
-    age: {
-        type: Number,
+    expiryDate: {
+        type: Date,
         required: true
+
     },
-    skills: {
-        type: [String]
+
+    dateOfBirth: {
+        type: Date,
+        required:true
     },
+
+    age:{
+        type: Number,
+        required:true
+    },
+
+    skills:{
+        type: [String],
+        required:false
+    },
+
     interests: {
-        type: [String]
+        type: [String],
+        required:false
     },
+
     password: {
         type: String,
-        required: true
+        required:true
     },
-    pastAttendedEvents: {
-        type: [String]
-    },
-    eventTime: {
-        type: Date
-    },
-    eventLocation: {
-        type: String
-    },
-    workComp: {
-        type: [String]
-    },
-    reviews: {
-        type: [String]
-    },
-    accountStatus: {
-        type: String
-    },
-    certifications: {
-        type: String
-    }
-    
-})
 
+    pastEventsAttended:{
+        type: [String],
+        required:false
+    },
+
+    contractTime:{
+        type: String,
+        required:true
+
+    },
+    contractLocation:{
+        type:String,
+        required:true
+    },
+
+    workCompleted:{
+        type:[String],
+        required:true
+    },
+
+    reviews:{
+        type:[String],
+        required:true
+    },
+
+    status:{
+        type: Boolean,
+        required:true
+    },
+})
 module.exports = Member = mongoose.model('members', MemberSchema)

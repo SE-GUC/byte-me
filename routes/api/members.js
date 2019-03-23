@@ -9,15 +9,14 @@ const validator = require('../../validations/memberValidations')
 router.get('/', async (req,res) => {
     var data = "";
     members.forEach((value) => {
-        if(value.id === req.params.id) {
-            data = `First Name: ${value.fname}<br>Last Name: ${value.lname}
-            <br>Email: ${value.email}<br>Expiring Date: ${value.expiringDate}
-            <br>Age: ${value.age}<br>Skills: ${value.skills}
+        if(value.ID === req.params.ID) {
+            data = `First Name: ${value.firstname}<br>Last Name: ${value.lastname}
+            <br>Email: ${value.email}<br>Expiry Date: ${value.expiryDate}
+            <br>Date of Birth: ${value.dateOfBirth}<br>Skills: ${value.skills}<br>Age: ${value.age}<br>Skills: ${value.skills}
             <br>Interests: ${value.interests}<br>Password: ${value.password}
-            <br>Past Attended Events: ${value.pastAttendedEvents}<br>Event Time: ${value.eventTime}
-            <br>Event Location: ${value.eventLocation}<br>Work Comp: ${value.workComp}
-            <br>Reveiews: ${value.reviews}<br>Account Status: ${value.accountStatus}
-            <br>Certifications: ${value.certifications}`;
+            <br>Past Attended Events: ${value.pastEventsAttended}<br>Contract Time: ${value.contractTime}
+            <br>Contract Location: ${value.contractLocation}<br>Work Completed: ${value.workCompleted}
+            <br>Reveiews: ${value.reviews}<br>Account Status: ${value.status}`;
             return;
         }
     });
