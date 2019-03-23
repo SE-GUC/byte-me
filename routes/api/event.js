@@ -31,7 +31,7 @@ router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
      const deletedevent = await Event.findByIdAndRemove(id)
-     res.json({msg:'Book was deleted successfully', data: deletedevent})
+     res.json({msg:'event was deleted successfully', data: deletedevent})
     }
     catch(error) {
         // We will be handling the error later
