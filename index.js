@@ -5,6 +5,8 @@ const coworkingSpace = require('./routes/api/coworkings')
 const partner = require('./routes/api/partners')
 const member = require('./routes/api/members')
 const admin = require('./routes/api/admins')
+const event = require('./routes/api/event')
+const vacancy = require('./routes/api/vacancy')
 
 const app = express()
 app.use(express.json())
@@ -25,6 +27,8 @@ app.get('/', (req, res) => {
     <a href="/api/members">member</a>
     <a href="/api/partners">partner</a>
     <a href="/api/admins">admins</a>
+    <a href="/api/vacancy">vacancy</a>
+    <a href="/api/events">events</a>
     `);
 })
 
@@ -33,6 +37,8 @@ app.use('/api/coworkings', coworkingSpaces)
 app.use('/api/partners', partners)
 app.use('/api/members', members)
 app.use('/api/admins', admins)
+app.use('/api/vacancy', vacancy)
+app.use('/api/events', events)
 
 // Handling 404
 app.use((req, res) => {
