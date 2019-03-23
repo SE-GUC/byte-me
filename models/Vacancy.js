@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
 const VacancySchema = new Schema({
-    id: {
-        type: Number,
-        required: true
-    },
     ownedBy: {
         type: String,
         required: true
