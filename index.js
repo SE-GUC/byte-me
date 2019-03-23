@@ -1,10 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 
-const coworkingSpace = require('./routes/api/coworkings')
-const partner = require('./routes/api/partners')
-const member = require('./routes/api/members')
-const admin = require('./routes/api/admins')
+const coworkingSpaces = require('./routes/api/coworkings') //added s in the end of every const
+const partners = require('./routes/api/partners')
+const members = require('./routes/api/members')
+const admins = require('./routes/api/admins')
 
 const app = express()
 app.use(express.json())
