@@ -283,6 +283,7 @@ const mongoose = require('mongoose')
 const Member = require('../../models/Member')
 
 //const validator = require('../../validations/bookValidations')
+const eventValidator = require('../../validations/eventValidations')
 
 router.get('/', async (req,res) => {
     const members = await Member.find()
@@ -330,6 +331,30 @@ router.put('/:id', async (req,res) => {
         // We will be handling the error later
         console.log(error)
     }  
+ })
+
+ router.post('/createEvent', async (req,res) =>{//as a member I can create an event 
+    try{
+        const isValidated = eventValidator.createValidation(req.body)
+        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+        const newEvent = await Event.create(req.body)
+        res.json({msg:'Event was created successfully', data: newEvent})
+    }
+    catch(error){
+        console.log(error)
+    }
+ })
+
+ router.get('viewEvent/:id', async (req,res) =>{
+     try{
+        const eventID = req.params.id
+        const curEvent = await Event.findOne({eventID})
+        if(!curEvent) return res.status(404).send({error: 'An event with that ID does not exist'})
+        res.json({data : curEvent})
+     }
+     catch(error){
+         console.log(error)
+     }
  })
 
  
