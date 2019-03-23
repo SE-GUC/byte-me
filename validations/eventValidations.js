@@ -16,7 +16,7 @@ module.exports = {
         return Joi.validate(request, createSchema)
     },
 
-    updateValidation: request => { //removed all .required from attributes because it's not necessary to update everything when we want to update sth
+    updateValidation: request => {
         const updateSchema = {
             type: Joi.string().min(3).max(500),
             eventName: Joi.string().min(3).max(500),

@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
-const mongoose = require('mongoose')
-
 const Event = require('../../models/Event')
 const validator = require('../../validations/eventValidations')
 
-
-
-//As a member , my profile should be updated when i create an event
+//Get all events
+router.get('/', async (req,res) => {
+    const events = await Event.find()
+    res.json({data: events})
+})
 router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id
@@ -23,10 +23,6 @@ router.put('/:id', async (req,res) => {
         console.log(error)
     }  
  })
-
- 
-
-
  router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
@@ -38,9 +34,5 @@ router.put('/:id', async (req,res) => {
         console.log(error)
     }  
  })
-
-
-
-
 
  module.exports = router

@@ -3,14 +3,13 @@ const Joi = require('joi')
 module.exports = {
     createValidation: request => {
         const createSchema = {
-            id: Joi.number().min(3).max(50).required(),
             ownedBy: Joi.string().min(3).max(100).required(),
-            description: Joi.string().min(50).max(3000).required(),
-            duration: Joi.string().min(20).max(200).required(),
-            location: Joi.string().min(20).max(200).required(),
-            monthlyWage: Joi.string().min(20).max(200).required(),
+            description: Joi.string().min(1).max(3000).required(),
+            duration: Joi.string().min(1).max(200).required(),
+            location: Joi.string().min(1).max(200).required(),
+            monthlyWage: Joi.string().min(1).max(200).required(),
             startDate: Joi.date(),
-            dailyHours: Joi.array().number(),
+            dailyHours: Joi.number(),
             endDate: Joi.date()
         }
 
@@ -19,14 +18,13 @@ module.exports = {
 
     updateValidation: request => {
         const updateSchema = {
-            id: Joi.number().min(3).max(50).required(),
-            ownedBy: Joi.string().min(3).max(100).required(),
-            description: Joi.string().min(50).max(3000).required(),
-            duration: Joi.string().min(20).max(200).required(),
-            location: Joi.string().min(20).max(200).required(),
-            monthlyWage: Joi.string().min(20).max(200).required(),
+            ownedBy: Joi.string().min(3).max(100),
+            description: Joi.string().min(1).max(3000),
+            duration: Joi.string().min(1).max(200),
+            location: Joi.string().min(1).max(200),
+            monthlyWage: Joi.string().min(1).max(200),
             startDate: Joi.date(),
-            dailyHours: Joi.array().number(),
+            dailyHours: Joi.number(),
             endDate: Joi.date()
         }
 

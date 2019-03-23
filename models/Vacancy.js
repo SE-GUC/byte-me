@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-// const Member = require('../models/Member')
 // Create the schema
 const VacancySchema = new Schema({
     ownedBy: {
@@ -35,11 +34,10 @@ const VacancySchema = new Schema({
         type : Date,
         required : true
     },
-        applicants:{
-          type: [String],
-          required : false
-        }
-
+    applicants:{
+      type: [String],
+      required : false
+    }
 })
 
 module.exports = Vacancy = mongoose.model('Vacancy', VacancySchema)
