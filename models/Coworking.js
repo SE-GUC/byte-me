@@ -19,8 +19,9 @@ const CoworkingSchema = new Schema({
         required: true
     },
     status: {
-        type : Boolean,
-        required : true
+        type : String,
+        required : true,
+        default: "Pending"
     },
     facilities:{
         type : [String],
