@@ -289,7 +289,6 @@ router.get('/', async (req,res) => {
     res.json({data: members})
 })
 
-
 // Create a Member
 router.post('/', async (req,res) => {
    try {
