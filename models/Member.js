@@ -2,11 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
 const MemberSchema = new Schema({
-<<<<<<< HEAD
-=======
-    
 
->>>>>>> salmadev
     firstName: {
         type: String,
         required: true
