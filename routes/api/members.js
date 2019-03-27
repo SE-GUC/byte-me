@@ -6,9 +6,9 @@ const Member = require('../../models/Member')
 const validator = require('../../validations/memberValidations')
 
 //Get my profile information (member)
-router.get('/', async (req,res) => {
+router.get('/:id', async (req,res) => {
     var data = "";
-    members.forEach((value) => {
+    Member.forEach((value) => {
         if(value.ID === req.params.ID) {
             data = `First Name: ${value.firstname}<br>Last Name: ${value.lastname}
             <br>Email: ${value.email}<br>Expiry Date: ${value.expiryDate}

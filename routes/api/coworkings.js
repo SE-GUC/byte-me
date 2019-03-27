@@ -6,10 +6,10 @@ const Coworking = require('../../models/Coworking')
 
 const validator = require('../../validations/coworkingValidations')
 
-router.get('/', (req, res) => res.json({ data: COworkingS }))
+//router.get('/', (req, res) => res.json({ data: COworkingS }))
 
 router.get('/', async (req,res) => {
-    const coworkings = await COworking.find()
+    const coworkings = await Coworking.find()
     res.json({data: coworkings})
 })
 
