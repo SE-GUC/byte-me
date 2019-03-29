@@ -26,13 +26,19 @@ const EventSchema = new Schema({
         type : Date,
         required : true
     },
-    attendees : {
-        type : [String],
+    attendees : [{
+        type : Schema.Types.ObjectId,
+        ref: "Member",
         required : false
-    },
+    }],
     organizedBy : {
-        type : String,
+        type : Schema.Types.ObjectId,
+        ref: "Partner",
         required : true
+    },
+    status:{
+        type: String,
+        default: "Pending"
     }
 })
 

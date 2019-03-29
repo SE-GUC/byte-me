@@ -1,6 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
+const Review = new Schema({
+    rating: {
+        type: Number,
+        required: true
+    },
+    reviewerID: {
+        type: Schema.Types.ObjectId,
+        ref: "Partner",
+        required: true
+    }
+}) 
 const MemberSchema = new Schema({
     firstName: {
         type: String,
@@ -26,41 +37,40 @@ const MemberSchema = new Schema({
         type: Number,
         required:false
     },
-    skills:{
-        type: [String],
+    skills:[{
+        type: String,
         required:false
-    },
-    interests: {
-        type: [String],
+    }],
+    interests: [{
+        type: String,
         required:false
-    },
+    }],
     password: {
         type: String,
         required:true
     },
-    pastEventsAttended:{
-        type: [String],
+    pastEventsAttended:[{
+        type: Schema.Types.ObjectId,
         required:false
-    },
+    }],
     contractTime:{
-        type: String,
+        type: Date,
         required:false
     },
     contractLocation:{
         type:String,
         required:false
     },
-    workCompleted:{
-        type:[String],
+    workCompleted:[{
+        type:String,
         required:false
-    },
-    reviews:{
-        type:[String],
+    }],
+    reviews:[{
+        type: Review,
         required:false
-    },
+    }],
     status:{
         type:String,
-        required:true,
         default: "Pending"
     }
 })
