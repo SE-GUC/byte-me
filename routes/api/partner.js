@@ -22,6 +22,8 @@ router.post('/login', async (req,res) => {
     .catch(err =>{console.log(err); return res.json({Message:`Email incorrect`})});
 });
 
+
+
 //As a partner i should get my profile information working
 router.get('/:id', async (req,res) => {
     //localhost:8080/api/partner/5c9f5f51b058922f00f0aa41
@@ -30,11 +32,11 @@ router.get('/:id', async (req,res) => {
     res.json({data: partner});
     })
 });
-//As a partner i should search for partners 
+/*As a partner i should search for partners 
  router.get('/', async (req,res) => {
     const partners = await Partner.find().select("-password")
     res.json({data: partners})
-})
+})*/
 /*As a partner i should search for members 
 router.get('/', async (req,res) => {
     const members = await Partner.find()
@@ -54,7 +56,7 @@ router.post('/', async (req,res) => {
     }  
  })
  //update profile workinggg
- router.put('/:id', function (req,res){
+ router.put('update/:id', function (req,res){
      Partner.findByIdAndUpdate(req.params.id,{$set:req.body},function(err,partner){
          if (err) return res.json({Message:'Error'});
          res.json({msg: 'Partner updated successfully'})
