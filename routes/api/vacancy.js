@@ -3,6 +3,8 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Vacancy = require('../../models/Vacancy')
 const validator = require('../../validations/vacancyValidations')
+
+
 //Get all vacancies
 router.get('/', async (req,res) => {
     const vacancies = await Vacancy.find()
@@ -38,6 +40,27 @@ router.put('/:id', async (req,res) => {
            console.log(error)
        }  
     })
+    router.put('/apply/:id1/:id2', async (req,res) => {
+        try {
+            
+            const id1 = req.params.id1
+            const member = await Member.findById(id1)
+            if(!member) return res.status(404).send({error: 'Member does not exist'})    
+            const id2 = req.params.id2
+            const vac = await Vacancy.findById(id2)
+            console.log(vac);
+            
+            
+            if(!vac) return res.status(404).send({error: 'Vacancy does not exist'})
+            vac.applicants.push(id1);
+            console.log(vac.applicants);
+           }
+           catch(error) {
+               
+               console.log(error)
+           }  
+        })
+    
 
     
 
