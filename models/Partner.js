@@ -27,7 +27,7 @@ const PartnerSchema = new Schema({
         required : true
     },
     eventID:{
-        type : [Number],
+        type : [String],
         required : false
     },
     fieldOfWork : {
@@ -35,15 +35,26 @@ const PartnerSchema = new Schema({
         required : true
     },
     vacancyID : {
-        type: [Number],
+        type: [String],
         required : false
     },
     status:{
         type: String,
-        required: true,
         default: "Pending"
+    },
+    expiryDate: {
+        type: Date,
+        required: false
+    },
+    contractTime:{
+        type: String,
+        required:false
+    },
+    contractLocation:{
+        type:String,
+        required:false
     }
     
 })
 
-module.exports = Partner = mongoose.model('Partners', PartnerSchema)
+module.exports = Partner = mongoose.model('Partner', PartnerSchema,'Partner')

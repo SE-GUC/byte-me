@@ -3,17 +3,12 @@ const router = express.Router()
 
 // We will be connecting using database 
 const Coworking = require('../../models/Coworking')
-
 const validator = require('../../validations/coworkingValidations')
-
-//router.get('/', (req, res) => res.json({ data: COworkingS }))
 
 router.get('/', async (req,res) => {
     const coworkings = await Coworking.find()
     res.json({data: coworkings})
 })
-
-
 
 router.post('/', async (req,res) => {
    try {
