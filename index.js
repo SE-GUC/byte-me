@@ -1,23 +1,26 @@
 const express = require('express')
-const mongoose = require('mongoose')
-
+const bodyParser = require('body-parser');
+const keys = require('./Config/keys_dev');
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')
 const member = require('./routes/api/member')
 const admin = require('./routes/api/admin')
 const event = require('./routes/api/event')
 const vacancy = require('./routes/api/vacancy')
-
 const app = express()
 
-//Db config 
-const db = require('./config/keys').mongoURI
 
 //connect to mongo
-mongoose
-    .connect(db)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log(err))
+const mongoose = require('mongoose');
+var mongoDB = process.env.MONGODB_URI || keys.MONGODB_URI ;
+mongoose.connect(mongoDB,{ useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.json())
 
@@ -45,5 +48,5 @@ app.use((req, res) => {
     res.status(404).send({err: 'We can not find what you are looking for'});
  })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Server up and running on port ${port}`))

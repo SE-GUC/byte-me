@@ -7,45 +7,32 @@ const Partner = require('../../models/Partner')
 const validator = require('../../validations/partnerValidations')
 
 //login 
-router.post('/register', async (req,res) => {
-    const { email, password }  = req.body
-    const partner = await Partner.findOne({email})
-    if(partner) return res.status(400).json({error: 'Email already exists'})
-    
-    const salt = bcrypt.genSaltSync(10)
-    const hashedPassword = bcrypt.hashSync(password,salt)
-    const newPartner = new Partner({
-            
-            password: hashedPassword ,
-            email
-            
-        })
-    newPartner
-    .save()
-    .then(partner => res.json({data: partner}))
-    .catch(err => res.json({error: 'Can not create partner'}))
-})
-
-//As a partner i should get my profile information
-router.get('/:id', async (req,res) => {
-    var data = "";
-    Partner.forEach((value) => {
-        if(value.ID === req.params.ID) {
-            data = `organization name: ${value.organizationName}
-            <br>Email: ${value.email}<br>password: ${value.password}
-            <br>description: ${value.description}<br>partners: ${value.partners}<br> board Members: ${value. boardMembers}
-            <br>events: ${value.eventID}
-            <br>field Of Work: ${value.fieldOfWork}<br>vacancy ID: ${value.vacancyID}
-            <br> status: ${value. status}<br>expiry Date: ${value.expiryDate}
-            <br>contract Time: ${value.contractTime}<br> contract Location: ${value. contractLocation}`;
-            return;
+router.post('/login', async (req,res) => {
+    Partner.findOne({email:req.body.email})
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        if (doc.password==req.body.password){
+            res.json({Message:'Login Successful'});
         }
-    });
-    res.json(data || 'No partner matches the requested id');
-})
+        else{
+            res.json({Message:'Password incorrect'});
+        }
+    })
+    .catch(err =>{console.log(err); return res.json({Message:`Email incorrect`})});
+});
+
+//As a partner i should get my profile information working
+router.get('/:id', async (req,res) => {
+    //localhost:8080/api/partner/5c9f5f51b058922f00f0aa41
+    Partner.findById(req.params.id,function(err,partner){
+    if(err) return res.json({Message:'No partner matches the requested id'});
+    res.json({data: partner});
+    })
+});
 //As a partner i should search for partners 
  router.get('/', async (req,res) => {
-    const partners = await Partner.find()
+    const partners = await Partner.find().select("-password")
     res.json({data: partners})
 })
 /*As a partner i should search for members 
@@ -66,32 +53,18 @@ router.post('/', async (req,res) => {
         console.log(error)
     }  
  })
- //update profile
- router.put('/:id', async (req,res) => {
-    try {
-     const id = req.params.id
-     const partner = await Partner.findOne({id})
-     if(!partner) return res.status(404).send({error: 'partner does not exist'})
-     const isValidated = validator.updateValidation(req.body)
-     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const updatedPartner = await Partner.updateOne(req.body)
-     res.json({msg: 'Partner updated successfully'})
-    }
-    catch(error) {
-        
-        console.log(error)
-    }  
- })
-//delete profile
+ //update profile workinggg
+ router.put('/:id', function (req,res){
+     Partner.findByIdAndUpdate(req.params.id,{$set:req.body},function(err,partner){
+         if (err) return res.json({Message:'Error'});
+         res.json({msg: 'Partner updated successfully'})
+     })
+});
+//delete profile workinngg
  router.delete('/:id', async (req,res) => {
-    try {
-     const id = req.params.id
-     const deletedPartner = await Partner.findByIdAndRemove(id)
-     res.json({msg:'Partner was deleted successfully', data: deletedPartner})
-    }
-    catch(error) {
-        
-        console.log(error)
-    }  
- })
+     Partner.findByIdAndRemove(req.params.id,function(err,partner){
+         if (err) return res.json({Message:'error'});
+         res.json({msg:'Partner was deleted successfully'}); 
+     }) 
+ });
 module.exports = router

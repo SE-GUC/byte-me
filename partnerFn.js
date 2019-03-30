@@ -4,7 +4,7 @@ const functions = {
     loginPartner: async () =>{
         return axios ({
             method:'post',
-            url:'https://byte-me-se-project.herokuapp.com/api/partner/register'
+            url:'http://localhost:8080/api/partner/register'
 
         })
        
