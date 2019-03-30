@@ -18,26 +18,28 @@ const PartnerSchema = new Schema({
         type: String,
         required: false
     },
-    partners: {
-        type : [String],
+    partners: [{
+        type : String,
         required : true
-    },
-    boardMembers:{
-        type : [String],
+    }],
+    boardMembers:[{
+        type : String,
         required : true
-    },
-    eventID:{
-        type : [String],
+    }],
+    eventID:[{
+        type : Schema.Types.ObjectId,
+        ref: "Event",
         required : false
-    },
+    }],
     fieldOfWork : {
         type : String,
         required : true
     },
-    vacancyID : {
-        type: [String],
+    vacancyID : [{
+        type: Schema.Types.ObjectId,
+        ref: "Vacancy",
         required : false
-    },
+    }],
     status:{
         type: String,
         default: "Pending"
