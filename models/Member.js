@@ -30,7 +30,7 @@ const MemberSchema = new Schema({
         required: false
     },
     dateOfBirth: {
-        type: String,
+        type: Date,
         required:true
     },
     age:{
@@ -51,7 +51,6 @@ const MemberSchema = new Schema({
     },
     pastEventsAttended:[{
         type: Schema.Types.ObjectId,
-        ref: "Event",
         required:false
     }],
     contractTime:{
