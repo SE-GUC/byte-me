@@ -2,16 +2,22 @@ const axios = require('axios');
 const functions = {
 
     loginPartner: async () =>{
-    
+        return axios ({
+            method:'post',
+            url:'https://byte-me-se-project.herokuapp.com/api/partner/register'
+
+        })
+       
+        
     },
     getPartner: async () =>{
-        const partners = await axios.get('https://byte-me-se-project.herokuapp.com/api/partners/')
-        return partners.data
+        const partner = await axios.get('https://byte-me-se-project.herokuapp.com/api/partner/')
+        return partner.data
     }, 
     createPartner: async () =>{
         return axios({
             method: 'post',
-            url: 'https://byte-me-se-project.herokuapp.com/api/partners',
+            url: 'https://byte-me-se-project.herokuapp.com/api/partner',
             headers: {'Content-Type': 'application/json'},
             data:
             {
@@ -29,11 +35,11 @@ const functions = {
         })
     },
     updatePartner: async (id) =>{
-        const partners = await axios.put('https://byte-me-se-project.herokuapp.com/api/partners/'+id)
+        const partners = await axios.put('https://byte-me-se-project.herokuapp.com/api/partner/'+id)
         return partners
     },
     deletePartner: async () =>{
-        const partner = await axios.delete('https://byte-me-se-project.herokuapp.com/api/partners')
+        const partner = await axios.delete('https://byte-me-se-project.herokuapp.com/api/partner')
         return partner
     },
     

@@ -26,11 +26,33 @@ router.post('/register', async (req,res) => {
     .catch(err => res.json({error: 'Can not create partner'}))
 })
 
-//As a partner i should get my profile information 
-router.get('/', async (req,res) => {
+//As a partner i should get my profile information
+router.get('/:id', async (req,res) => {
+    var data = "";
+    Partner.forEach((value) => {
+        if(value.ID === req.params.ID) {
+            data = `organization name: ${value.organizationName}
+            <br>Email: ${value.email}<br>password: ${value.password}
+            <br>description: ${value.description}<br>partners: ${value.partners}<br> board Members: ${value. boardMembers}
+            <br>events: ${value.eventID}
+            <br>field Of Work: ${value.fieldOfWork}<br>vacancy ID: ${value.vacancyID}
+            <br> status: ${value. status}<br>expiry Date: ${value.expiryDate}
+            <br>contract Time: ${value.contractTime}<br> contract Location: ${value. contractLocation}`;
+            return;
+        }
+    });
+    res.json(data || 'No partner matches the requested id');
+})
+//As a partner i should search for partners 
+ router.get('/', async (req,res) => {
     const partners = await Partner.find()
     res.json({data: partners})
 })
+/*As a partner i should search for members 
+router.get('/', async (req,res) => {
+    const members = await Partner.find()
+    res.json({data: partners})
+})*/
 //create profile
 router.post('/', async (req,res) => {
     try {

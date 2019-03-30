@@ -9,10 +9,11 @@ module.exports = {
             description: Joi.string(),
             partners: Joi.array().min(1).required(),
             boardMembers: Joi.array().min(1).required(),
-            eventID: Joi.array().number(),
             fieldOfWork: Joi.string().min(10).max(30).required(),
-            vacancyID: Joi.array().number(),
-            status: Joi.string().min(10).max(30).required()
+            expiryDate: Joi.date().min(6).max(30),
+            contractTime: Joi.string().min(10).max(30),
+            contractLocation: Joi.string().min(10).max(30)
+            
         }
 
         return Joi.validate(request, createSchema)
@@ -26,10 +27,12 @@ module.exports = {
             description: Joi.string(),
             partners: Joi.array().min(1).required(),
             boardMembers: Joi.array().min(1).required(),
-            eventID: Joi.array().number(),
             fieldOfWork: Joi.string().min(10).max(30).required(),
-            vacancyID: Joi.array().number(),
-            status: Joi.string().min(10).max(30).required()
+            expiryDate: Joi.date().min(6).max(30),
+            contractTime: Joi.string().min(10).max(30),
+            contractLocation: Joi.string().min(10).max(30)
+            
+           
         }
 
         return Joi.validate(request, updateSchema)
