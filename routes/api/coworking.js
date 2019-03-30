@@ -6,38 +6,28 @@ const Coworking = require('../../models/Coworking')
 const validator = require('../../validations/coworkingValidations')
 
 router.get('/', async (req,res) => {
-    const coworkings = await Coworking.find()
-    res.json({data: coworkings})
+    const coworkings = await Coworking.find().select("-password")
+    res.json({coworkings})
 })
 
 router.post('/', async (req,res) => {
    try {
-    const isValidated = validator.createValidation(req.body)
+    const email = req.body.email
+    const password = req.body.password
+    const name = req.body.name
+    const facilities = req.body.facilities
+    const businessPlan = req.body.businessPlan
+    const isValidated = validator.coworkingCreateValidation({email, password, name, facilities, businessPlan})
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-    const newCOworking = await COworking.create(req.body)
-    res.json({msg:'Coworker was created successfully', data: newCOworking})
+    const newCoworking = await Coworking.create(req.body)
+    res.json({msg:'Coworker was created successfully', data: newCoworking})
    }
    catch(error) {
        // We will be handling the error later
        console.log(error)
    }  
 })
-// Update coworking
-router.put('/:id', async (req,res) => {
-    try {
-     const id = req.params.id
-     const coworking = await Coworking.findOne({id})
-     if(!coworking) return res.status(404).send({error: 'partner coworking space does not exist'})
-     const isValidated = validator.updateValidation(req.body)
-     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const updatedcoworking = await Coworking.updateOne(req.body)
-     res.json({msg: 'partner coworking space updated successfully'})
-    }
-    catch(error) {
-        // We will be handling the error later
-        console.log(error)
-    }  
- })
+
 //Delete coworking
  router.delete('/:id', async (req,res) => {
     try {
