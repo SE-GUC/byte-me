@@ -26,14 +26,20 @@ const EventSchema = new Schema({
         type : String,
         required : true
     },
-    attendees : {
-        type : [String],
+    attendees : [{
+        type : Schema.Types.ObjectId,
+        ref: "Member",
+        required : false
+    }],
+    organizedBy : {
+        type : Schema.Types.ObjectId,
+        ref: "Partner",
         required : false
     },
-    organizedBy : {
-        type : String,
-        required : true
+    status:{
+        type: String,
+        default: "Pending"
     }
 })
 
-module.exports = Event = mongoose.model('Events', EventSchema)
+module.exports = Event = mongoose.model('Event', EventSchema,'Event')

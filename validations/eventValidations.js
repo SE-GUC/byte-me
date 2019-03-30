@@ -10,7 +10,7 @@ module.exports = {
             eventDuration: Joi.string().min(3).max(500).required(),
             eventDate: Joi.string().required(),
             attendees:Joi.array().items(Joi.string()),
-            organizedBy: Joi.string().min(3).max(500).required()
+            organizedBy: Joi.string().min(3).max(500)
         }
 
         return Joi.validate(request, createSchema)

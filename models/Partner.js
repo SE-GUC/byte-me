@@ -18,32 +18,45 @@ const PartnerSchema = new Schema({
         type: String,
         required: false
     },
-    partners: {
-        type : [String],
+    partners: [{
+        type : String,
         required : true
-    },
-    boardMembers:{
-        type : [String],
+    }],
+    boardMembers:[{
+        type : String,
         required : true
-    },
-    eventID:{
-        type : [Number],
+    }],
+    eventID:[{
+        type : Schema.Types.ObjectId,
+        ref: "Event",
         required : false
-    },
+    }],
     fieldOfWork : {
         type : String,
         required : true
     },
-    vacancyID : {
-        type: [Number],
+    vacancyID : [{
+        type: Schema.Types.ObjectId,
+        ref: "Vacancy",
         required : false
-    },
+    }],
     status:{
         type: String,
-        required: true,
         default: "Pending"
+    },
+    expiryDate: {
+        type: Date,
+        required: false
+    },
+    contractTime:{
+        type: String,
+        required:false
+    },
+    contractLocation:{
+        type:String,
+        required:false
     }
     
 })
 
-module.exports = Partner = mongoose.model('Partners', PartnerSchema)
+module.exports = Partner = mongoose.model('Partner', PartnerSchema,'Partner')
