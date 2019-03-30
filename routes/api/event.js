@@ -8,6 +8,19 @@ router.get('/', async (req,res) => {
     const events = await Event.find()
     res.json({data: events})
 })
+router.post('/', async (req,res) => {
+    try {
+     const isValidated = validator.createValidation(req.body)
+     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+     const newEvent = await Event.create(req.body)
+     res.json({msg:'Event was created successfully', data: newEvent})
+    }
+    catch(error) {
+        // We will be handling the error later
+        console.log(error)
+    }  
+ })
+ 
 router.put('/:id', async (req,res) => {
     try {
      const id = req.params.id

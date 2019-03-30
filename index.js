@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const cors=require('cors')
 
 const coworkingSpace = require('./routes/api/coworkings')
 const partner = require('./routes/api/partners')
@@ -13,6 +14,7 @@ const Coworking = require('./models/Coworking')
 const Admin = require('./models/Admin')
 const Partner = require('./models/Partner')
 const Member = require('./models/Member')
+const Event = require('./models/Event')
 
 const app = express()
 app.use(express.json())
@@ -30,6 +32,10 @@ mongoose
     app.use(express.json())
     app.use(express.urlencoded({extended: false}))
 
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+app.use(cors())
+
 app.get('/', (req, res) => {
     res.send(`<h1>Welcome to Lirten Hub</h1>
     <a href="/api/coworkings">coworking</a>
@@ -37,7 +43,7 @@ app.get('/', (req, res) => {
     <a href="/api/partners">partner</a>
     <a href="/api/admins">admins</a>
     <a href="/api/vacancy">vacancy</a>
-    <a href="/api/events">events</a>
+    <a href="/api/event">events</a>
     `);
 })
 
@@ -150,7 +156,7 @@ app.use('/api/partners', partner)
 app.use('/api/members', member)
 app.use('/api/admins', admin)
 app.use('/api/vacancy', vacancy)
-app.use('/api/events', event)
+app.use('/api/event', event)
 
 // Handling 404
 app.use((req, res) => {
