@@ -18,7 +18,7 @@ module.exports = {
 
     updateValidation: request => {
         const updateSchema = {
-            ownedBy: Joi.string().min(3).max(100),
+            ownedBy: Joi.string().min(3).max(100).required(),
             description: Joi.string().min(1).max(3000),
             duration: Joi.string().min(1).max(200),
             location: Joi.string().min(1).max(200),

@@ -26,12 +26,12 @@ router.post('/', async (req,res) => {
 router.put('/:id', async (req,res) => {
     try {
         const id = req.params.id
-        const vacancy = await Vacancy.findOne({id})
+        const vacancy = await Vacancy.findByIdAndUpdate(id)
         if(!vacancy) return res.status(404).send({error: 'Vacancy does not exist'})
         const isValidated = validator.updateValidation(req.body)
         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
         const updatedVacancy = await Vacancy.updateOne(req.body)
-        res.json({msg: 'Book updated successfully'})
+        res.json({msg: 'Vacancy updated successfully',data: updatedVacancy})
        }
        catch(error) {
            
