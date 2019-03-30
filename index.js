@@ -9,7 +9,6 @@ const event = require('./routes/api/event')
 const vacancy = require('./routes/api/vacancy')
 
 const app = express()
-app.use(express.json())
 
 //Db config 
 const db = require('./config/keys').mongoURI
@@ -19,6 +18,8 @@ mongoose
     .connect(db)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
+
+app.use(express.json())
 
 app.get('/', (req, res) => {
     res.send(`<h1>Welcome to Lirten Hub</h1>

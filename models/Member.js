@@ -74,4 +74,4 @@ const MemberSchema = new Schema({
         default: "Pending"
     }
 })
-module.exports = Member = mongoose.model('Member', MemberSchema)
+module.exports = Member = mongoose.model('Member', MemberSchema,'Member')

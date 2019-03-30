@@ -57,4 +57,4 @@ const PartnerSchema = new Schema({
     
 })
 
-module.exports = Partner = mongoose.model('Partner', PartnerSchema)
+module.exports = Partner = mongoose.model('Partner', PartnerSchema,'Partner')

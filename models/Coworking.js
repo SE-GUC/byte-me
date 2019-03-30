@@ -85,4 +85,4 @@ const CoworkingSchema = new Schema({
     }
 })
 
-module.exports = Coworking = mongoose.model('Coworking', CoworkingSchema)
+module.exports = Coworking = mongoose.model('Coworking', CoworkingSchema,'Coworking')
