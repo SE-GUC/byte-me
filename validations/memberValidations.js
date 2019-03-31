@@ -14,7 +14,7 @@ module.exports = {
             interests: Joi.array().min(4).max(30),
             password: Joi.number().min(8).max(30).required(),
             pastEventsAttended: Joi.array().min(4).max(30),
-            contractTime: Joi.date().min(6).max(30).required(),
+            contractTime: Joi.Date().min(6).max(30).required(),
             contractLocation: Joi.string().min(6).max(30).required(),
             workComp: Joi.array().min(4).max(30).required(),
             reviews: Joi.array().min(4).max(30).required(),
