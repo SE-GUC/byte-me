@@ -18,16 +18,6 @@ const events = await Event.findById(id)
 res.json({data: events})
 }),
 
-//Create an event
-router.post('/create', async (req,res) => {
-const isValidated = validator.createValidation(req.body)
-if (isValidated.error) return res.status(400).send({ error:
-isValidated.error.details[0].message })
-const newEvent = await Event.create(req.body)
-res.json({msg:'Event was created successfully', data: newEvent})
-}),
-
-
 //Search event date
 router.get('/searcheventDate/:eventDate',async(req,res)=>{
     var eventDate = req.params.eventDate;
@@ -97,7 +87,25 @@ router.put('/pcreateevent/:id1/:id2', async (req,res) => {
                  catch(error) { 
                      console.log(error)
                            }  
-                        })
+        })
+        //create an event by partners
+        router.post('/create/:id1', async (req,res) => {
+        try {
+         const id1 = req.params.id1
+           const partner = await Partner.findById(id1)
+          if(!partner) return res.status(404).send({error: 'Partner does not exist'})  
+             const isValidated = validator.createValidation(req.body)
+           if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+               const newEvent = await Event.create(req.body)
+               newEvent.organizedBy = id1
+              
+              return res.json({msg:'Event was created successfully', data: newEvent})
+           }
+              catch(error) {
+              // We will be handling the error later
+                  console.log(error)
+            }  
+         })
 
                         
 //Delete an event
