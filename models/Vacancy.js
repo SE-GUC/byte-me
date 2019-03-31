@@ -5,7 +5,7 @@ const VacancySchema = new Schema({
     ownedBy: {
         type: Schema.Types.ObjectId,
         ref: "Partner",
-        required: true
+        required: false
     },
     description: {
         type: String,
@@ -34,6 +34,10 @@ const VacancySchema = new Schema({
     endDate : {
         type : Date,
         required : true
+    },
+    requiredSkills: {
+        type : string,
+        required :false
     },
     applicants: [{
       type: Schema.Types.ObjectId,
