@@ -47,7 +47,11 @@ const VacancySchema = new Schema({
     status:{
         type: String,
         default: "Pending"
-    }
+    },
+    requiredSkills:[{
+        type:String,
+        required:true
+    }]
 })
 
 module.exports = Vacancy = mongoose.model('Vacancy', VacancySchema,'Vacancy')
