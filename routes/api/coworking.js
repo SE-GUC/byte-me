@@ -9,7 +9,58 @@ router.get('/', async (req,res) => {
     const coworkings = await Coworking.find().select("-password")
     res.json({coworkings})
 })
+//get specific coworking
+router.get('/:id', async (req,res) => {
+    try{
+    const id = req.params.id
+    const coworkings = await Coworking.findById(id)
+    res.json({data: coworkings})
+   
+    }
+    catch(error) {
+        res.json({msg:'Coworking not found'}) 
+               
+            }
 
+    
+})
+
+// //get all rooms
+
+//     router.get(':id1/room/:id2', async (req,res) => {
+//         try{
+//         const idco = req.params.id1
+//         const idroom = req.params.id2
+//         const coworkingspecificroom= await Coworking.findOne(idco,idroom)
+//         //const coworkingspecificroom = Coworking.room.findById({idroom})
+         
+//         res.json({coworkingspecificroom})
+//         console.log("kk")
+//         }
+//         catch{
+//         res.json({msg:'Room not found'})
+//         } 
+//     })
+
+   
+// })
+//     catch(error) {
+//         res.json({msg:'Coworking not found'}) 
+               
+//             }
+
+    
+// })
+
+    
+
+
+//room schedule with coworking id
+router.get('/', async (req,res) => {
+    const coworkings = await Coworking.find().select("-password")
+    res.json({coworkings})
+})
+//
 router.post('/', async (req,res) => {
    try {
     const email = req.body.email
