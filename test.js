@@ -32,13 +32,7 @@ expect(response.data[0].duration).toEqual('8 hours')
 },
 );
 
- test('testing vacancy delete',async()=>{
-   const before = await functions.getVacancy() 
-   functions.deleteVacancy('5ca0f42dcde6f21cd823045e')
-   const after = await functions.getVacancy() 
-   expect(before.data.length-1).toBe(after.data.length) 
-  },
-  );
+
 test('testing vacancy post',async()=>{
   const before =await functions.getVacancy()
   const m = functions.postVacancy()
@@ -58,6 +52,13 @@ const response = await functions.searchVacancyEndDate('2019-12-22T22:00:00.000Z'
 expect(response.data.data[0].endDate).toEqual('2019-12-22T22:00:00.000Z')
 },
 );
+ test('testing vacancy delete',async()=>{
+   const before = await functions.getVacancy() 
+   functions.deleteVacancy('5ca0f3f0e470641490b6787f')
+   const after = await functions.getVacancy() 
+   expect(before.data.length-1).toBe(after.data.length) 
+  },
+  );
 
 
 

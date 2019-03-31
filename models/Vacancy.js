@@ -36,7 +36,7 @@ const VacancySchema = new Schema({
         required : true
     },
     requiredSkills: {
-        type : string,
+        type : String,
         required :false
     },
     applicants: [{

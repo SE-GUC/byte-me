@@ -30,6 +30,16 @@ const functions = {
        // console.log(vacancyl.data)
         return vacancyl
     } ,
+    searchVacancyStartDate: async (startDate) =>{
+        const vacancyl = await axios.get('http://localhost:3000/api/vacancy/searchstartDate/'+startDate,{})
+       // console.log(vacancyl.data)
+        return vacancyl
+    } ,
+    searchVacancyEndDate: async (endDate) =>{
+        const vacancyl = await axios.get('http://localhost:3000/api/vacancy/searchendDate/'+endDate,{})
+       // console.log(vacancyl.data)
+        return vacancyl
+    } ,
     
     postVacancy : async () =>{
         return axios({
