@@ -8,8 +8,7 @@ module.exports = {
             eventDescription: Joi.string().min(3).max(500).required(),
             eventLocation: Joi.string().min(3).max(500).required(),
             eventDuration: Joi.string().min(3).max(500).required(),
-            eventDate: Joi.string().required(),
-            attendees:Joi.array().items(Joi.string()),
+            eventDate: Joi.date().required(),
             organizedBy: Joi.string().min(3).max(500)
         }
 
@@ -23,8 +22,7 @@ module.exports = {
             eventDescription: Joi.string().min(3).max(500),
             eventLocation: Joi.string().min(3).max(500),
             eventDuration: Joi.string().min(3).max(500),
-            eventDate: Joi.string(),
-            attendees:Joi.array().items(Joi.string()),
+            eventDate: Joi.date(),
             organizedBy: Joi.string().min(3).max(500)
         
         }

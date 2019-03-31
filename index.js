@@ -13,15 +13,6 @@ const app = express()
 
 //Db config 
 const db = require('./config/keys').mongoURI
-// var mongoDB = process.env.mongoURI || keys.mongoURI
-// mongoose.connect(mongoDB,{useNewUrlParser:true})
-// mongoose.Promise=global.Promise
-// var db = mongoose.connection;
-// db.on('error',console.error.bind(console,'MongoDB connection error:'))
-// mongoose.set('useFindAndModify',false)
-// mongoose.set('useCreateIndex',true)
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({extended:false}))
 
 //connect to mongo
 mongoose
