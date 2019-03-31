@@ -4,6 +4,7 @@ module.exports = {
     coworkingCreateValidation: request => {
         const coworkingCreateSchema = {
             name: Joi.string().min(5).max(20).required(),
+            location: Joi.string().required(),
             email:Joi.string().email().required(),
             password: Joi.string().regex(/^[a-zA-Z0-9]{8,20}$/).min(8).max(20).required(),
             facilities: Joi.array().items(Joi.string()).min(1).required(),
@@ -22,6 +23,7 @@ module.exports = {
     coworkingUpdateValidation: request => {
         const coworkingUpdateSchema = {
             name: Joi.string().min(5).max(20),
+            location: Joi.string(),
             email:Joi.string().email(),
             password: Joi.string().regex(/^[a-zA-Z0-9]{8,20}$/).min(8).max(20),
             facilities: Joi.array().items(Joi.string()).min(1),
@@ -56,7 +58,7 @@ module.exports = {
     },
     scheduleUpdateValidation: request => {
         const scheduleUpdateSchema = {
-            date: Joi.string().not(null),
+            date: Joi.string().not(null)
         }
         return Joi.validate(request, scheduleUpdateSchema)
     },

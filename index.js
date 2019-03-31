@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')

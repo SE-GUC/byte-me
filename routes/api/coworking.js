@@ -133,12 +133,28 @@ router.put('/:id1/room/:id2/schedule/:id3/reserve/:id4', async (req,res) => {
     }
 })
 
+//get specific coworking
+router.get('/:id', async (req,res) => {
+    try{
+    const id = req.params.id
+    const coworkings = await Coworking.findById(id)
+    res.json({data: coworkings})
+   
+    }
+    catch(error) {
+        res.json({msg:'Coworking not found'}) 
+               
+            }
+
+    
+})
+
 //Delete a specific Coworking account
-router.delete('/:id', async (req,res) => {
+ router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
      await Coworking.findOneAndRemove(id)
-     res.json({msg:'partner coworking space was deleted successfully'})
+     res.json({msg:'Coworking was deleted successfully'})
     }
     catch(error) {
         res.status(422).send({ error: 'This coworking does not exist' });
@@ -163,7 +179,7 @@ router.post('/register', async (req,res) => {
     try {
      const isValidated = validator.coworkingCreateValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const {email, password, name, facilities, businessPlan, rooms} = req.body
+     const {email, password, name, facilities, businessPlan, rooms, location} = req.body
      const admin = await Admin.findOne({ email });
      const coworking = await Coworking.findOne({ email });
      const partner = await Partner.findOne({ email });
@@ -177,6 +193,7 @@ router.post('/register', async (req,res) => {
              email,
              facilities,
              businessPlan,
+             location,
              rooms
          });
          await Coworking.create(newCoworking);
@@ -205,6 +222,23 @@ router.post('/login', async (req, res) => {
         }
 		else return res.status(400).send({ password: 'Wrong password' });
 	} catch (e) {}
+});
+
+router.get('/searchname/:name',async (req, res)=> {
+    var name = req.params.name;
+    await Coworking.find({name: name},  (err, coworking)=> {
+     
+        res.json({data:coworking})
+       
+    });
+});
+
+router.get('/searchlocation/:location',async (req, res)=> {
+    var location = req.params.location;
+    await Coworking.find({location: location},  (err, location)=> {
+        res.json({data:location})
+        console.log("kk")
+    });
 });
 
 module.exports = router
