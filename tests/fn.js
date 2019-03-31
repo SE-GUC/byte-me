@@ -20,10 +20,19 @@ const functions = {
         const all = axios.get('localhost:3000/api/member')
         return all.data
     },
+    deleteMember: async (id) =>{
+        const membersd = await axios.delete('http://localhost:3000/api/member/'+id,{})
+        return membersd
+    },
     updateMember: async (id,tskills)=>{
         const updatedMember = await axios.put('http://localhost:3000/api/member/'+id,{skills:tskills})
         return updatedMember.data
-    }
+    },
+    getMember: async () =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member')
+        return membersg.data
+    }, 
+    
 }
 
 module.exports = functions
