@@ -61,23 +61,24 @@ router.get('/', async (req,res) => {
     res.json({coworkings})
 })
 //
-router.post('/', async (req,res) => {
-   try {
-    const email = req.body.email
-    const password = req.body.password
-    const name = req.body.name
-    const facilities = req.body.facilities
-    const businessPlan = req.body.businessPlan
-    const isValidated = validator.coworkingCreateValidation({email, password, name, facilities, businessPlan})
-    if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-    const newCoworking = await Coworking.create(req.body)
-    res.json({msg:'Coworker was created successfully', data: newCoworking})
-   }
-   catch(error) {
-       // We will be handling the error later
-       console.log(error)
-   }  
-})
+// router.post('/', async (req,res) => {
+//    try {
+       
+//     const email = req.body.email
+//     const password = req.body.password
+//     const name = req.body.name
+//     const facilities = req.body.facilities
+//     const businessPlan = req.body.businessPlan
+//     const isValidated = validator.coworkingCreateValidation({email, password, name, facilities, businessPlan})
+//     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+//     const newCoworking = await Coworking.create(req.body)
+//     res.json({msg:'Coworker was created successfully', data: newCoworking})
+//    }
+//    catch(error) {
+//        // We will be handling the error later
+//        console.log(error)
+//    }  
+// })
 
 //Delete coworking
  router.delete('/:id', async (req,res) => {
@@ -91,6 +92,24 @@ router.post('/', async (req,res) => {
         console.log(error)
     }  
  })
+
+ router.get('/searchname/:name',async (req, res)=> {
+    var name = req.params.name;
+    await Coworking.find({name: name},  (err, coworking)=> {
+     
+        res.json({data:coworking})
+       
+    });
+});
+
+router.get('/searchlocation/:location',async (req, res)=> {
+    var location = req.params.location;
+    await Coworking.find({location: location},  (err, location)=> {
+        res.json({data:location})
+        console.log("kk")
+    });
+});
+
 
 
 module.exports = router
