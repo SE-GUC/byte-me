@@ -4,6 +4,8 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 const Partner = require('../../models/Partner')
+const Vacancy = require('../../models/Vacancy')
+
 const validator = require('../../validations/partnerValidations')
 
 //login 
@@ -26,22 +28,13 @@ router.post('/login', async (req,res) => {
 
 //As a partner i should get my profile information working
 router.get('/:id', async (req,res) => {
-    //localhost:8080/api/partner/5c9f5f51b058922f00f0aa41
+    
     Partner.findById(req.params.id,function(err,partner){
     if(err) return res.json({Message:'No partner matches the requested id'});
     res.json({data: partner});
     })
 });
-/*As a partner i should search for partners 
- router.get('/', async (req,res) => {
-    const partners = await Partner.find().select("-password")
-    res.json({data: partners})
-})*/
-/*As a partner i should search for members 
-router.get('/', async (req,res) => {
-    const members = await Partner.find()
-    res.json({data: partners})
-})*/
+
 //create profile
 router.post('/', async (req,res) => {
     try {
@@ -55,18 +48,67 @@ router.post('/', async (req,res) => {
         console.log(error)
     }  
  })
- //update profile workinggg
+ //update profile 
  router.put('update/:id', function (req,res){
      Partner.findByIdAndUpdate(req.params.id,{$set:req.body},function(err,partner){
          if (err) return res.json({Message:'Error'});
          res.json({msg: 'Partner updated successfully'})
      })
 });
-//delete profile workinngg
+//delete profile 
  router.delete('/:id', async (req,res) => {
      Partner.findByIdAndRemove(req.params.id,function(err,partner){
          if (err) return res.json({Message:'error'});
          res.json({msg:'Partner was deleted successfully'}); 
      }) 
  });
+
+ //view my vacancies
+ router.get('/view/:id',async (req,res)=>{
+     
+    Vacancy.find({ownedBy:req.params.id},function(err,vacancy){
+        if(err) return res.json({Message:'Partner has no vacacncies'});
+        res.json({data: vacancy});  
+    })
+    
+});
+//get vacancy applicants
+router.get('/viewApplicants/:id',async (req,res)=>{
+     
+    Vacancy.findOne()
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        if (doc.ownedBy==req.params.id){
+            res.json({data:doc.applicants});
+        }
+        else{
+            res.json({Message:'Not his vacancy'});
+        }
+    })
+    .catch(err =>{console.log(err); return res.json({Message:`no vacancies`})});
+    
+});
+//update vacancy description
+/*router.put('updateDescription/:id', function (req,res){
+    Vacancy.findOneAndUpdate({ownedby:req.params.id},{$set:req.body.description},function(err,vacancy){
+        if (err) return res.json({Message:'Error'});
+        res.json({msg: 'description of vacancy updated successfully'})
+    })
+});*/
+router.get('search/organizationName',async (req,res)=>{
+    try{
+        const organizationName=req.params.organizationName
+        await partner.findOne({organizationName: new RegExp('^'+organizationName+'$',"i")},
+        function(err, doc){})
+        res.json({data: partner}
+            )
+    }
+    catch(error){
+        console.log(error)
+    }
+})
+
+
+
 module.exports = router
