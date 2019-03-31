@@ -74,7 +74,86 @@ Member.findOne({email:req.body.email})
      const alljobs = await Vacancy.find()
      res.json({data:alljobs})
  })
-
- 
+//Search for First Name
+ router.get('/searchfirstName/:firstName',async (req, res)=> {
+    var firstName = req.params.firstName;
+    await Member.find({firstName: firstName},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Last Name
+router.get('/searchlastName/:lastName',async (req, res)=> {
+    var lastName = req.params.lastName;
+    await Member.find({lastName: lastName},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Email
+router.get('/searchemail/:email',async (req, res)=> {
+    var email = req.params.email;
+    await Member.find({email: email},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Age
+router.get('/searchage/:age',async (req, res)=> {
+    var age = req.params.age;
+    await Member.find({age: age},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Skills
+router.get('/searchskills/:skills',async (req, res)=> {
+    var skills = req.params.skills;
+    await Member.find({skills: skills},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Interests
+router.get('/searchinterests/:interests',async (req, res)=> {
+    var interests = req.params.interests;
+    await Member.find({interests: interests},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Work Completed
+router.get('/searchworkcompleted/:workcompleted',async (req, res)=> {
+    var workcompleted = req.params.workcompleted;
+    await Member.find({workcompleted: workcompleted},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Reviews
+router.get('/searchreviews/:reviews',async (req, res)=> {
+    var reviews = req.params.reviews;
+    await Member.find({reviews: reviews},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
+//Search for Status
+router.get('/searchstatus/:status',async (req, res)=> {
+    var status = req.params.status;
+    await Member.find({status: status},  (err, member)=> {
+     
+        res.json({data:member})
+       
+    });
+});
 
 module.exports = router

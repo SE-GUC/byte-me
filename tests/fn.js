@@ -31,8 +31,43 @@ const functions = {
     getMember: async () =>{  
         const membersg = await axios.get('http://localhost:3000/api/member')
         return membersg.data
+    },
+    getMemberFirstName: async (firstName) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchfirstname/'+firstName)
+        return membersg.data
+    },  
+    getMemberLastName: async (lastName) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchlastName/'+lastName,{lastName: lastName})
+        return membersg.data
+    },  
+    getMemberEmail: async (email) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchemail/'+email,{email: email})
+        return membersg.data
+    },  
+    getMemberAge: async (age) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchage/'+age,{age: age})
+        return membersg.data
+    },  
+    getMemberSkills: async (skills) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchskills/'+skills,{skills: skills})
+        return membersg.data
+    },  
+    getMemberInterests: async (interests) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchinterests/'+interests,{interests: interests})
+        return membersg.data
+    },  
+    getMemberWorkCompleted: async (workcompleted) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchworkcompleted/'+workcompleted,{workcompleted: workcompleted})
+        return membersg.data
+    },
+    getMemberReviews: async (reviews) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchreviews/'+reviews,{reviews: reviews})
+        return membersg.data
     }, 
-    
+    getMemberStatus: async (status) =>{  
+        const membersg = await axios.get('http://localhost:3000/api/member/searchstatus/'+status,{status: status})
+        return membersg.data
+    },   
 }
 
 module.exports = functions
