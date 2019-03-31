@@ -66,10 +66,20 @@ router.put('/:id1/room/:id2', async (req,res) => {
         const isValidated = validator.roomUpdateValidation(req.body)
         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
         const {roomNo, capacity, rate} = req.body
-        if(roomNo) await Coworking.update({"_id": idCo, "rooms._id": idRoom}, {$set: {"rooms.$.roomNo": roomNo}})
-        if(capacity) await Coworking.update({"_id": idCo, "rooms._id": idRoom}, {$set: {"rooms.$.capacity": capacity}})
-        if(rate) await Coworking.update({"_id": idCo, "rooms._id": idRoom}, {$set: {"rooms.$.rate": rate}})
-        res.json({ msg: 'Room updated successfully'});
+        var Co = [];
+        if(roomNo) {
+            await Coworking.update({"_id": idCo, "rooms._id": idRoom}, {$set: {"rooms.$.roomNo": roomNo}})
+            Co +=roomNo
+        } 
+        if(capacity) {
+             await Coworking.update({"_id": idCo, "rooms._id": idRoom}, {$set: {"rooms.$.capacity": capacity}})
+             Co +=capacity
+        }
+        if(rate) {
+            await Coworking.update({"_id": idCo, "rooms._id": idRoom}, {$set: {"rooms.$.rate": rate}})
+            Co +=rate
+        }
+        res.json({ msg: 'Room updated successfully'}, {data: Co});
     }
     catch(error){
         res.status(422).send({ error: 'This coworking does not exist' });
