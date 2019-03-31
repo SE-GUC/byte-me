@@ -3,26 +3,31 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Vacancy = require('../../models/Vacancy')
 const validator = require('../../validations/vacancyValidations')
-
+const Partner = require('../../models/Partner')
 
 //Get all vacancies
 router.get('/', async (req,res) => {
     const vacancies = await Vacancy.find()
     res.json({data: vacancies})
 })
-//Create Vacancy
-router.post('/create', async (req,res) => {
-    try {
-     const isValidated = validator.createValidation(req.body)
-     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const newVacancy = await Vacancy.create(req.body)
-     res.json({msg:'Vacancy was created successfully', data: newVacancy})
-    }
-    catch(error) {
-        // We will be handling the error later
-        console.log(error)
-    }  
- })
+
+  router.post('/create/:id1', async (req,res) => {
+        try {
+            const id1 = req.params.id1
+           const partner = await Partner.findById(id1)
+          if(!partner) return res.status(404).send({error: 'Partner does not exist'})  
+             const isValidated = validator.createValidation(req.body)
+           if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+               const newVacancy = await Vacancy.create(req.body)
+               newVacancy.ownedBy=id1
+               partner.vacancyID.push(newVacancy.id)
+              return res.json({msg:'Vacancy was created successfully', data: newVacancy})
+           }
+              catch(error) {
+              // We will be handling the error later
+                  console.log(error)
+            }  
+         })
  
  // as a partner i should be able to update my vacancies so that i can keep my profile updated
  router.put('/update/:id', async (req,res) => {

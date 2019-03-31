@@ -1,5 +1,6 @@
 const axios = require('axios');
 axios.defaults.adapter = require('axios/lib/adapters/http')
+//http://localhost:3000/api/vacancy
 const functions = {
     getVacancy: async () =>{  
         const vacancyg = await axios.get('http://localhost:3000/api/vacancy')
@@ -14,17 +15,40 @@ const functions = {
         const vacancyd = await axios.delete('http://localhost:3000/api/vacancy/delete/'+id,{})
         return vacancyd
     }   ,
-    searchVacancyStartDate: async (startDate) =>{
-        const vacancyl = await axios.get('http://localhost:3000/api/vacancy/searchstartDate/'+startDate,{})
-        console.log(vacancyl.data)
+    ApplyOnVacancy: async (id1,id2) =>{
+        const vacancyd = await axios.put('http://localhost:3000/api/vacancy/apply/'+id1+'/'+id2,{})
+        //console.log(vacancyd.data)
+        return vacancyd
+    } ,
+    searchVacancyLocation: async (location) =>{
+        const vacancyl = await axios.get('http://localhost:3000/api/vacancy/searchlocation/'+location,{})
+        //console.log(vacancyl.data)
         return vacancyl
     } ,
-    searchVacancyEndDate: async (endDate) =>{
-        const vacancyl = await axios.get('http://localhost:3000/api/vacancy/searchendDate/'+endDate,{})
-        console.log(vacancyl.data)
+    searchVacancyDuration: async (duration) =>{
+        const vacancyl = await axios.get('http://localhost:3000/api/vacancy/searchduration/'+duration,{})
+       // console.log(vacancyl.data)
         return vacancyl
     } ,
     
+    postVacancy : async () =>{
+        return axios({
+            method:'post',
+            url:'localhost:3000/api/vacancy/create/5ca0f7a134ede009c00c3f42',
+            headers:{'Content-Type':'application/json'},
+            data:{
+                
+                description:"desc",
+                duration : "8 hours",
+                location : "zamalek",
+                monthlyWage :  5,
+                startDate: "2019-01-04",
+                dailyHours : 9,
+                endDate : "2019-01-05"
+            }
+        })
+    }
     
 };
+ //functions.searchVacancy('cairo')
 module.exports = functions;
