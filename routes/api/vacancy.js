@@ -76,7 +76,22 @@ router.get('/searchduration/:duration',async (req, res)=> {
     });
 });
 
-    
+router.get('/searchstartDate/:startDate',async (req, res)=> {
+    var startDate = req.params.startDate;
+    await Vacancy.find({startDate: startDate},  (err, vacancy)=> {
+     
+        res.json({data:vacancy})
+       
+    });
+});
+router.get('/searchendDate/:endDate',async (req, res)=> {
+    var endDate = req.params.endDate;
+    await Vacancy.find({endDate: endDate},  (err, vacancy)=> {
+     
+        res.json({data:vacancy})
+       
+    });
+});
 
  router.delete('/delete/:id', async (req,res) => {
     try {
