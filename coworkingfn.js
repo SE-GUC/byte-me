@@ -3,7 +3,7 @@ axios.defaults.adapter = require('axios/lib/adapters/http')
 const functions = {
     
     getcoworking: async () =>{  
-        const coworkinggetter = await axios.get('http://localhost:3000/api/coworking')
+        const coworkinggetter = await axios.get('http://localhost:3000/api/coworking/get')
         return coworkinggetter.data
     }, 
     updatecoworking: async (id) =>{
