@@ -7,7 +7,7 @@ module.exports = {
             lastName: Joi.string().min(3).max(20).required(),
             email: Joi.string().min(7).max(30).required(),
             expiryDate: Joi.date().min(6).max(30),
-            dateOfBirth: Joi.string().min(1).max(3).required(),
+            dateOfBirth: Joi.string().min(1).max(20).required(),
             age: Joi.number().min(1).max(3),
             skills: Joi.array().items(Joi.string()).min(4).max(30),
             interests: Joi.array().items(Joi.string()).min(4).max(30),

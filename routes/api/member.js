@@ -53,6 +53,21 @@ router.put('/:id', async (req,res)=>{
         console.log(error)
     }  
  })
+//Login
+router.post('/login', async (req,res) =>{
+Member.findOne({email:req.body.email})
+.exec()
+.then(doc=>{
+    console.log(doc)
+    if(doc.password==req.body.password){
+        res.json({Message:'Login Successful'});
+    }
+    else{
+        res.json({Message:'Password Incorrect'});
+    }
+})
+.catch(err =>{console.log(err); return res.json({Message:'Email Incorrect'})});
+})
 
  //view jobs
  router.get('/viewJobs/', async (req,res) => {
