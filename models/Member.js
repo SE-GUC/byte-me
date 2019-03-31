@@ -1,6 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 // Create the schema
+const Review = new Schema({
+    rating: {
+        type: Number,
+        required: true
+    },
+    reviewerID: {
+        type: Schema.Types.ObjectId,
+        ref: "Partner",
+        required: true
+    }
+}) 
 const MemberSchema = new Schema({
     firstName: {
         type: String,
@@ -15,33 +26,33 @@ const MemberSchema = new Schema({
         required: true
     },
     expiryDate: {
-        type: Date,
+        type: String,
         required: false
     },
     dateOfBirth: {
-        type: Date,
+        type: String,
         required:true
     },
     age:{
         type: Number,
         required:false
     },
-    skills:{
-        type: [String],
+    skills:[{
+        type: String,
         required:false
-    },
-    interests: {
-        type: [String],
+    }],
+    interests: [{
+        type: String,
         required:false
-    },
+    }],
     password: {
         type: String,
         required:true
     },
-    pastEventsAttended:{
-        type: [String],
+    pastEventsAttended:[{
+        type: Schema.Types.ObjectId,
         required:false
-    },
+    }],
     contractTime:{
         type: String,
         required:false
@@ -50,18 +61,21 @@ const MemberSchema = new Schema({
         type:String,
         required:false
     },
-    workCompleted:{
-        type:[String],
+    workCompleted:[{
+        type:String,
         required:false
-    },
-    reviews:{
-        type:[String],
+    }],
+    reviews:[{
+        type: Review,
         required:false
-    },
+    }],
     status:{
         type:String,
-        required:true,
         default: "Pending"
+    },
+    placeOfResidence:{
+        type:String,
+        required:true
     }
 })
-module.exports = Member = mongoose.model('members', MemberSchema)
+module.exports = Member = mongoose.model('Member', MemberSchema,'Member')

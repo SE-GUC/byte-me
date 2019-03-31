@@ -3,8 +3,9 @@ const Schema = mongoose.Schema
 // Create the schema
 const VacancySchema = new Schema({
     ownedBy: {
-        type: String,
-        required: true
+        type: Schema.Types.ObjectId,
+        ref: "Partner",
+        required: false
     },
     description: {
         type: String,
@@ -19,7 +20,7 @@ const VacancySchema = new Schema({
         required : true
     },
     monthlyWage:{
-        type : String,
+        type : Number,
         required : true
     },
     startDate : {
@@ -34,10 +35,23 @@ const VacancySchema = new Schema({
         type : Date,
         required : true
     },
-    applicants:{
-      type: [String],
+    requiredSkills: {
+        type : String,
+        required :false
+    },
+    applicants: [{
+      type: Schema.Types.ObjectId,
+      ref: "Member",
       required : false
-    }
+    }],
+    status:{
+        type: String,
+        default: "Pending"
+    },
+    requiredSkills:[{
+        type:String,
+        required:true
+    }]
 })
 
-module.exports = Vacancy = mongoose.model('Vacancy', VacancySchema)
+module.exports = Vacancy = mongoose.model('Vacancy', VacancySchema,'Vacancy')
