@@ -10,7 +10,7 @@ module.exports = {
             partners: Joi.array().min(1).required(),
             boardMembers: Joi.array().min(1).required(),
             fieldOfWork: Joi.string().min(10).max(30).required(),
-            expiryDate: Joi.string(),
+            expiryDate: Joi.date(),
             contractTime: Joi.string().min(10).max(30),
             contractLocation: Joi.string().min(10).max(30)
             
@@ -28,7 +28,7 @@ module.exports = {
             partners: Joi.array().min(1),
             boardMembers: Joi.array().min(1),
             fieldOfWork: Joi.string().min(10).max(30),
-            expiryDate: Joi.string().min(6).max(30),
+            expiryDate: Joi.date().min(6).max(30),
             contractTime: Joi.string().min(10).max(30),
             contractLocation: Joi.string().min(10).max(30)
             

@@ -25,8 +25,12 @@ router.post('/login', async (req,res) => {
 });
 
 
-
-//As a partner i should get my profile information working
+//get all partners
+router.get('/', async (req,res) => {
+    const partners = await Partner.find()
+    res.json({data: partners})
+})
+//As a partner i should get my profile information 
 router.get('/:id', async (req,res) => {
     
     Partner.findById(req.params.id,function(err,partner){
@@ -49,12 +53,21 @@ router.post('/', async (req,res) => {
     }  
  })
  //update profile 
- router.put('update/:id', function (req,res){
-     Partner.findByIdAndUpdate(req.params.id,{$set:req.body},function(err,partner){
+ /*router.put('update/:id', function (req,res){
+    Partner.findOneAndUpdate(req.params.id,{$set:req.body},function(err,partner){
          if (err) return res.json({Message:'Error'});
          res.json({msg: 'Partner updated successfully'})
      })
-});
+     
+});*/
+router.put('/:id', async (req,res) => {
+    Partner.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,e)=>{
+        if(err){
+            return res.json({error:'Cannot update this partner'})
+        }
+        else return res.json({data:e})
+    })
+})
 //delete profile 
  router.delete('/:id', async (req,res) => {
      Partner.findByIdAndRemove(req.params.id,function(err,partner){
@@ -89,14 +102,34 @@ router.get('/viewApplicants/:id',async (req,res)=>{
     .catch(err =>{console.log(err); return res.json({Message:`no vacancies`})});
     
 });
-//update vacancy description
-/*router.put('updateDescription/:id', function (req,res){
-    Vacancy.findOneAndUpdate({ownedby:req.params.id},{$set:req.body.description},function(err,vacancy){
-        if (err) return res.json({Message:'Error'});
-        res.json({msg: 'description of vacancy updated successfully'})
-    })
-});*/
 
+//searched by  boardMembers
+router.get('/searchMembers/:boardMembers',async (req, res)=> {
+    var boardMembers = req.params.boardMembers;
+    await Partner.find({boardMembers: boardMembers},  (err, partner)=> {
+     
+        res.json({data:partner})
+       
+    });
+});
+//searched by fieldOfWork
+router.get('/searchfieldOfWork/:fieldOfWork',async (req, res)=> {
+    var fieldOfWork = req.params.fieldOfWork;
+    await Partner.find({fieldOfWork: fieldOfWork},  (err, partner)=> {
+     
+        res.json({data:partner})
+       
+    });
+});
+//searched by status
+router.get('/searchstatus/:status',async (req, res)=> {
+    var status = req.params.status;
+    await Partner.find({status: status},  (err, partner)=> {
+     
+        res.json({data:partner})
+       
+    });
+});
 
 
 
