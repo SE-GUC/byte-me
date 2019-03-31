@@ -10,6 +10,7 @@ module.exports = {
             monthlyWage: Joi.string().min(1).max(200).required(),
             startDate: Joi.date().required(),
             dailyHours: Joi.number().required(),
+            dailyHours:Joi.string().required(),
             endDate: Joi.date().required()
         }
 

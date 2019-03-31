@@ -25,14 +25,16 @@ router.post('/create', async (req,res) => {
  })
  
  // as a partner i should be able to update my vacancies so that i can keep my profile updated
-router.put('/update/:id', async (req,res) => {
-        Vacancy.findByIdAndUpdate(req.params.id,req.body,{new : true}, (err,e)=>{
-        if(err){
-        return res.json({ error: `cannot update this request` })
-        }else{
-        return res.json({data:e})
-        }
-        })
+ router.put('/update/:id', async (req,res) => {
+    Vacancy.findByIdAndUpdate(req.params.id,req.body,{new : true}, (err,e)=>{
+    if(err){
+    return res.json({ error: `cannot update this request` })
+    }else{
+    return res.json({data:e})
+    }
+    })
+    })
+
         
     router.put('/apply/:id1/:id2', async (req,res) => {
         try {
@@ -53,7 +55,7 @@ router.put('/update/:id', async (req,res) => {
                
                console.log(error)
            }  
-        })
+        }),
     
 
     
@@ -68,6 +70,7 @@ router.put('/update/:id', async (req,res) => {
         
         console.log(error)
     }  
- })
+ }),
+
 
  module.exports = router
