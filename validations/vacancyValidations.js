@@ -7,10 +7,9 @@ module.exports = {
             description: Joi.string().min(1).max(3000).required(),
             duration: Joi.string().min(1).max(200).required(),
             location: Joi.string().min(1).max(200).required(),
-            monthlyWage: Joi.string().min(1).max(200).required(),
+            monthlyWage: Joi.number().required(),
             startDate: Joi.date().required(),
             dailyHours: Joi.number().required(),
-            dailyHours:Joi.string().required(),
             endDate: Joi.date().required()
         }
 
@@ -23,7 +22,7 @@ module.exports = {
             description: Joi.string().min(1).max(3000),
             duration: Joi.string().min(1).max(200),
             location: Joi.string().min(1).max(200),
-            monthlyWage: Joi.string().min(1).max(200),
+            monthlyWage: Joi.number(),
             startDate: Joi.date(),
             dailyHours: Joi.number(),
             endDate: Joi.date()

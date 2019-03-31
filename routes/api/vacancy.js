@@ -44,12 +44,14 @@ router.post('/create', async (req,res) => {
             if(!member) return res.status(404).send({error: 'Member does not exist'})    
             const id2 = req.params.id2
             const vac = await Vacancy.findById(id2)
-            console.log(vac);
+            
             
             
             if(!vac) return res.status(404).send({error: 'Vacancy does not exist'})
             vac.applicants.push(id1);
-            console.log(vac.applicants);
+            console.log({data:vac})
+             return res.json({data:vac})
+            
            }
            catch(error) {
                
@@ -61,8 +63,8 @@ router.post('/create', async (req,res) => {
   router.get('/searchlocation/:location',async (req, res)=> {
     var location = req.params.location;
     await Vacancy.find({location: location},  (err, vacancy)=> {
-     
-        res.json({data:vacancy})
+         console.log({data:vacancy})
+        return res.json({data:vacancy})
        
     });
 });
@@ -71,7 +73,7 @@ router.get('/searchduration/:duration',async (req, res)=> {
     var duration = req.params.duration;
     await Vacancy.find({duration: duration},  (err, vacancy)=> {
      
-        res.json({data:vacancy})
+        return res.json({data:vacancy})
        
     });
 });
@@ -80,7 +82,7 @@ router.get('/searchstartDate/:startDate',async (req, res)=> {
     var startDate = req.params.startDate;
     await Vacancy.find({startDate: startDate},  (err, vacancy)=> {
      
-        res.json({data:vacancy})
+        return res.json({data:vacancy})
        
     });
 });
@@ -88,7 +90,7 @@ router.get('/searchendDate/:endDate',async (req, res)=> {
     var endDate = req.params.endDate;
     await Vacancy.find({endDate: endDate},  (err, vacancy)=> {
      
-        res.json({data:vacancy})
+        return res.json({data:vacancy})
        
     });
 });
