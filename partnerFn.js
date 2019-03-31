@@ -1,0 +1,81 @@
+const axios = require('axios');
+axios.defaults.adapter = require('axios/lib/adapters/http')
+const functions = {
+
+    loginPartner: async () =>{
+        return axios ({
+            method:'post',
+            url:'http://localhost:8000/api/partner/login',
+            headers: {'Content-Type': 'application/json'},
+            data:
+            {
+            
+            email: 'gucmail',
+            password: 'gucpassword100'
+            }
+
+        })
+       
+        
+    },
+    getAllPartners: async()=>{
+        const partners = await axios.get('http://localhost:8000/api/partner/')
+
+        return partners.data
+
+    },
+    
+    createPartner: async () =>{
+        return axios({
+            method: 'post',
+            url: 'http://localhost:8000/api/partner/',
+            headers: {'Content-Type': 'application/json'},
+            data:
+            {
+            organizationName: ' testing partner',
+            email: 'omneya@yahoo.com',
+            password: 'gffjuyfg',
+            description: 'description of organization',
+            partners: ['hgv','htdx'],
+            boardMembers: ['yfcb','hfdsrt'],
+            fieldOfWork: 'entertainment',
+            expiryDate: 'fifteen december',
+            contractTime: 'monday the 3rd on 3 pm',
+            contractLocation: 'masr el gedida'
+            
+            
+            }
+        })
+    },
+    
+    deletePartner: async (id) =>{
+        const partner = await axios.delete('http://localhost:8000/api/partner/'+id,{})
+        return partner
+    },
+    
+     
+     
+     getApplicants: async (id) =>{
+         const applicantsV= await axios.get('http://localhost:8000/api/partner/viewApplicants/'+id,{})
+         return applicantsV.data
+     },
+     getPartnerBoardMembers: async (boardMembers) =>{  
+        const partnersM = await axios.get('http://localhost:8000/api/partner/searchMembers/'+boardMembers,{boardMembers:
+          boardMembers})
+        return partnersM.data
+    },
+    getFieldOfWork: async (fieldOfWork) =>{  
+        const partnersF = await axios.get('http://localhost:8000/api/partner/searchfieldOfWork/'+fieldOfWork,{fieldOfWork:
+        fieldOfWork})
+        return partnersF.data
+    }, 
+        
+};
+
+    
+
+
+
+
+
+module.exports = functions;
