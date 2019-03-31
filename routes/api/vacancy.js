@@ -60,7 +60,25 @@ router.put('/:id', async (req,res) => {
                console.log(error)
            }  
         })
-    
+        
+  
+  router.get('/searchlocation/:location',async (req, res)=> {
+    var location = req.params.location;
+    await Vacancy.find({location: location},  (err, vacancy)=> {
+     
+        res.json({data:vacancy})
+       
+    });
+});
+
+router.get('/searchduration/:duration',async (req, res)=> {
+    var duration = req.params.duration;
+    await Vacancy.find({duration: duration},  (err, vacancy)=> {
+     
+        res.json({data:vacancy})
+       
+    });
+});
 
     
 
