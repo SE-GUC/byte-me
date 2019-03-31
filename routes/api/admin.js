@@ -11,21 +11,31 @@ router.get('/', async (req,res) => {
     res.json({data: admins})
 })
 
-//updating an admin 
-router.put('/:id', async (req,res) => {
-    try {
-     const id = req.params.id
-     const admin = await Admin.findOne({id})
-     if(!admin) return res.status(404).send({error: 'Admin does not exist'})
-     const isValidated = validator.updateValidation(req.body)
-     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const updatedAdmin = await Admin.updateOne(req.body)
-     res.json({msg: 'Admin updated successfully'})
+// getting a single admin 
+router.get('/:id', async(req,res) =>{
+    try{
+        const id = req.param.id
+        const admin = await Admin.findById(id)
+        if(!admin) return res.status(404).send({error: 'Admin searched for does not exist'})
+        res.json(admin)
     }
-    catch(error) {
+    catch(error){
         console.log(error)
-    }  
- })
+    }
+})
+
+
+//Updating an admin 
+router.put('/update/:id', async (req,res) => {
+    Admin.findByIdAndUpdate(req.params.id,req.body,{new : true}, (err,e)=>{
+    if(err){
+    return res.json({ error: `cannot upddate an admin` })
+    }else{
+    return res.json({data:e})
+    }
+    })
+    })
+
 
  // Deleting an admin profile
  router.delete('/:id', async (req,res) => {
