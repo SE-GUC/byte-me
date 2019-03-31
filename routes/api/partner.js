@@ -96,18 +96,7 @@ router.get('/viewApplicants/:id',async (req,res)=>{
         res.json({msg: 'description of vacancy updated successfully'})
     })
 });*/
-router.get('search/organizationName',async (req,res)=>{
-    try{
-        const organizationName=req.params.organizationName
-        await partner.findOne({organizationName: new RegExp('^'+organizationName+'$',"i")},
-        function(err, doc){})
-        res.json({data: partner}
-            )
-    }
-    catch(error){
-        console.log(error)
-    }
-})
+
 
 
 
