@@ -3,9 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 
 const bodyParser = require('body-parser')
-
 //const cors=require('cors')
-
 const keys = require ('./config/keys_dev')
 
 const coworkingSpace = require('./routes/api/coworking')
@@ -19,7 +17,6 @@ const admin = require('./routes/api/admin')
 const event = require('./routes/api/event')
 
 const vacancy = require('./routes/api/vacancy')
-
 const app = express()
 
  
@@ -66,6 +63,8 @@ mongoose
 
 //app.use(express.urlencoded())
 app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+//app.use(cors())
 
 
 app.use(express.urlencoded({extended: false}))
@@ -122,7 +121,7 @@ app.use((req, res) => {
 
  
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 3000
 
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
 
