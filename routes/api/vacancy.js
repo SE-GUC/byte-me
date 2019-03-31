@@ -11,7 +11,7 @@ router.get('/', async (req,res) => {
     res.json({data: vacancies})
 })
 //Create Vacancy
-router.post('/', async (req,res) => {
+router.post('/create', async (req,res) => {
     try {
      const isValidated = validator.createValidation(req.body)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
@@ -25,7 +25,7 @@ router.post('/', async (req,res) => {
  })
  
  // as a partner i should be able to update my vacancies so that i can keep my profile updated
-router.put('/:id', async (req,res) => {
+router.put('/update/:id', async (req,res) => {
     try {
         const id = req.params.id
         const vacancy = await Vacancy.findByIdAndUpdate(id)
@@ -64,7 +64,7 @@ router.put('/:id', async (req,res) => {
 
     
 
- router.delete('/:id', async (req,res) => {
+ router.delete('/delete/:id', async (req,res) => {
     try {
      const id = req.params.id
      const deletedVacancy = await Vacancy.findByIdAndRemove(id)
