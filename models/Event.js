@@ -26,15 +26,15 @@ const EventSchema = new Schema({
         type : Date,
         required : true
     },
-    attendees : [{
-        type : Schema.Types.ObjectId,
+    attendees:[{
+        type: Schema.Types.ObjectId,
         ref: "Member",
         required : false
-    }],
+      }],
     organizedBy : {
         type : Schema.Types.ObjectId,
         ref: "Partner",
-        required : true
+        required : false
     },
     status:{
         type: String,

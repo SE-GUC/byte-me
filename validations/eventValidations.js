@@ -8,9 +8,8 @@ module.exports = {
             eventDescription: Joi.string().min(3).max(500).required(),
             eventLocation: Joi.string().min(3).max(500).required(),
             eventDuration: Joi.string().min(3).max(500).required(),
-            eventDate: Joi.date.required(),
-            attendees:Joi.array.string().min(3).max(500).required(),
-            organizedBy: Joi.string().min(3).max(500).required()
+            eventDate: Joi.date().required(),
+            organizedBy: Joi.string().min(3).max(500)
         }
 
         return Joi.validate(request, createSchema)
@@ -23,8 +22,7 @@ module.exports = {
             eventDescription: Joi.string().min(3).max(500),
             eventLocation: Joi.string().min(3).max(500),
             eventDuration: Joi.string().min(3).max(500),
-            eventDate: Joi.date,
-            attendees:Joi.array.string().min(3).max(500),
+            eventDate: Joi.date(),
             organizedBy: Joi.string().min(3).max(500)
         
         }
