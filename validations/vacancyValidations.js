@@ -10,7 +10,8 @@ module.exports = {
             monthlyWage: Joi.string().min(1).max(200).required(),
             startDate: Joi.date(),
             dailyHours: Joi.number(),
-            endDate: Joi.date()
+            endDate: Joi.date(),
+            requiredSkills: Joi.array().items(Joi.string()).min(1).required()
         }
 
         return Joi.validate(request, createSchema)
@@ -25,7 +26,8 @@ module.exports = {
             monthlyWage: Joi.string().min(1).max(200),
             startDate: Joi.date(),
             dailyHours: Joi.number(),
-            endDate: Joi.date()
+            endDate: Joi.date(),
+            requiredSkills: Joi.array().items(Joi.string()).min(1)
         }
 
         return Joi.validate(request, updateSchema)

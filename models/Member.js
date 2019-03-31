@@ -72,6 +72,10 @@ const MemberSchema = new Schema({
     status:{
         type:String,
         default: "Pending"
+    },
+    placeOfResidence:{
+        type:String,
+        required:true
     }
 })
 module.exports = Member = mongoose.model('Member', MemberSchema,'Member')

@@ -75,6 +75,76 @@ Member.findOne({email:req.body.email})
      res.json({data:alljobs})
  })
 
+ //view recommended jobs
+ router.get('/viewRecommendedVacancies/:id', async (req,res)=>{
+     try{
+         const myID = req.params.id 
+         const currentMember = await Member.findById(myID)
+         if(!currentMember) return res.status(400).send({ error: "Cant" })
+         var recommendedJobs = []
+         const allvacancies = await Vacancy.find()
+             for(const vac of allvacancies){//check availability,location and skills
+                 if(vac.status==="available" && vac.location===currentMember.placeOfResidence){
+                     for( const skill of vac.requiredSkills){
+                         if(currentMember.skills.includes(skill) && !(recommendedJobs.includes(vac)))
+                             recommendedJobs.push(vac)
+                     }
+                 }
+             }
+             for(const vac of allvacancies){
+                 if(vac.status==="available"){//check availability and skills
+                     for( const skill of vac.requiredSkills){
+                         if(currentMember.skills.includes(skill) && !(recommendedJobs.includes(vac)))
+                             recommendedJobs.push(vac)
+                     }
+                 }
+             }
+             for(const vac of allvacancies){//check availability and location
+                 if(vac.status==="available" && vac.location===currentMember.placeOfResidence){
+                     if(!(recommendedJobs.includes(vac)))
+                         recommendedJobs.push(vac)
+                     
+                 }
+             }
+             for(const vac of allvacancies){//check location and skills
+                 if(vac.location===currentMember.placeOfResidence){
+                     for( const skill of vac.requiredSkills){
+                         if(currentMember.skills.includes(skill) && !(recommendedJobs.includes(vac)))
+                             recommendedJobs.push(vac)
+                     }
+                 }
+             }
+             for(const vac of allvacancies){//check availability
+                 if(vac.status==="available"){
+                     if(!(recommendedJobs.includes(vac)))
+                         recommendedJobs.push(vac)
+                     
+                 }
+             }
+             for(const vac of allvacancies){//check skills
+                // if(vac.status==="available"){
+                     for( const skill of vac.requiredSkills){
+                         if(currentMember.skills.includes(skill) && !(recommendedJobs.includes(vac)))
+                             recommendedJobs.push(vac)
+                     }
+                // }
+             }
+             for(const vac of allvacancies){//check location
+                 if(vac.location===currentMember.placeOfResidence){
+                     if(!(recommendedJobs.includes(vac)))
+                         recommendedJobs.push(vac)
+                     
+                 }
+             }
+     
+             
+         res.json({data:recommendedJobs})
+
+     }
+     catch(error){
+         console.log(error)
+     }
+ })
  
 
 module.exports = router

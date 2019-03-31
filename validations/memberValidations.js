@@ -17,7 +17,8 @@ module.exports = {
             contractLocation: Joi.string().min(6).max(30),
             workCompleted: Joi.array().items(Joi.string()).min(4).max(30),
             reviews: Joi.array().items(Joi.string()).min(4).max(30),
-            status: Joi.string().min(4).max(30)
+            status: Joi.string().min(4).max(30),
+            placeOfResidence: Joi.string().min(3).max(50).required()
         }
 
         return Joi.validate(request, createSchema)
@@ -34,7 +35,8 @@ module.exports = {
             password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/),
             pastEventsAttended: Joi.array().items(Joi.object()).min(4).max(30),
             workCompleted: Joi.array().items(Joi.string()).min(4).max(30),
-            reviews: Joi.array().items(Joi.string()).min(4).max(30)
+            reviews: Joi.array().items(Joi.string()).min(4).max(30),
+            placeOfResidence: Joi.string().min(3).max(50)
         }
 
         return Joi.validate(request, updateSchema)
