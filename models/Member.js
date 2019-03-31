@@ -26,11 +26,11 @@ const MemberSchema = new Schema({
         required: true
     },
     expiryDate: {
-        type: Date,
+        type: String,
         required: false
     },
     dateOfBirth: {
-        type: Date,
+        type: String,
         required:true
     },
     age:{
@@ -54,7 +54,7 @@ const MemberSchema = new Schema({
         required:false
     }],
     contractTime:{
-        type: Date,
+        type: String,
         required:false
     },
     contractLocation:{
@@ -72,6 +72,10 @@ const MemberSchema = new Schema({
     status:{
         type:String,
         default: "Pending"
+    },
+    placeOfResidence:{
+        type:String,
+        required:true
     }
 })
 module.exports = Member = mongoose.model('Member', MemberSchema,'Member')

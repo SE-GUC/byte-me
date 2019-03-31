@@ -5,7 +5,7 @@ const VacancySchema = new Schema({
     ownedBy: {
         type: Schema.Types.ObjectId,
         ref: "Partner",
-        required: true
+        required: false
     },
     description: {
         type: String,
@@ -35,6 +35,10 @@ const VacancySchema = new Schema({
         type : Date,
         required : true
     },
+    requiredSkills: {
+        type : String,
+        required :false
+    },
     applicants: [{
       type: Schema.Types.ObjectId,
       ref: "Member",
@@ -43,7 +47,11 @@ const VacancySchema = new Schema({
     status:{
         type: String,
         default: "Pending"
-    }
+    },
+    requiredSkills:[{
+        type:String,
+        required:true
+    }]
 })
 
 module.exports = Vacancy = mongoose.model('Vacancy', VacancySchema,'Vacancy')
