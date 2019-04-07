@@ -3,27 +3,18 @@ const Schema = mongoose.Schema
 // Create the schema
 
 const Schedule = new Schema({
-    startTime: {
-        type: Date,
-        required: true
-    },
-    endTime: {
-        type: Date,
-        required: true
+    date: {
+            type: String,
+            required: true,         
     },
     reserverID: {
         type: Schema.Types.ObjectId,
         ref: "Partner",
-        required: false
     },
     reserved: {
         type: Boolean,
         required: false,
         default: false
-    },
-    rate: {
-        type: Number,
-        required: true
     }
 })
 
@@ -36,16 +27,23 @@ const Room = new Schema({
         type: Number,
         required: true
     },
-    reservation: [{
-        type: Schedule,
+    reservation: {
+        type: [Schedule],
+    },
+    rate: {
+        type: Number,
         required: true
-    }]
+    }
 })
 
 const CoworkingSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    location: {
+        type: String,
+        required:true
     },
     email: {
         type: String,
@@ -57,7 +55,6 @@ const CoworkingSchema = new Schema({
     },
     rooms: [{
         type: Room,
-        required: true
     }],
     status: {
         type : String,

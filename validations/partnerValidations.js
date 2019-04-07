@@ -10,7 +10,9 @@ module.exports = {
             partners: Joi.array().min(1).required(),
             boardMembers: Joi.array().min(1).required(),
             fieldOfWork: Joi.string().min(10).max(30).required(),
-            
+            expiryDate: Joi.date(),
+            contractTime: Joi.string().min(10).max(30),
+            contractLocation: Joi.string().min(10).max(30)
             
         }
 
@@ -19,6 +21,7 @@ module.exports = {
 
     updateValidation: request => {
         const updateSchema = {
+
             organizationName: Joi.string().min(3).max(100),
             email: Joi.string().min(3).max(100),
             password: Joi.string().min(10).max(30),

@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+
 const bodyParser = require('body-parser')
 //const cors=require('cors')
 const keys = require ('./config/keys_dev')
@@ -12,8 +13,6 @@ const vacancy = require('./routes/api/vacancy')
 const app = express()
 const cors = require('cors');
 app.use(cors())
-
-//Db config 
 const db = require('./config/keys').mongoURI
 
 //connect to mongo
@@ -54,3 +53,4 @@ app.use((req, res) => {
 
 const port = process.env.PORT || 4000
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
+
