@@ -19,6 +19,8 @@ const event = require('./routes/api/event')
 
 const vacancy = require('./routes/api/vacancy')
 const app = express()
+const cors = require('cors');
+app.use(cors())
 
  
 
@@ -122,7 +124,9 @@ app.use((req, res) => {
 
  
 
-const port = process.env.PORT || 3000
+
+const port = process.env.PORT || 4000
+
 
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
 
