@@ -19,7 +19,7 @@ const event = require('./routes/api/event')
 
 const vacancy = require('./routes/api/vacancy')
 const app = express()
-const cors = require('cors');
+
 app.use(cors())
 
  
