@@ -4,12 +4,14 @@ import './App.css';
 import EventPost from'./components/EventPost';
 import VacancyPut from'./components/VacancyPut';
 import VacancyPost from './components/VacancyPost'
+import CoProfile from './components/Coworking/CoProfile';
 class App extends Component {
   render() {
     return (
       <div className="App">
         <EventPost/>
         <VacancyPost/>
+        <CoProfile/>
         <VacancyPut/>
       </div>
     );
