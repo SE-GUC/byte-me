@@ -8,12 +8,9 @@ router.get('/', async (req,res) => {
     res.json({data: partners})
 })
 
-const mongoose = require('mongoose')
 
-const Partner = require('../../models/Partner')
 const Vacancy = require('../../models/Vacancy')
 
-const validator = require('../../validations/partnerValidations')
 
 //login 
 router.post('/login', async (req,res) => {
@@ -140,7 +137,7 @@ router.get('/searchstatus/:status',async (req, res)=> {
 
 
 
-=======
+
 // Create a Partner
 router.post('/', async (req,res) => {
    try {
