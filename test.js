@@ -1,5 +1,4 @@
-const funcs = require('./coworkingFn')
-
+const funcs = require('./coworkingfn')
 test('testing coworking update', async ()=>{
     const response = await funcs.updatecoworking('5ca1256430ad6d49b447d4f7','youssefzidan2010@gmail.com')
     expect(response.data.email.sort()).toEqual('youssefzidan2010@gmail.com'.sort())
@@ -8,7 +7,7 @@ test('testing coworking update', async ()=>{
      const before = await funcs.getcoworking()
      funcs.deletecoworking('5ca1256430ad6d49b447d4f7')
      const after = await funcs.getcoworking()
-     expect(before.data.length-1).toBe(after.data.length)
+     expect(before.length-1).toBe(after.length)
  });
 test('testing coworking get',async()=>{
     const response = await funcs.getcoworking()
@@ -29,7 +28,7 @@ test('testing specific coworking ', async ()=>{
     expect(response.data[0].name).toEqual('hoba')
 });
 
-const funcs = require('./coworkingFn')
+
 test('Register', async () =>{
     const registered = funcs.register()
     expect(registered).toBeDefined()
@@ -63,4 +62,7 @@ test('Login', async () =>{
     const login = funcs.login()
     expect(login).toBeDefined()
 });
+
+
+
 

@@ -1,11 +1,6 @@
 const axios = require('axios');
 axios.defaults.adapter = require('axios/lib/adapters/http')
 const functions = {
-<<<<<<< HEAD:coworkingfn.js
-    
-    getcoworking: async () =>{  
-        const coworkinggetter = await axios.get('http://localhost:3000/api/coworking/get')
-=======
     postRoom: async (id) =>{  
         return axios({
             method:'post',
@@ -100,7 +95,6 @@ const functions = {
 
     getcoworking: async()=>{  
         const coworkinggetter = await axios.get('http://localhost:3000/api/coworking')
->>>>>>> 09eb42fd7fea70f1b95a642870808c6b1f004e34:tests/coworkingfn.js
         return coworkinggetter.data
     }, 
     updatecoworking: async (id) =>{
