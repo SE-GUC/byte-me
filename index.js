@@ -1,26 +1,31 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const cors = require('cors')
 
+const bodyParser = require('body-parser')
+//const cors=require('cors')
+const keys = require ('./config/keys_dev')
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')
 const member = require('./routes/api/member')
 const admin = require('./routes/api/admin')
 const event = require('./routes/api/event')
 const vacancy = require('./routes/api/vacancy')
-
 const app = express()
-
-//Db config 
+const cors = require('cors');
+app.use(cors())
 const db = require('./config/keys').mongoURI
 
 //connect to mongo
 mongoose
     .connect(db)
     .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
+
+// app.use(express.json())
 
 app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+//app.use(cors())
 
 app.get('/', (req, res) => {
     res.send(`<h1>Welcome to Lirten Hub</h1>
@@ -46,5 +51,6 @@ app.use((req, res) => {
     res.status(404).send({err: 'We can not find what you are looking for'});
  })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
+

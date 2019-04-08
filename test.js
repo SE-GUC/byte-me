@@ -7,7 +7,7 @@ test('testing coworking update', async ()=>{
      const before = await funcs.getcoworking()
      funcs.deletecoworking('5ca1256430ad6d49b447d4f7')
      const after = await funcs.getcoworking()
-     expect(before.length-1).toBe(after.length)
+     expect(before.data.length-1).toBe(after.data.length)
  });
 test('testing coworking get',async()=>{
     const response = await funcs.getcoworking()
