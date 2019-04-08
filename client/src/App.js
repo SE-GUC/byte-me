@@ -3,10 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import Partner from './components/partner';
 import EventPost from'./components/EventPost';
+
+import CreateMember from './components/CreateMember';
+import UpdateMember from './components/UpdateMember';
+
+
 import VacancyPut from'./components/VacancyPut';
 import VacancyPost from './components/VacancyPost'
 import CoProfile from './components/Coworking/CoProfile';
 import axios from 'axios';
+
 class App extends Component {
   state={
     partners:[]
@@ -35,9 +41,14 @@ class App extends Component {
         
       </React.Fragment>
         <EventPost/>
+
+        <CreateMember/>
+        <UpdateMember/>
+
         <VacancyPost/>
         <CoProfile/>
         <VacancyPut/>
+
       </div>
     );
   }
