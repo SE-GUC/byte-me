@@ -9,8 +9,8 @@ const admin = require('./routes/api/admin')
 const event = require('./routes/api/event')
 const vacancy = require('./routes/api/vacancy')
 const app = express()
+app.use(cors())
 const db = require('./config/keys').mongoURI
-
 mongoose
     .connect(db)
     .then(() => console.log('Connected to MongoDB'))
