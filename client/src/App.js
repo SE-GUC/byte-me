@@ -3,10 +3,7 @@ import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import EditVacancy from "./components/EditVacancy";
-import VacancyPost from "./components/VacancyPost";
-import ViewVacancy from "./components/ViewVacancy";
-import SearchVacancy from "./components/SearchCity";
+import HomeVacancy from './components/HomeVacancy';
 
 class App extends Component {
   render() {
@@ -23,28 +20,36 @@ class App extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                  <Link to={"/"} className="nav-link">
-                    Home
-                  </Link>
-                </li>
-                
-                <li className="nav-item">
-                  <Link to={"/post"} className="nav-link">
-                    Post new Vacancy
-                  </Link>
-                </li>
+              <li className="nav-item">
 
-                <li className="nav-item">
-                  <Link to={"/viewAvailableVacancies"} className="nav-link">
-                    Vacancies
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to={"/Search"} className="nav-link">
-                    Search
-                  </Link>
-                </li>
+<Link to={'/partner'} className="nav-link">Partner</Link>
+
+</li>
+
+<li className="nav-item">
+
+<Link to={'/member'} className="nav-link">Member</Link>
+
+</li>
+
+<li className="nav-item">
+
+<Link to={'/vacancy'} className="nav-link">Vacancy</Link>
+
+</li>
+
+<li className="nav-item">
+
+<Link to={'/event'} className="nav-link">Event</Link>
+
+</li>
+<li className="nav-item">
+
+<Link to={'/coworking'} className="nav-link">CoWorking</Link>
+
+</li>
+            
+
               </ul>
 
             </div>
@@ -61,10 +66,9 @@ class App extends Component {
 
             {/* <Route path='/update/:id' component={ Edit } /> */}
 
-            <Route exact path="/post" component={VacancyPost} />
-            <Route path="/update/:id" component={EditVacancy} />
-            <Route path={"/viewAvailableVacancies"} component={ViewVacancy} />
-            <Route path={"/Search"} component={SearchVacancy} />
+           
+            <Route path={"/vacancy"} component={HomeVacancy} />
+            
           </Switch>
         </div>
       </Router>

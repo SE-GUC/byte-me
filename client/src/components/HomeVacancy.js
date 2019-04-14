@@ -3,13 +3,13 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import EditVacancy from "./EditVacancy";
-import VacancyPost from "./VacancyPost";
-import ViewVacancy from "./ViewVacancy";
-import SearchCity from "./SearchCity";
-import SearchstartDate from './SearchstartDate';
+import EditVacancy from './EditVacancy';
+import VacancyPost from './VacancyPost';
+import ViewVacancy from './ViewVacancy';
 import SearchendDate from './SearchendDate';
 import Searchduration from './Searchduration';
+import SearchstartDate from './SearchstartDate';
+import SearchCity from './SearchCity';
 
 class HomeVacancy extends Component {
   render() {

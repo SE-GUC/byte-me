@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios'
-// import Edit from './components/Edit'
+
 
  
 
-class TableRow extends Component {
+class TableRowVacancy extends Component {
 
     constructor(props) {
 
@@ -15,6 +15,8 @@ class TableRow extends Component {
 
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
+        this.apply = this.apply.bind(this);
+
 
     }
     delete() {
@@ -72,6 +74,17 @@ class TableRow extends Component {
         
     }
 
+        
+
+    
+    apply(){
+      axios.put('http://localhost:4000/api/vacancy/apply/5ca0c819f792812168c302e0/'+this.props.obj._id)
+      .then(console.log('Applied'))
+      .then(window.parent.location = window.parent.location.href)
+
+      .catch(err => console.log(err))
+    }
+    
     
 
   render() {
@@ -127,7 +140,7 @@ class TableRow extends Component {
 
           <td>
 
-          <Link to={"/update/"+this.props.obj._id} className="btn btn-primary" onClick="edit">Edit</Link>
+          <Link to={"/vacancy/update/"+this.props.obj._id} className="btn btn-primary" onClick="edit">Edit</Link>
 
           </td>
 
@@ -136,7 +149,12 @@ class TableRow extends Component {
           <button onClick={this.delete}className="btn btn-danger">Delete</button >
           
 
-          </td>
+          </td><td>
+  
+  <button onClick={this.apply}className="btn btn-danger">Apply</button >
+  
+
+  </td>
 
         </tr>
 
@@ -149,6 +167,6 @@ class TableRow extends Component {
 
  
 
-export default TableRow;
+export default TableRowVacancy;
 
  
