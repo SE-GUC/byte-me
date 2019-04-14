@@ -9,6 +9,13 @@ router.get('/', async (req,res) => {
     const partners = await Partner.find()
     res.json({data: partners})
 })
+//Get my profile information (partner)
+router.get('/:id', async (req,res) => {
+    const myID = req.params.id
+    const partner = await Partner.findById(myID)
+    if(!partner) return res.status(404).send({error: 'There is no member with such ID'})
+    res.json({data:[partner]})
+})
 
 //login 
 router.post('/login', async (req,res) => {
@@ -86,7 +93,7 @@ router.put('/addBoardMembers/:id',async (req, res)=> {
     var toAdd = req.body.boardMembers;
         partners.forEach((value) => {
          if(value.id === req.params.id) {
-            value.partners.push(` ${toAdd}`);
+            value.boardMembers.push(` ${toAdd}`);
             var partners=value.partners;
             var eventID=value.eventID;
             var vacancyID=value.vacancyID;

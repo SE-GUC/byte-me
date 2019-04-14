@@ -14,7 +14,6 @@ class UpdatePartner extends Component {
         this.onpassword= this.onpassword.bind(this);
         this.ondescription = this.ondescription.bind(this);
         this.onfieldOfWork = this.onfieldOfWork.bind(this);
-
         this.onSubmit = this.onSubmit.bind(this);
         this.onSubmit1 = this.onSubmit1.bind(this);
         this.onSubmit2 = this.onSubmit2.bind(this);
@@ -22,6 +21,7 @@ class UpdatePartner extends Component {
             partner:'',
             partners:'',
             boardMembers:'',
+            boardMember:'',
             organizationName:'',
             email:'',
             password: '',
@@ -41,7 +41,7 @@ class UpdatePartner extends Component {
       }
       onboardMember(e) {
         this.setState({
-          boardMembers: e.target.value
+          boardMember: e.target.value
         });
       }
     onboardMembers(e) {
@@ -77,7 +77,7 @@ class UpdatePartner extends Component {
     
       onSubmit(e) {
         e.preventDefault();
-        axios.put('http://localhost:4000/api/partner/5ca0f7a134ede009c00c3f42/', {
+        axios.put('http://localhost:4000/api/partner/5ca1141b21356c2d388904e7/', {
             partner:this.state.partner,
             boardMember: this.state.boardMember,
             organizationName: this.state.organizationName,
@@ -92,15 +92,6 @@ class UpdatePartner extends Component {
         })
         .then(res => {
             console.log(res.data)
-            this.setState({
-              partner:'',
-              boardMember:'',
-              organizationName:'',
-              email:'',
-              password: '',
-              description: '',
-              fieldOfWork:'' 
-          })
         })
         .catch(error => {
             console.log(error)
