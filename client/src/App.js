@@ -11,6 +11,7 @@ import UpdateMember from './components/UpdateMember';
 import VacancyPut from'./components/VacancyPut';
 import VacancyPost from './components/VacancyPost'
 import CoProfile from './components/Coworking/CoProfile';
+import CoEdit from './components/Coworking/CoEdit';
 import axios from 'axios';
 
 class App extends Component {
@@ -47,6 +48,7 @@ class App extends Component {
 
         <VacancyPost/>
         <CoProfile/>
+        <CoEdit/>
         <VacancyPut/>
 
       </div>
