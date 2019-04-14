@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.3.1",
     "concurrently": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
@@ -26,9 +27,11 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.6",
+    "react-calendar": "^2.18.1",
     "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "^2.1.8",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
