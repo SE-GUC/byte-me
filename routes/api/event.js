@@ -14,7 +14,8 @@ res.json({data: events})
 //Get an event
 router.get('/:id', async (req,res) => {
 const id = req.params.id
-const events = await Event.findById(id)
+const partner = await Partner.findById(id)
+const events = await Event.find({organizedBy:partner.id})
 res.json({data: events})
 }),
 
@@ -32,7 +33,16 @@ router.get('/searcheventLocation/:eventLocation',async(req,res)=>{
            return res.json({data:event})
     });
   });
-  
+  router.get('/searchCity/:city',async (req,res)=>{
+    try{
+       const data= await Event.find({eventLocation:req.params.city})
+        return res.json({data:data})
+    }
+    catch(e){
+        console.log(e)
+    }
+
+})
 //Update an event
 router.put('/update/:id', async (req,res) => {
 Event.findByIdAndUpdate(req.params.id,req.body,{new : true}, (err,e)=>{
