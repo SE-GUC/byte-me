@@ -122,7 +122,7 @@ app.use((req, res) => {
 
  
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 20000
 
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
 
