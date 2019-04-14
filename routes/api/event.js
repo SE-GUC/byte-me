@@ -8,31 +8,39 @@ const Partner = require('../../models/Partner')
 //Get all events
 router.get('/', async (req,res) => {
 const events = await Event.find()
-res.json({data: events})
+return res.json({data: events})
 }),
 
 //Get an event
 router.get('/:id', async (req,res) => {
 const id = req.params.id
-const events = await Event.findById(id)
+const partner = await Partner.findById(id)
+const events = await Event.find({organizedBy:partner.id})
 res.json({data: events})
 }),
 
 //Search event date
-router.get('/searcheventDate/:eventDate',async(req,res)=>{
-    var eventDate = req.params.eventDate;
-    await Event.find({eventDate:eventDate},(err,event)=>{
-          return res.json({data:event})
-    });
-  });
+router.get('/searchType/:city',async (req,res)=>{
+    try{
+       const data= await Event.find({type:req.params.city})
+        return res.json({data:data})
+    }
+    catch(e){
+        console.log(e)
+    }
+
+})
 //Search event location
-router.get('/searcheventLocation/:eventLocation',async(req,res)=>{
-    var eventLocation = req.params.eventLocation;
-    await Event.find({eventLocation:eventLocation},(err,event)=>{
-           return res.json({data:event})
-    });
-  });
-  
+  router.get('/searchCity/:city',async (req,res)=>{
+    try{
+       const data= await Event.find({eventLocation:req.params.city})
+        return res.json({data:data})
+    }
+    catch(e){
+        console.log(e)
+    }
+
+})
 //Update an event
 router.put('/update/:id', async (req,res) => {
 Event.findByIdAndUpdate(req.params.id,req.body,{new : true}, (err,e)=>{
@@ -95,7 +103,7 @@ router.put('/pcreateevent/:id1/:id2', async (req,res) => {
              const isValidated = validator.createValidation(req.body)
              if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
              const newMember = await Member.create(req.body)
-             res.json({msg:'Event was created successfully', data: newMember})
+             return res.json({msg:'Event was created successfully', data: newMember})
             }
             catch(error) {
                 // We will be handling the error later
@@ -127,7 +135,7 @@ router.delete('/delete/:id', async (req,res) => {
 try {
 const id = req.params.id
 const deletedevent = await Event.findByIdAndRemove(id)
-res.json({msg:'event was deleted successfully', data: deletedevent})
+return res.json({msg:'event was deleted successfully', data: deletedevent})
 }
 catch(error) {
 // We will be handling the error later

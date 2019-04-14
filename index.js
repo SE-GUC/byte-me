@@ -1,8 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
-
 const bodyParser = require('body-parser')
 //const cors=require('cors')
+//const react = require('react-router-dom')
 const keys = require ('./config/keys_dev')
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')
@@ -53,4 +53,3 @@ app.use((req, res) => {
 
 const port = process.env.PORT || 4000
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
-
