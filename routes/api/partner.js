@@ -3,17 +3,12 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Partner = require('../../models/Partner')
 const validator = require('../../validations/partnerValidations')
+const Vacancy = require('../../models/Vacancy')
+
 router.get('/', async (req,res) => {
     const partners = await Partner.find()
     res.json({data: partners})
 })
-
-const mongoose = require('mongoose')
-
-const Partner = require('../../models/Partner')
-const Vacancy = require('../../models/Vacancy')
-
-const validator = require('../../validations/partnerValidations')
 
 //login 
 router.post('/login', async (req,res) => {
@@ -46,19 +41,7 @@ router.get('/:id', async (req,res) => {
     })
 });
 
-//create profile
-router.post('/', async (req,res) => {
-    try {
-     const isValidated = validator.createValidation(req.body)
-     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const newProfile = await Partner.create(req.body)
-     res.json({msg:'partner was created successfully', data: newProfile})
-    }
-    catch(error) {
-        
-        console.log(error)
-    }  
- })
+
  //update profile 
  /*router.put('update/:id', function (req,res){
     Partner.findOneAndUpdate(req.params.id,{$set:req.body},function(err,partner){
@@ -75,6 +58,24 @@ router.put('/:id', async (req,res) => {
         else return res.json({data:e})
     })
 })
+//Add partners
+router.put('/addPartners/:id',async (req, res)=> {
+    var data = [];
+    const partners = await Partner.find()
+    var toAdd = req.body.partners;
+    partners.forEach((value) => {
+        if(value.id === req.params.id) {
+            for(i=0; i<value.partners.length; i++){
+                data.push(` ${value.partners[i]}`);
+            }
+            for(i=0; i<toAdd.length; i++){
+            data.push(` ${toAdd[i]}`);
+            }
+            return;
+        }
+    });
+    res.json(data || 'No partners matches the requested id');
+});
 //delete profile 
  router.delete('/:id', async (req,res) => {
      Partner.findByIdAndRemove(req.params.id,function(err,partner){
@@ -140,7 +141,7 @@ router.get('/searchstatus/:status',async (req, res)=> {
 
 
 
-=======
+
 // Create a Partner
 router.post('/', async (req,res) => {
    try {
