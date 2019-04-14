@@ -27,15 +27,11 @@
     "mongoose": "^5.5.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-<<<<<<< HEAD
-    "react-bootstrap": "^0.32.4",
-=======
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-calendar": "^2.18.1",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
->>>>>>> 08c34b94dabb9a8b86f322d3c32c32b24f80f59e
     "react-router-dom": "^5.0.0",
     "uuid": "^3.3.2"
   },
