@@ -134,7 +134,7 @@ export default class UpdateMember extends Component {
             interests:allInterests,
             placeOfResidence:this.state.placeOfResidence
         }
-        axios.put('https://localhost:4000/api/member/5ca0fb82f759451f18e3ae8f',{obj},{
+        axios.put('https://localhost:4000/api/member/'+this.props.obj_id,{obj},{
             headers: {
                 'Content-Type': 'application/json'
             }

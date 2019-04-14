@@ -1,20 +1,11 @@
 import React, { Component } from "react";
 
-// import CreateMember from './components/CreateMember';
-// import UpdateMember from './components/UpdateMember';
-
-
-// import VacancyPut from'./components/VacancyPut';
-// import VacancyPost from './components/VacancyPost'
-// import CoProfile from './components/Coworking/CoProfile';
-// import axios from 'axios';
-// import ViewRecommendedJobs from './components/ViewRecommended';
-// import ViewRecommendations from './components/ViewRecommended';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import HomeVacancy from './components/HomeVacancy';
 import HomeEvent from './components/HomeEvent';
+import MemberHome from "./components/MemberHome";
 
 class App extends Component {
   render() {
@@ -80,7 +71,7 @@ class App extends Component {
            
             <Route path={"/vacancy"} component={HomeVacancy} />
             <Route path={"/event"} component={HomeEvent} />
-            
+            <Route path={"/member"} component={MemberHome} />
           </Switch>
         </div>
       </Router>

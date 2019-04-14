@@ -72,7 +72,7 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import TableRowVacancy from './TableRowVacany';
+import TableRowVacancy from './TableRowVacancy';
 
 //  import {createStackNavigator, createAppContainer} from 'react-navigation';
 
@@ -92,7 +92,7 @@ export default class ViewRecommendations extends Component {
 //de hansebha bas hansheel menha delete w edit buttons
     componentDidMount(){
 
-      axios.get('http://localhost:4000/api/member/viewRecommendedVacancies/5ca0fb82f759451f18e3ae8f')
+      axios.get('http://localhost:4000/api/member/viewRecommendedVacancies/'+this.props.obj_id)
 
         .then(vacancy => {
 
