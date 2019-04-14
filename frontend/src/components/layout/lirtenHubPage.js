@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Header() {
+function lirtenHubPage() {
   return (
     <header style={headerStyle}>
-      <h1>Partner</h1>
-      <Link style={linkStyle} to="/SignUp">Sign up</Link> | <Link style={linkStyle} to="/Partner">View profile</Link>
+      <h1>Lirten Hub</h1>
+      <Link style={linkStyle} to="/Partner">Partner</Link> 
     </header>
   )
 }
@@ -22,6 +22,5 @@ const linkStyle = {
   textDecoration: 'none'
 }
 
-export default Header;
-
+export default lirtenHubPage;
 
