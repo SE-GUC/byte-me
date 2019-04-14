@@ -14,25 +14,33 @@ return res.json({data: events})
 //Get an event
 router.get('/:id', async (req,res) => {
 const id = req.params.id
-const events = await Event.findById(id)
-return res.json({data: events})
+const partner = await Partner.findById(id)
+const events = await Event.find({organizedBy:partner.id})
+res.json({data: events})
 }),
 
 //Search event date
-router.get('/searcheventDate/:eventDate',async(req,res)=>{
-    var eventDate = req.params.eventDate;
-    await Event.find({eventDate:eventDate},(err,event)=>{
-          return res.json({data:event})
-    });
-  });
+router.get('/searchType/:city',async (req,res)=>{
+    try{
+       const data= await Event.find({type:req.params.city})
+        return res.json({data:data})
+    }
+    catch(e){
+        console.log(e)
+    }
+
+})
 //Search event location
-router.get('/searcheventLocation/:eventLocation',async(req,res)=>{
-    var eventLocation = req.params.eventLocation;
-    await Event.find({eventLocation:eventLocation},(err,event)=>{
-           return res.json({data:event})
-    });
-  });
-  
+  router.get('/searchCity/:city',async (req,res)=>{
+    try{
+       const data= await Event.find({eventLocation:req.params.city})
+        return res.json({data:data})
+    }
+    catch(e){
+        console.log(e)
+    }
+
+})
 //Update an event
 router.put('/update/:id', async (req,res) => {
 Event.findByIdAndUpdate(req.params.id,req.body,{new : true}, (err,e)=>{
