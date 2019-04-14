@@ -16,11 +16,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
-<<<<<<< HEAD
     "command": "0.0.5",
-=======
     "concurrently": "^4.1.0",
->>>>>>> a6cf39898515ff6d17e363dd80aba2b5902f6518
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "joi": "^14.3.1",
@@ -32,12 +29,9 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-<<<<<<< HEAD
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.5.0",
     "jest": "^24.5.0",
-=======
->>>>>>> a6cf39898515ff6d17e363dd80aba2b5902f6518
     "nodemon": "^1.18.10"
   }
 }
