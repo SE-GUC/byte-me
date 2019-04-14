@@ -8,7 +8,7 @@ const Partner = require('../../models/Partner')
 //Get all events
 router.get('/', async (req,res) => {
 const events = await Event.find()
-res.json({data: events})
+return res.json({data: events})
 }),
 
 //Get an event
@@ -103,7 +103,7 @@ router.put('/pcreateevent/:id1/:id2', async (req,res) => {
              const isValidated = validator.createValidation(req.body)
              if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
              const newMember = await Member.create(req.body)
-             res.json({msg:'Event was created successfully', data: newMember})
+             return res.json({msg:'Event was created successfully', data: newMember})
             }
             catch(error) {
                 // We will be handling the error later
@@ -135,7 +135,7 @@ router.delete('/delete/:id', async (req,res) => {
 try {
 const id = req.params.id
 const deletedevent = await Event.findByIdAndRemove(id)
-res.json({msg:'event was deleted successfully', data: deletedevent})
+return res.json({msg:'event was deleted successfully', data: deletedevent})
 }
 catch(error) {
 // We will be handling the error later
