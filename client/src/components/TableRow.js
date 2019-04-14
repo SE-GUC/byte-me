@@ -63,7 +63,7 @@ return (
 {this.props.obj.eventDate}
 </td>
 <td>
-<Link to={"/update/"+this.props.obj._id} className="btn btn-primary"
+<Link to={"/event/update/"+this.props.obj._id} className="btn btn-primary"
 onClick="edit">Edit</Link>
 </td>
 <td>

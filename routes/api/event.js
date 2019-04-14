@@ -20,19 +20,17 @@ res.json({data: events})
 }),
 
 //Search event date
-router.get('/searcheventDate/:eventDate',async(req,res)=>{
-    var eventDate = req.params.eventDate;
-    await Event.find({eventDate:eventDate},(err,event)=>{
-          return res.json({data:event})
-    });
-  });
+router.get('/searchType/:city',async (req,res)=>{
+    try{
+       const data= await Event.find({type:req.params.city})
+        return res.json({data:data})
+    }
+    catch(e){
+        console.log(e)
+    }
+
+})
 //Search event location
-router.get('/searcheventLocation/:eventLocation',async(req,res)=>{
-    var eventLocation = req.params.eventLocation;
-    await Event.find({eventLocation:eventLocation},(err,event)=>{
-           return res.json({data:event})
-    });
-  });
   router.get('/searchCity/:city',async (req,res)=>{
     try{
        const data= await Event.find({eventLocation:req.params.city})
