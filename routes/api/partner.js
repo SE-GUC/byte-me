@@ -31,7 +31,7 @@ router.get('/', async (req,res) => {
     res.json({data: partners})
 })
 //As a partner i should get my profile information 
-router.get('/:id', async (req,res) => {
+router.get('/viewProfile/:id', async (req,res) => {
     
     Partner.findById(req.params.id,function(err,partner){
     if(err) return res.json({Message:'No partner matches the requested id'});
@@ -42,10 +42,13 @@ router.get('/:id', async (req,res) => {
 //create profile
 router.post('/', async (req,res) => {
     try {
+        
      const isValidated = validator.createValidation(req.body)
+     console.log("tt"+isValidated)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const newProfile = await Partner.create(req.body)
-     res.json({msg:'partner was created successfully', data: newProfile})
+     const newPartner = await Partner.create(req.body)
+     console.log(newPartner)
+     res.json({msg:'partner was created successfully', data: newPartner})
     }
     catch(error) {
         
@@ -69,7 +72,7 @@ router.put('/:id', async (req,res) => {
     })
 })
 //delete profile 
- router.delete('/:id', async (req,res) => {
+ router.delete('/delete/:id', async (req,res) => {
      Partner.findByIdAndRemove(req.params.id,function(err,partner){
          if (err) return res.json({Message:'error'});
          res.json({msg:'Partner was deleted successfully'}); 
@@ -82,6 +85,15 @@ router.put('/:id', async (req,res) => {
     Vacancy.find({ownedBy:req.params.id},function(err,vacancy){
         if(err) return res.json({Message:'Partner has no vacacncies'});
         res.json({data: vacancy});  
+    })
+    
+});
+//view my events
+router.get('/viewEvent/:id',async (req,res)=>{
+     
+    Vacancy.find({organizedBy:req.params.id},function(err,event){
+        if(err) return res.json({Message:'Partner has no events'});
+        res.json({data: event});  
     })
     
 });
