@@ -14,14 +14,7 @@ import CreatePartner from './components/CreatePartner';
 import './App.css';
 
 class App extends Component {
- 
-
-
-
-
-
   render() {
-    
     return (
       <Router>
       <div className="App">
@@ -70,9 +63,6 @@ class App extends Component {
           )} />
         </div>  
       </div>
-    
-
-     
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link to={"/"} className="navbar-brand">
