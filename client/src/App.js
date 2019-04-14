@@ -12,6 +12,8 @@ import VacancyPut from'./components/VacancyPut';
 import VacancyPost from './components/VacancyPost'
 import CoProfile from './components/Coworking/CoProfile';
 import axios from 'axios';
+import ViewRecommendedJobs from './components/ViewRecommended';
+import ViewRecommendations from './components/ViewRecommended';
 
 class App extends Component {
   state={
@@ -46,8 +48,9 @@ class App extends Component {
         <UpdateMember/>
 
         <VacancyPost/>
-        <CoProfile/>
+        {/* <CoProfile/> */}
         <VacancyPut/>
+        <ViewRecommendations />
 
       </div>
     );

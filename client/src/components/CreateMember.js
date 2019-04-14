@@ -122,42 +122,19 @@ export default class CreateMember extends Component {
     }
     onSubmit(e){
         e.preventDefault()
+        const allSkills = this.state.skills.concat([this.state.skill1,this.state.skill2,this.state.skill3,this.state.skill4])
+        const allInterests = this.state.interests.concat([this.state.interest1,this.state.interest2,this.interest3,this.state.interest4])
         const obj = {
             firstName:this.state.firstName,
             lastName:this.state.lastName,
             email:this.state.email,
             dateOfBirth:this.state.dateOfBirth,
             password:this.state.password,
-            skills:this.state.skills.concat([this.state.skill1,this.state.skill2,this.state.skill3,this.state.skill4]),
-            skill1:this.state.skill1,
-            skill2:this.state.skill2,
-            skill3:this.state.skill3,
-            skill4:this.state.skill4,
-            interests:this.state.interests.concat([this.state.interest1,this.state.interest2,this.interest3,this.state.interest4]),
-            interest1:this.state.interest1,
-            interest2:this.state.interest2,
-            interest3:this.state.interest3,
-            interest4:this.state.interest4,
+            skills:allSkills,
+            interests:allInterests,
             placeOfResidence:this.state.placeOfResidence
         }
-        axios.post('https://localhost:4000/api/member/',{
-            firstName:this.state.firstName,
-            lastName:this.state.lastName,
-            email:this.state.email,
-            dateOfBirth:this.state.dateOfBirth,
-            password:this.state.password,
-            skills:this.state.skills.concat([this.state.skill1,this.state.skill2,this.state.skill3,this.state.skill4]),
-            skill1:this.state.skill1,
-            skill2:this.state.skill2,
-            skill3:this.state.skill3,
-            skill4:this.state.skill4,
-            interests:this.state.interests.concat([this.state.interest1,this.state.interest2,this.interest3,this.state.interest4]),
-            interest1:this.state.interest1,
-            interest2:this.state.interest2,
-            interest3:this.state.interest3,
-            interest4:this.state.interest4,
-            placeOfResidence:this.state.placeOfResidence
-        },{
+        axios.post('https://localhost:4000/api/member/',{obj},{
             headers: {
                 'Content-Type': 'application/json'
             }

@@ -339,6 +339,6 @@ export default class UpdateMember extends Component {
     }
 }
 ReactDOM.render(
-    <CreateMember subreddit='reactjs' />,
+    <UpdateMember subreddit='reactjs' />,
       document.getElementById('root')
   )
