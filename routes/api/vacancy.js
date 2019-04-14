@@ -7,8 +7,8 @@ const Partner = require('../../models/Partner')
 
 //Get all vacancies
 router.get('/', async (req,res) => {
-    const vacancies = await Vacancy.find()
-    res.json({data: vacancies})
+    const vacancy = await Vacancy.find()
+    return res.json({data: vacancy})
 })
 
   router.post('/create/:id1', async (req,res) => {
@@ -28,6 +28,16 @@ router.get('/', async (req,res) => {
                   console.log(error)
             }  
          })
+         router.get('/searchCity/:city',async (req,res)=>{
+            try{
+               const data= await Vacancy.find({location:req.params.city})
+                return res.json({data:data})
+            }
+            catch(e){
+                console.log(e)
+            }
+        
+        })
  
  // as a partner i should be able to update my vacancies so that i can keep my profile updated
  router.put('/update/:id', async (req,res) => {
