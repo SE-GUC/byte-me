@@ -68,6 +68,7 @@ router.put('/applyevent/:id1/:id2', async (req,res) => {
     })
 
 //Put partner id in the array organized by if he created an event
+
 router.put('/pcreateevent/:id1/:id2', async (req,res) => {
     try {
                             
@@ -89,6 +90,19 @@ router.put('/pcreateevent/:id1/:id2', async (req,res) => {
                            }  
         })
         //create an event by partners
+        router.post('/', async (req,res) => {
+            try {
+             const isValidated = validator.createValidation(req.body)
+             if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+             const newMember = await Member.create(req.body)
+             res.json({msg:'Event was created successfully', data: newMember})
+            }
+            catch(error) {
+                // We will be handling the error later
+                console.log(error)
+            }  
+         })
+         //hena partner howa ely bey create event
         router.post('/create/:id1', async (req,res) => {
         try {
          const id1 = req.params.id1
