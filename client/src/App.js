@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import HomeVacancy from './components/HomeVacancy';
 import HomeEvent from './components/HomeEvent';
+import MemberHome from "./components/MemberHome";
 
 class App extends Component {
   render() {
@@ -70,7 +71,7 @@ class App extends Component {
            
             <Route path={"/vacancy"} component={HomeVacancy} />
             <Route path={"/event"} component={HomeEvent} />
-            
+            <Route path={"/member"} component={MemberHome} />
           </Switch>
         </div>
       </Router>
