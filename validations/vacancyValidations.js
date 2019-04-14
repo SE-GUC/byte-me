@@ -9,8 +9,11 @@ module.exports = {
             location: Joi.string().min(1).max(200).required(),
             monthlyWage: Joi.number().min(1).max(2000000000000).required(),
             startDate: Joi.date().required(),
+            // startDate: Joi.string().required(),
+
             dailyHours: Joi.number().required(),
             endDate: Joi.date().required(),
+            // endDate: Joi.string().required(),
             requiredSkills:Joi.string().min(1).max(200)
         }
 
