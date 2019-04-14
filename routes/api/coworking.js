@@ -108,14 +108,26 @@ router.put('/:id1/room/:id2/schedule/:id3', async (req,res) => {
     idRoom = req.params.id2
     idS = req.params.id3
     try{
+        await Coworking.findById(idCo).then(data => {
+            if(!data)
+                return res.status(422).send({ error: 'This coworking does not exist'});
+            if(!data.rooms.id(idRoom))
+                return res.status(422).send({ error: 'This room does not exist'});
+            if(!data.rooms.id(idRoom).reservation.id(idS))
+                return res.status(422).send({ error: 'This schedule does not exist'});
+            })
         const isValidated = validator.scheduleUpdateValidation(req.body)
         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-        const date = req.body
-        if(date) await Coworking.update({"_id": idCo, "rooms._id": idRoom, "reservation._id": idS}, {$set: {"rooms" :{"reservation.$.date": date}}})
+        const date = req.body.date
+        if(date){ 
+        await Coworking.findById(idCo).then(data => {
+            data.rooms.id(idRoom).reservation.id(idS).date = date;
+            data.save();
+        });
+    }
         res.json({ msg: 'Date updated successfully'});
     }
     catch(error){
-        res.status(422).send({ error: 'This coworking or room does not exist' });
     }
 })
 
@@ -126,20 +138,30 @@ router.put('/:id1/room/:id2/schedule/:id3/reserve/:id4', async (req,res) => {
     idS = req.params.id3
     idR = req.params.id4
     try{
-        const reserver = Partner.findOne(idR)
-        if(!reserver) return res.status(400).send({ error: "No partner exists" })
-        const isValidated = validator.scheduleUpdateValidation(req.body)
-        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-        const {reserverID} = req.body
-        if(reserverID) 
-        {
-            await Coworking.update({"_id": idCo, "rooms._id": idRoom, "reservation._id": idS}, {$set: {"reservation.$.reserverID": idR}})
-            await Coworking.update({"_id": idCo, "rooms._id": idRoom, "reservation._id": idS}, {$set: {"reservation.$.reserved": true}})
-        }
+        await Partner.findById(idR).then(data => {
+            if(!data) return res.status(422).send({ error: "No partner exists" })
+        })
+        await Coworking.findById(idCo).then(data => {
+            if(!data)
+                return res.status(422).send({ error: 'This coworking does not exist'});
+            else if(!data.rooms.id(idRoom))
+                return res.status(422).send({ error: 'This room does not exist'});
+            else if(!data.rooms.id(idRoom).reservation.id(idS))
+                return res.status(422).send({ error: 'This schedule does not exist'});
+            else if(data.rooms.id(idRoom).reservation.id(idS).reserved)
+                if(data.rooms.id(idRoom).reservation.id(idS).reserverID == idR)
+                    return res.status(422).send({ error: 'You already reservered this timing'});
+                else return res.status(422).send({ error: 'This timing is already reserved by another user'});                    
+            })
+        await Coworking.findById(idCo).then(data => {
+            data.rooms.id(idRoom).reservation.id(idS).reserverID = idR;
+            data.rooms.id(idRoom).reservation.id(idS).reserved = true;
+            data.save();
+        });
         res.json({ msg: 'Reserved successfully'});
     }
     catch(error){
-        res.status(422).send({ error: 'This coworking or room does not exist' });
+        
     }
 })
 

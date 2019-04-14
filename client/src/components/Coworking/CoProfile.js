@@ -10,7 +10,7 @@ class CoProfile extends Component {
   }
 
   componentDidMount() {
-     axios.get('http://localhost:4000/api/coworking').then(coworking => this.setState({coworking:coworking.data}))
+     axios.get('http://localhost:4000/api/coworking').then(coworking => this.setState({coworking:coworking.data.coworking}))
   }
   
   render() {
