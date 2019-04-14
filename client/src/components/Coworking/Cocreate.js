@@ -78,7 +78,7 @@ class coworkingPost extends Component {
       }
       oncontractLocation(c) {
         this.setState({
-          status: c.target.value
+          contractLocation: c.target.value
         })
       }
       

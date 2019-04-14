@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import cotablerow from './cotablerow'
+import cotablerow from './cotablerow';
 export default class Search extends Component {
     constructor(props) {
 
@@ -87,7 +87,7 @@ export default class Search extends Component {
 
           <tbody>
 
-            { this.tabRow() }
+            { this.tablerow() }
 
           </tbody>
 

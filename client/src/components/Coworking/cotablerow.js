@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 
 import axios from 'axios'
 
-
- 
-
 class cotablerow extends Component {
 
     constructor(props) {
