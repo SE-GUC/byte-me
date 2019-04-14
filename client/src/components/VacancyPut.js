@@ -2,17 +2,10 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
-class VacancyPost extends Component {
+class VacancyPut extends Component {
     constructor (props) {
         super(props)
-        /*"description":"test p",
-	"duration" : "8 hours",
-	"location" : "masr el gdeeda",
-	"monthlyWage" :  "5",
-	"startDate": "2019/01/05",
-	"dailyHours" : "9",
-	"endDate" : "2019/12/23",
-    "requiredSkills":"skills1"*/
+       
         this.onvacancyDescription=this.onvacancyDescription.bind(this);
         this.onvacancyDuration=this.onvacancyDuration.bind(this);
         this.onvacancyLocation=this.onvacancyLocation.bind(this)
@@ -91,7 +84,7 @@ class VacancyPost extends Component {
         };
         console.log(this.state)
        
-        axios.post('http://localhost:4000/api/vacancy/create/5ca0f7a134ede009c00c3f42/', {
+        axios.put('http://localhost:4000/api/vacancy/update/5c9f2d4eaf0aa213fc616efc/', {
             dailyHours:this.state.dailyHours,
             description: this.state.description,
             duration: this.state.duration,
@@ -123,7 +116,7 @@ clickMe()
     render() {
         return(
             <div style={{ marginTop: 10 }}>
-            <h3>Add New Vacancy</h3>
+            <h3>update Vacancy</h3>
             <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                     <label>Vacancy Description:  </label>
@@ -191,7 +184,7 @@ clickMe()
                       />
                 </div>
                 <div className="form-group">
-                    <input type="submit" value="Create" className="btn btn-primary" onClick ={this.clickMe.bind(this)} />
+                    <input type="submit" value="update" className="btn btn-primary" onClick ={this.clickMe.bind(this)} />
                 </div>
             </form>
         </div>
@@ -199,9 +192,10 @@ clickMe()
     }
 
 }
+
 ReactDOM.render(
-    <VacancyPost subreddit='reactjs' />,
+    <VacancyPut subreddit='reactjs' />,
       document.getElementById('root')
   )
 
-export default VacancyPost;
+export default VacancyPut;
