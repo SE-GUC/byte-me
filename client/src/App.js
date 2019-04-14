@@ -1,58 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import UpdatePartner from './components/UpdatePartner';
+import GetPartners from './components/GetPartners';
+import GetPartner from './components/GetPartner';
+import CreatePartner from './components/CreatePartner';
 import './App.css';
-import Partner from './components/partner';
-import EventPost from'./components/EventPost';
-
-import CreateMember from './components/CreateMember';
-import UpdateMember from './components/UpdateMember';
-
-
-import VacancyPut from'./components/VacancyPut';
-import VacancyPost from './components/VacancyPost'
-import CoProfile from './components/Coworking/CoProfile';
-import axios from 'axios';
 
 class App extends Component {
-  state={
-    partners:[]
-  }
-  
-  
-  componentDidMount() {
-  
-    axios.get('http://localhost:3001/api/partner')
-      .then(res => this.setState({ partners: res.data }))
-  }
-  getPartners = () => {
-    this.setState({ partners: this.state.partners});
-    console.log(this.state.partners)
-    
-  }
+ 
   render() {
+    
     return (
-      <div className="App">
-      
-      
-      
-      <React.Fragment>
-        
-        <Partner getPartners={this.getPartners} />
-        
-      </React.Fragment>
-        <EventPost/>
-
-        <CreateMember/>
-        <UpdateMember/>
-
-        <VacancyPost/>
-        <CoProfile/>
-        <VacancyPut/>
-
+      <div >
+              <React.Fragment>
+              <UpdatePartner/>
+              <br></br>
+              <br></br>
+              <br></br>
+              <CreatePartner/>
+              <br></br>
+              <br></br>
+              <br></br>
+              <GetPartners/>
+              <br></br>
+              <br></br>
+              <br></br>
+              <GetPartner/>
+              </React.Fragment>
       </div>
+      
     );
   }
 }
 
 export default App;
-

@@ -12,18 +12,23 @@ router.get('/', async (req,res) => {
 
 //login 
 router.post('/login', async (req,res) => {
-    Partner.findOne({email:req.body.email})
-    .exec()
-    .then(doc => {
-        console.log(doc)
-        if (doc.password==req.body.password){
-            res.json({Message:'Login Successful'});
+    try {
+		const { email, password } = req.body;
+		const partner = await Partner.findOne({ email });
+		if (!partner) return res.status(404).json({ email: 'Email does not exist' });
+		const match = bcrypt.compareSync(password, partner.password);
+		if (match) {
+            const payload = {
+                id: partner.id,
+                name: partner.name,
+                email: partner.email
+            }
+            const token = jwt.sign(payload, tokenKey, { expiresIn: '1h' })
+            res.json({data: `Bearer ${token}`})
+            return res.json({ data: 'Token' })
         }
-        else{
-            res.json({Message:'Password incorrect'});
-        }
-    })
-    .catch(err =>{console.log(err); return res.json({Message:`Email incorrect`})});
+		else return res.status(400).send({ password: 'Wrong password' });
+	} catch (e) {}
 });
 
 
@@ -37,7 +42,7 @@ router.get('/:id', async (req,res) => {
     
     Partner.findById(req.params.id,function(err,partner){
     if(err) return res.json({Message:'No partner matches the requested id'});
-    res.json({data: partner});
+    res.json({data: [partner]});
     })
 });
 
@@ -58,23 +63,68 @@ router.put('/:id', async (req,res) => {
         else return res.json({data:e})
     })
 })
+//Add board members
+router.put('/addBoardMembers/:id',async (req, res)=> {
+    var data = [];
+    const partners = await Partner.find()
+    var toAdd = req.body.boardMembers;
+        partners.forEach((value) => {
+         if(value.id === req.params.id) {
+            value.partners.push(` ${toAdd}`);
+            var partners=value.partners;
+            var eventID=value.eventID;
+            var vacancyID=value.vacancyID;
+            var status=value.status;
+            var organizationName=value.organizationName;
+            var email=value.email;
+            var password=value.password;
+            var description=value.description;
+            var fieldOfWork=value.fieldOfWork;
+            data=value.boardMembers;
+            data={boardMembers:data, partners, eventID, vacancyID, status, organizationName, email, password, description, fieldOfWork};
+            res.send(data);
+            Partner.findOneAndUpdate(req.params.id,data,{new:true},(err,e)=>{
+                if(err){
+                    return res.json({error:'Cannot update this partner'})
+                }
+                //else return res.json({data:e})
+            })
+             return;
+        }   
+    });
+    return res.json({error:'There is no such ID'})
+});
 //Add partners
 router.put('/addPartners/:id',async (req, res)=> {
     var data = [];
     const partners = await Partner.find()
     var toAdd = req.body.partners;
-    partners.forEach((value) => {
-        if(value.id === req.params.id) {
-            for(i=0; i<value.partners.length; i++){
-                data.push(` ${value.partners[i]}`);
-            }
-            for(i=0; i<toAdd.length; i++){
-            data.push(` ${toAdd[i]}`);
-            }
-            return;
-        }
+    // for(i=0; i<partners.length; i++)
+        partners.forEach((value) => {
+         if(value.id === req.params.id) {
+            value.partners.push(` ${toAdd}`);
+            var boardMembers=value.boardMembers;
+            var eventID=value.eventID;
+            var vacancyID=value.vacancyID;
+            var status=value.status;
+            var organizationName=value.organizationName;
+            var email=value.email;
+            var password=value.password;
+            var description=value.description;
+            var fieldOfWork=value.fieldOfWork;
+            data=value.partners;
+            data={partners:data, boardMembers, eventID, vacancyID, status, organizationName, email, password, description, fieldOfWork};
+            res.send(data);
+            Partner.findOneAndUpdate(req.params.id,data,{new:true},(err,e)=>{
+                if(err){
+                    return res.json({error:'Cannot update this partner'})
+                }
+                //else return res.json({data:e})
+            })
+             return;
+        }   
     });
-    res.json(data || 'No partners matches the requested id');
+    return res.json({error:'There is no such ID'})
 });
 //delete profile 
  router.delete('/:id', async (req,res) => {
