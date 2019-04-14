@@ -1,9 +1,6 @@
 const express = require('express')
 const router = express.Router()
-<<<<<<< HEAD
 const Vacancy = require('../../models/Vacancy')
-=======
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b
 const Partner = require('../../models/Partner')
 const validator = require('../../validations/partnerValidations')
 router.get('/', async (req,res) => {
@@ -11,16 +8,6 @@ router.get('/', async (req,res) => {
     res.json({data: partners})
 })
 
-<<<<<<< HEAD
-=======
-// const mongoose = require('mongoose')
-
-// const Partner = require('../../models/Partner')
-const Vacancy = require('../../models/Vacancy')
-
-// const validator = require('../../validations/partnerValidations')
-
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b
 //login 
 router.post('/login', async (req,res) => {
     Partner.findOne({email:req.body.email})
@@ -144,11 +131,6 @@ router.get('/searchstatus/:status',async (req, res)=> {
     });
 });
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b
 // Create a Partner
 router.post('/', async (req,res) => {
    try {

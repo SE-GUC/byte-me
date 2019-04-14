@@ -8,16 +8,15 @@
     "react-calendar": "^2.18.1",
     "react-datepicker": "^2.3.0",
     "react-dom": "^16.8.6",
-<<<<<<< HEAD
     "react-redux": "^6.0.1",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
-=======
+    "redux-thunk": "^2.3.0",
     "react-navigation": "^3.7.1",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8"
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b
+    "react-bootstrap": "^1.0.0-beta.6",
+    "react-router": "^5.0.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
