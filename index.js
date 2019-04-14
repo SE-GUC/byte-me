@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 const bodyParser = require('body-parser')
 //const cors=require('cors')
+//const react = require('react-router-dom')
 const keys = require ('./config/keys_dev')
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')
