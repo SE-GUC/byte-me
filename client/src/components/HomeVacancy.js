@@ -1,33 +1,30 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
-import EditVacancy from "./components/EditVacancy";
-import VacancyPost from "./components/VacancyPost";
-import ViewVacancy from "./components/ViewVacancy";
-import SearchVacancy from "./components/SearchCity";
 
-class App extends Component {
+import EditVacancy from "./EditVacancy";
+import VacancyPost from "./VacancyPost";
+import ViewVacancy from "./ViewVacancy";
+import SearchCity from "./SearchCity";
+import SearchstartDate from './SearchstartDate';
+import SearchendDate from './SearchendDate';
+import Searchduration from './Searchduration';
+
+class HomeVacancy extends Component {
   render() {
     return (
       <Router>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link to={"/"} className="navbar-brand">
-              Lirten HUB
-            </Link>
+           
 
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                  <Link to={"/"} className="nav-link">
-                    Home
-                  </Link>
-                </li>
+                
                 
                 <li className="nav-item">
                   <Link to={"/post"} className="nav-link">
@@ -40,11 +37,30 @@ class App extends Component {
                     Vacancies
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to={"/Search"} className="nav-link">
-                    Search
-                  </Link>
+                
+               
+                 <li className="nav-item">
+
+                  <Link to={'/SearchCity'} className="nav-link">Search city</Link>
+
                 </li>
+                <li className="nav-item">
+
+                  <Link to={'/SearchstartDate'} className="nav-link">Search StartDate</Link>
+
+                </li>
+                <li className="nav-item">
+                      <Link to={'/SearchendDate'} className="nav-link">Search EndDate</Link>
+
+                </li>
+               
+                <li className="nav-item">
+
+                  <Link to={'/Searchduration'} className="nav-link">Search Duration</Link>
+
+                </li>
+              
+
               </ul>
 
             </div>
@@ -62,9 +78,12 @@ class App extends Component {
             {/* <Route path='/update/:id' component={ Edit } /> */}
 
             <Route exact path="/post" component={VacancyPost} />
-            <Route path="/update/:id" component={EditVacancy} />
+            <Route path={"/vacancy/update/:id"} component={EditVacancy} />
             <Route path={"/viewAvailableVacancies"} component={ViewVacancy} />
-            <Route path={"/Search"} component={SearchVacancy} />
+            <Route path={"/SearchCity"} component={SearchCity} />
+            <Route path={'/SearchstartDate'} component={SearchstartDate} />
+            <Route path={'/SearchendDate'} component={SearchendDate} />
+            <Route path={'/Searchduration'} component={Searchduration} />
           </Switch>
         </div>
       </Router>
@@ -72,4 +91,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default HomeVacancy;

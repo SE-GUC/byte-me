@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const moment = require('moment')
 // Create the schema
 const VacancySchema = new Schema({
     ownedBy: {
@@ -34,10 +35,6 @@ const VacancySchema = new Schema({
     endDate : {
         type : Date,
         required : true
-    },
-    requiredSkills: {
-        type : String,
-        required :false
     },
     applicants: [{
       type: Schema.Types.ObjectId,
