@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const moment = require('moment')
+
 // Create the schema
 const VacancySchema = new Schema({
     ownedBy: {
