@@ -10,7 +10,3 @@ import store from './globalState/store'
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 serviceWorker.unregister();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b

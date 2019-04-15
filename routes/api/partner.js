@@ -1,40 +1,41 @@
 const express = require('express')
 const router = express.Router()
-<<<<<<< HEAD
 const Vacancy = require('../../models/Vacancy')
-=======
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b
 const Partner = require('../../models/Partner')
 const validator = require('../../validations/partnerValidations')
+
 router.get('/', async (req,res) => {
     const partners = await Partner.find()
     res.json({data: partners})
 })
 
-<<<<<<< HEAD
-=======
-// const mongoose = require('mongoose')
+//Get my profile information (partner)
+router.get('/:id', async (req,res) => {
+    const myID = req.params.id
+    const partner = await Partner.findById(myID)
+    if(!partner) return res.status(404).send({error: 'There is no member with such ID'})
+    res.json({data:[partner]})
+})
 
-// const Partner = require('../../models/Partner')
-const Vacancy = require('../../models/Vacancy')
-
-// const validator = require('../../validations/partnerValidations')
-
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b
 //login 
 router.post('/login', async (req,res) => {
-    Partner.findOne({email:req.body.email})
-    .exec()
-    .then(doc => {
-        console.log(doc)
-        if (doc.password==req.body.password){
-            res.json({Message:'Login Successful'});
+    try {
+		const { email, password } = req.body;
+		const partner = await Partner.findOne({ email });
+		if (!partner) return res.status(404).json({ email: 'Email does not exist' });
+		const match = bcrypt.compareSync(password, partner.password);
+		if (match) {
+            const payload = {
+                id: partner.id,
+                name: partner.name,
+                email: partner.email
+            }
+            const token = jwt.sign(payload, tokenKey, { expiresIn: '1h' })
+            res.json({data: `Bearer ${token}`})
+            return res.json({ data: 'Token' })
         }
-        else{
-            res.json({Message:'Password incorrect'});
-        }
-    })
-    .catch(err =>{console.log(err); return res.json({Message:`Email incorrect`})});
+		else return res.status(400).send({ password: 'Wrong password' });
+	} catch (e) {}
 });
 
 
@@ -44,21 +45,25 @@ router.get('/', async (req,res) => {
     res.json({data: partners})
 })
 //As a partner i should get my profile information 
-router.get('/:id', async (req,res) => {
+router.get('/viewProfile/:id', async (req,res) => {
     
     Partner.findById(req.params.id,function(err,partner){
     if(err) return res.json({Message:'No partner matches the requested id'});
-    res.json({data: partner});
+    res.json({data: [partner]});
     })
 });
+
 
 //create profile
 router.post('/', async (req,res) => {
     try {
+        
      const isValidated = validator.createValidation(req.body)
+     console.log("tt"+isValidated)
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const newProfile = await Partner.create(req.body)
-     res.json({msg:'partner was created successfully', data: newProfile})
+     const newPartner = await Partner.create(req.body)
+     console.log(newPartner)
+     res.json({msg:'partner was created successfully', data: newPartner})
     }
     catch(error) {
         
@@ -81,8 +86,71 @@ router.put('/:id', async (req,res) => {
         else return res.json({data:e})
     })
 })
+//Add board members
+router.put('/addBoardMembers/:id',async (req, res)=> {
+    var data = [];
+    const partners = await Partner.find()
+    var toAdd = req.body.boardMembers;
+        partners.forEach((value) => {
+         if(value.id === req.params.id) {
+            value.boardMembers.push(` ${toAdd}`);
+            var partners=value.partners;
+            var eventID=value.eventID;
+            var vacancyID=value.vacancyID;
+            var status=value.status;
+            var organizationName=value.organizationName;
+            var email=value.email;
+            var password=value.password;
+            var description=value.description;
+            var fieldOfWork=value.fieldOfWork;
+            data=value.boardMembers;
+            data={boardMembers:data, partners, eventID, vacancyID, status, organizationName, email, password, description, fieldOfWork};
+            res.send(data);
+            Partner.findOneAndUpdate(req.params.id,data,{new:true},(err,e)=>{
+                if(err){
+                    return res.json({error:'Cannot update this partner'})
+                }
+                //else return res.json({data:e})
+            })
+             return;
+        }   
+    });
+    return res.json({error:'There is no such ID'})
+});
+//Add partners
+router.put('/addPartners/:id',async (req, res)=> {
+    var data = [];
+    const partners = await Partner.find()
+    var toAdd = req.body.partners;
+    // for(i=0; i<partners.length; i++)
+        partners.forEach((value) => {
+         if(value.id === req.params.id) {
+            value.partners.push(` ${toAdd}`);
+            var boardMembers=value.boardMembers;
+            var eventID=value.eventID;
+            var vacancyID=value.vacancyID;
+            var status=value.status;
+            var organizationName=value.organizationName;
+            var email=value.email;
+            var password=value.password;
+            var description=value.description;
+            var fieldOfWork=value.fieldOfWork;
+            data=value.partners;
+            data={partners:data, boardMembers, eventID, vacancyID, status, organizationName, email, password, description, fieldOfWork};
+            res.send(data);
+            Partner.findOneAndUpdate(req.params.id,data,{new:true},(err,e)=>{
+                if(err){
+                    return res.json({error:'Cannot update this partner'})
+                }
+                //else return res.json({data:e})
+            })
+             return;
+        }   
+    });
+    return res.json({error:'There is no such ID'})
+});
 //delete profile 
- router.delete('/:id', async (req,res) => {
+ router.delete('/delete/:id', async (req,res) => {
      Partner.findByIdAndRemove(req.params.id,function(err,partner){
          if (err) return res.json({Message:'error'});
          res.json({msg:'Partner was deleted successfully'}); 
@@ -95,6 +163,15 @@ router.put('/:id', async (req,res) => {
     Vacancy.find({ownedBy:req.params.id},function(err,vacancy){
         if(err) return res.json({Message:'Partner has no vacacncies'});
         res.json({data: vacancy});  
+    })
+    
+});
+//view my events
+router.get('/viewEvent/:id',async (req,res)=>{
+     
+    Vacancy.find({organizedBy:req.params.id},function(err,event){
+        if(err) return res.json({Message:'Partner has no events'});
+        res.json({data: event});  
     })
     
 });
@@ -144,11 +221,6 @@ router.get('/searchstatus/:status',async (req, res)=> {
     });
 });
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b
 // Create a Partner
 router.post('/', async (req,res) => {
    try {
@@ -163,33 +235,6 @@ router.post('/', async (req,res) => {
    }  
 })
 
-// Update a Partner
-router.put('/:id', async (req,res) => {
-    try {
-     const id = req.params.id
-     const partner = await Partner.findOne({id})
-     if(!partner) return res.status(404).send({error: 'Partner does not exist'})
-     const isValidated = validator.updateValidation(req.body)
-     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-     const updatedPartner = await Partner.updateOne(req.body)
-     res.json({msg: 'Partner updated successfully'})
-    }
-    catch(error) {
-        // We will be handling the error later
-        console.log(error)
-    }  
- })
 
- router.delete('/:id', async (req,res) => {
-    try {
-     const id = req.params.id
-     const deletedPartner = await Partner.findByIdAndRemove(id)
-     res.json({msg:'Partner was deleted successfully', data: deletedPartner})
-    }
-    catch(error) {
-        // We will be handling the error later
-        console.log(error)
-    }  
- })
 
 module.exports = router

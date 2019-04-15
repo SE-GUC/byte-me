@@ -1,14 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-<<<<<<< HEAD:server.js
 const cors = require('cors')
 const bodyParser = require('body-parser')
-=======
-const bodyParser = require('body-parser')
-//const cors=require('cors')
-//const react = require('react-router-dom')
-const keys = require ('./config/keys_dev')
->>>>>>> bc2d42fc43592e221e90d3c2e9adb14bb43bba8b:index.js
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')
 const member = require('./routes/api/member')
