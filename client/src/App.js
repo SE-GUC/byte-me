@@ -4,11 +4,11 @@ import HomeEvent from './components/HomeEvent';
 import MemberHome from "./components/MemberHome";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import React, { Component } from 'react';
+
 import Cocreate from './components/Coworking/Cocreate';
 import Coupdate from './components/Coworking/Coupdate';
 import CoHome from './components/Coworking/CoHome';
 import searchbyname from './components/Coworking/searchbyname';
-
 import Header from './components/layout/Header';
 import UpdatePartner from './components/UpdatePartner';
 import GetPartners from './components/GetPartners';
@@ -24,13 +24,13 @@ class App extends Component {
       <Router>
       <div className="App">
 
+
         
         
         {/* <Cocreate/>
         <Coupdate/>
         <searchbyname/> */}
         <CoHome/>
-
         <div className="container">
           
           <Header />
@@ -46,6 +46,7 @@ class App extends Component {
 
             
 
+
           )} />
           <Route path="/Partner" render={props => (
             
@@ -54,6 +55,7 @@ class App extends Component {
             <DeletePartner  />
              {/* <PartnerViewVacancies />
              <PartnerViewApplicants /> */}
+
 
 <UpdatePartner/>
               <br></br>

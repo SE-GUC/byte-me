@@ -36,6 +36,10 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^24.5.0",
+    "jest": "^24.5.0",
+    "nodemon": "^1.18.10"
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "bulma": "^0.7.4",

@@ -1,3 +1,7 @@
+
+
+const funcs2 = require('./partnerFn');
+const axios = require('axios');
 // const funcs = require('./coworkingfn')
 // test('testing coworking update', async ()=>{
 //     const response = await funcs.updatecoworking('5ca1256430ad6d49b447d4f7','youssefzidan2010@gmail.com')
@@ -66,6 +70,7 @@
 
 
 
+
 /* test ('partner login',async()=>{
     const before =await funcs2.getAllPartners()
     
@@ -112,6 +117,5 @@ test('testing boardMembers search', async ()=>{
 });
 test('testing fieldOfWork search', async ()=>{
     const response = await funcs2.getFieldOfWork('entertainement')
-    expect(response.data[0].fieldOfWork).toEqual('entertainement')
-
+    expect(response.data[0].fieldOfWork).toEqual('entertainement')*/
 
