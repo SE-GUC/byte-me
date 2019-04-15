@@ -37,14 +37,10 @@ class App extends Component {
       </div>,
       <Router>
       <div className="App">
-
-        
-        
         {/* <Cocreate/>
         <Coupdate/>
         <searchbyname/> */}
         <CoHome/>
-
         <div className="container">
           
           <Header />
