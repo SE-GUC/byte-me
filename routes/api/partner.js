@@ -1,13 +1,14 @@
 const express = require('express')
 const router = express.Router()
+const Vacancy = require('../../models/Vacancy')
 const Partner = require('../../models/Partner')
 const validator = require('../../validations/partnerValidations')
-const Vacancy = require('../../models/Vacancy')
 
 router.get('/', async (req,res) => {
     const partners = await Partner.find()
     res.json({data: partners})
 })
+
 //Get my profile information (partner)
 router.get('/:id', async (req,res) => {
     const myID = req.params.id
