@@ -10,6 +10,10 @@ import HomeVacancy from './components/HomeVacancy';
 import HomeEvent from './components/HomeEvent';
 import MemberHome from "./components/MemberHome";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Cocreate from './components/Coworking/Cocreate';
+import Coupdate from './components/Coworking/Coupdate';
+import CoHome from './components/Coworking/CoHome';
+import searchbyname from './components/Coworking/searchbyname';
 import Header from './components/layout/Header';
 import UpdatePartner from './components/UpdatePartner';
 import GetPartners from './components/GetPartners';
@@ -33,6 +37,14 @@ class App extends Component {
       </div>,
       <Router>
       <div className="App">
+
+        
+        
+        {/* <Cocreate/>
+        <Coupdate/>
+        <searchbyname/> */}
+        <CoHome/>
+
         <div className="container">
           
           <Header />
