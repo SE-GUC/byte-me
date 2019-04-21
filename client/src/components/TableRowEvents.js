@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-class TableRow extends Component {
+class TableRowEvents extends Component {
 
   constructor(props) {
         super(props);
@@ -13,30 +13,33 @@ class TableRow extends Component {
     return (
         <tr>
           <td>
-            {this.props.obj.ownedBy}
+            {this.props.obj.type}
           </td>
           <td>
-            {this.props.obj.description}
+            {this.props.obj.eventName}
           </td>
           <td>
-            {this.props.obj.duration}
+            {this.props.obj.eventDescription}
           </td>
           <td>
-            {this.props.obj.location}
+            {this.props.obj.eventLocation}
           </td>
           <td>
-            {this.props.obj.monthlyWage}
+            {this.props.obj.eventDuration}
           </td>
           <td>
-            {this.props.obj.startDate}
+            {this.props.obj.eventDate}
           </td>
           <td>
-            {this.props.obj.dailyHours}
+            {this.props.obj.attendees}
           </td>
           <td>
-            {this.props.obj.endDate}
+            {this.props.obj.organizedBy}
           </td>
           
+          <td>
+            <Link to={"/PartnerViewAttendees/"+this.props.obj._id} className="btn btn-primary">View attendees</Link>
+          </td>
           {/* <td>
             <button onClick={this.delete} className="btn btn-danger">Delete</button>
           </td> */}
@@ -45,4 +48,4 @@ class TableRow extends Component {
   }
 }
 
-export default TableRow;
+export default TableRowEvents;

@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const Partner = require('../../models/Partner')
 const validator = require('../../validations/partnerValidations')
 const Vacancy = require('../../models/Vacancy')
+const Event = require ('../../models/Event')
 
 router.get('/', async (req,res) => {
     const partners = await Partner.find()
@@ -13,6 +14,7 @@ router.get('/', async (req,res) => {
 //login 
 router.post('/login', async (req,res) => {
     try {
+        console.log('login')
 		const { email, password } = req.body;
 		const partner = await Partner.findOne({ email });
 		if (!partner) return res.status(404).json({ email: 'Email does not exist' });
@@ -20,17 +22,38 @@ router.post('/login', async (req,res) => {
 		if (match) {
             const payload = {
                 id: partner.id,
-                name: partner.name,
+                name: partner.organizationName,
                 email: partner.email
             }
-            const token = jwt.sign(payload, tokenKey, { expiresIn: '1h' })
+            const token = jwt.sign(payload, tokenKey, { expiresIn: '5h' });
+            console.log(token);
+            store.set("token",token);
+            console.log(token.payload);
             res.json({data: `Bearer ${token}`})
             return res.json({ data: 'Token' })
         }
 		else return res.status(400).send({ password: 'Wrong password' });
 	} catch (e) {}
 });
+router.get('/logout', async (req, res)=> {
+    console.log("logout");
+    store.remove("token");
+    res.send('logged out');
+});
+const checkToken = (req, res, next)=> {
+    const header =req.headers ['authorization'];
 
+    if(typeof header !== 'undefined')
+    {
+        const bearer =header.split('');
+        const token =bearer[1];
+        req.token=token;
+        next();
+    }
+    else{
+        res.sendStatus(403)
+    }
+};
 
 //get all partners
 router.get('/', async (req,res) => {
@@ -39,16 +62,25 @@ router.get('/', async (req,res) => {
 })
 //As a partner i should get my profile information 
 router.get('/viewProfile/:id', async (req,res) => {
+    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+        if(err)
+        {
+            console.log('ERROR:could not connect to the protected route');
+            res.sendStatus(403);
+        }else{
+            Partner.findById(req.params.id,function(err,partner){
+                if(err) return res.json({Message:'No partner matches the requested id'});
+                res.json({data: [partner]});
+                })
+   }
+    });
     
-    Partner.findById(req.params.id,function(err,partner){
-    if(err) return res.json({Message:'No partner matches the requested id'});
-    res.json({data: [partner]});
-    })
 });
 
 
 //create profile
 router.post('/', async (req,res) => {
+    
     try {
         
      const isValidated = validator.createValidation(req.body)
@@ -64,13 +96,7 @@ router.post('/', async (req,res) => {
     }  
  })
  //update profile 
- /*router.put('update/:id', function (req,res){
-    Partner.findOneAndUpdate(req.params.id,{$set:req.body},function(err,partner){
-         if (err) return res.json({Message:'Error'});
-         res.json({msg: 'Partner updated successfully'})
-     })
-     
-});*/
+ 
 router.put('/:id', async (req,res) => {
     Partner.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,e)=>{
         if(err){
@@ -144,25 +170,43 @@ router.put('/addPartners/:id',async (req, res)=> {
 });
 //delete profile 
  router.delete('/delete/:id', async (req,res) => {
-     Partner.findByIdAndRemove(req.params.id,function(err,partner){
-         if (err) return res.json({Message:'error'});
-         res.json({msg:'Partner was deleted successfully'}); 
-     }) 
+     jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+         if(err)
+         {
+             console.log('ERROR:could not connect to the protected route');
+             res.sendStatus(403);
+         }else{
+         Partner.findByIdAndRemove(req.params.id,function(err,partner){
+            if (err) return res.json({Message:'error'});
+            res.json({msg:'Partner was deleted successfully'}); 
+        })
+    }
+     });
+      
  });
 
  //view my vacancies
  router.get('/view/:id',async (req,res)=>{
      
-    Vacancy.find({ownedBy:req.params.id},function(err,vacancy){
-        if(err) return res.json({Message:'Partner has no vacacncies'});
-        res.json({data: vacancy});  
-    })
+    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+        if(err)
+        {
+            console.log('ERROR:could not connect to the protected route');
+            res.sendStatus(403);
+        }else{
+            Vacancy.find({ownedBy:req.params.id},function(err,vacancy){
+                if(err) return res.json({Message:'Partner has no vacacncies'});
+                res.json({data: vacancy});  
+            })
+            
+   }
+    });
     
 });
 //view my events
 router.get('/viewEvent/:id',async (req,res)=>{
      
-    Vacancy.find({organizedBy:req.params.id},function(err,event){
+    Event.find({organizedBy:req.params.id},function(err,event){
         if(err) return res.json({Message:'Partner has no events'});
         res.json({data: event});  
     })
@@ -185,7 +229,59 @@ router.get('/viewApplicants/:id',async (req,res)=>{
     .catch(err =>{console.log(err); return res.json({Message:`no vacancies`})});
     
 });
-
+//get event attendees 
+router.get('/viewAttendees/:id',async (req,res)=>{
+     
+    Event.findOne()
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        if (doc.organizedBy==req.params.id){
+            res.json({data:doc.attendees});
+        }
+        else{
+            res.json({Message:'Not his event'});
+        }
+    })
+    .catch(err =>{console.log(err); return res.json({Message:`no events`})});
+    
+});
+//searched by organizationName
+router.get('/searchOrganizationName/:organizationName',async (req, res)=> {
+    var organizationName = req.params.organizationName;
+    await Partner.find({organizationName: organizationName},  (err, partner)=> {
+     
+        res.json({data:partner})
+       
+    });
+});
+//searched by email
+router.get('/searchEmail/:email',async (req, res)=> {
+    var email = req.params.email;
+    await Partner.find({email: email},  (err, partner)=> {
+     
+        res.json({data:partner})
+       
+    });
+});
+//searched by description
+router.get('/searchDescription/:description',async (req, res)=> {
+    var description = req.params.description;
+    await Partner.find({description: description},  (err, partner)=> {
+     
+        res.json({data:partner})
+       
+    });
+});
+//searched by partners
+router.get('/searchPartners/:partners',async (req, res)=> {
+    var partners = req.params.partners;
+    await Partner.find({partners: partners},  (err, partner)=> {
+     
+        res.json({data:partner})
+       
+    });
+});
 //searched by  boardMembers
 router.get('/searchMembers/:boardMembers',async (req, res)=> {
     var boardMembers = req.params.boardMembers;

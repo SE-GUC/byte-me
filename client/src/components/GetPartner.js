@@ -20,7 +20,7 @@ class GetPartner extends Component {
     
     }
     getPartner = () => {
-      axios.get('http://localhost:4000/api/partner/5ca1141b21356c2d388904e7')
+      axios.get('http://localhost:4000/api/partner/viewProfile/')
       .then(res => this.setState({ partners: res.data.data }))
       this.setState({ partners: this.state.partners});
       }

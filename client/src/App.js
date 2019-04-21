@@ -5,9 +5,13 @@ import UpdatePartner from './components/UpdatePartner';
 import GetPartners from './components/GetPartners';
 import GetPartner from './components/GetPartner';
 import DeletePartner from './components/DeletePartner';
-import SearchPartner from './components/SearchPartner';
+import SearchFieldOfWork from './components/SearchFieldOfWork';
 import CreatePartner from './components/CreatePartner';
+import PartnerViewVacancies from './components/PartnerViewVacancies';
+import SearchOrganizationName from './components/SearchOarganizationName';
+import SignIn from './components/SignIn'
 import './App.css';
+import SearchEmail from './components/SearchEmail';
 
 class App extends Component {
  
@@ -25,7 +29,7 @@ class App extends Component {
               
               <CreatePartner  />
               
-             
+             <SignIn />
               
             </React.Fragment>
 
@@ -37,6 +41,7 @@ class App extends Component {
             <React.Fragment>
               
             <DeletePartner  />
+           
              {/* <PartnerViewVacancies />
              <PartnerViewApplicants /> */}
 
@@ -50,7 +55,11 @@ class App extends Component {
               <br></br>
               <br></br>
               <GetPartner/>
-             <SearchPartner />
+              <PartnerViewVacancies />
+              <h3 align="center">Search For partners:</h3>
+              <SearchOrganizationName />
+              <SearchEmail />
+             <SearchFieldOfWork />
              
              
             
