@@ -8,7 +8,7 @@ import SearchendDate from "./SearchendDate";
 import Searchduration from "./Searchduration";
 import SearchstartDate from "./SearchstartDate";
 import SearchCity from "./SearchCity";
-class HomeVacancy extends Component {
+class HomeVacancyPartner extends Component {
   render() {
     return (
       <Router>
@@ -20,35 +20,35 @@ class HomeVacancy extends Component {
             >
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link to={"/post"} className="nav-link">
+                  <Link to={"/vacancy/partner/post"} className="nav-link">
                     Post new Vacancy
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to={"/viewAvailableVacancies"} className="nav-link">
+                  <Link to={"/vacancy/partner/viewAvailableVacancies"} className="nav-link">
                     Vacancies
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to={"/SearchCity"} className="nav-link">
+                  <Link to={"/vacancy/partner/SearchCity"} className="nav-link">
                     Search city
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/SearchstartDate"} className="nav-link">
+                  <Link to={"/vacancy/partner/SearchstartDate"} className="nav-link">
                     Search StartDate
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/SearchendDate"} className="nav-link">
+                  <Link to={"/vacancy/partner/SearchendDate"} className="nav-link">
                     Search EndDate
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to={"/Searchduration"} className="nav-link">
+                  <Link to={"/vacancy/partner/Searchduration"} className="nav-link">
                     Search Duration
                   </Link>
                 </li>
@@ -56,13 +56,13 @@ class HomeVacancy extends Component {
             </div>
           </nav>
           <Switch>
-            <Route exact path="/post" component={VacancyPost} />
-            <Route path={"/vacancy/update/:id"} component={EditVacancy} />
-            <Route path={"/viewAvailableVacancies"} component={ViewVacancy} />
-            <Route path={"/SearchCity"} component={SearchCity} />
-            <Route path={"/SearchstartDate"} component={SearchstartDate} />
-            <Route path={"/SearchendDate"} component={SearchendDate} />
-            <Route path={"/Searchduration"} component={Searchduration} />
+            <Route path="/vacancy/partner/post" component={VacancyPost} />
+            <Route path={"/vacancy/partner/update/:id"} component={EditVacancy} />
+            <Route path={"/vacancy/partner/viewAvailableVacancies"} component={ViewVacancy} />
+            <Route path={"/vacancy/partner/SearchCity"} component={SearchCity} />
+            <Route path={"/vacancy/partner/SearchstartDate"} component={SearchstartDate} />
+            <Route path={"/vacancy/partner/SearchendDate"} component={SearchendDate} />
+            <Route path={"/vacancy/partner/Searchduration"} component={Searchduration} />
           </Switch>
         </div>
       </Router>
@@ -70,4 +70,4 @@ class HomeVacancy extends Component {
   }
 }
 
-export default HomeVacancy;
+export default HomeVacancyPartner;

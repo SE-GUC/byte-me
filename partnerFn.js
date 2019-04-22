@@ -49,27 +49,37 @@ const functions = {
     },
     
     deletePartner: async (id) =>{
-        const partner = await axios.delete('http://localhost:8000/api/partner/'+id,{})
+        const partner = await axios.delete('http://localhost:4000/api/partner/'+id,{})
         return partner
     },
     
      
      
      getApplicants: async (id) =>{
-         const applicantsV= await axios.get('http://localhost:8000/api/partner/viewApplicants/'+id,{})
+         const applicantsV= await axios.get('http://localhost:4000/api/partner/viewApplicants/'+id,{})
          return applicantsV.data
      },
      getPartnerBoardMembers: async (boardMembers) =>{  
-        const partnersM = await axios.get('http://localhost:8000/api/partner/searchMembers/'+boardMembers,{boardMembers:
+        const partnersM = await axios.get('http://localhost:4000/api/partner/searchMembers/'+boardMembers,{boardMembers:
           boardMembers})
         return partnersM.data
     },
     getFieldOfWork: async (fieldOfWork) =>{  
-        const partnersF = await axios.get('http://localhost:8000/api/partner/searchfieldOfWork/'+fieldOfWork,{fieldOfWork:
+        const partnersF = await axios.get('http://localhost:4000/api/partner/searchfieldOfWork/'+fieldOfWork,{fieldOfWork:
         fieldOfWork})
         return partnersF.data
     }, 
+    getVacancies: async (id) =>{
+        const vacancies= await axios.get('http://localhost:4000/api/partner/view/'+id,{})
+        console.log(vacancies.data)
+        return vacancies.data
+    },
+    updatePartner: async (id,par) =>{
+        const partner = await axios.put('http://localhost:4000/api/partner/'+id,{partners:par})
         
+        return partner.data
+    },
+    
 };
 
     

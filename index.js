@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 //const cors=require('cors')
+//const react = require('react-router-dom')
 const keys = require ('./config/keys_dev')
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')
@@ -10,10 +11,8 @@ const admin = require('./routes/api/admin')
 const event = require('./routes/api/event')
 const vacancy = require('./routes/api/vacancy')
 const app = express()
-
+const cors = require('cors');
 app.use(cors())
-
-//Db config 
 const db = require('./config/keys').mongoURI
 
 //connect to mongo
