@@ -2,10 +2,10 @@ import React, { Component } from "react";
 
 import axios from "axios";
 
-import TableRowVacancy from "./TableRowVacancy";
 import Calendar from "react-calendar";
+import TableRowVacancyCo from "./TableRowVacancyCo";
 
-export default class SearchstartDate extends Component {
+export default class SearchstartDateCo extends Component {
   constructor(props) {
     super(props);
 
@@ -42,7 +42,7 @@ export default class SearchstartDate extends Component {
 
   tabRow() {
     return this.state.vacancy.map(function(Date, i) {
-      return <TableRowVacancy obj={Date} key={i} />;
+      return <TableRowVacancyCo obj={Date} key={i} />;
     });
   }
 
@@ -86,7 +86,6 @@ export default class SearchstartDate extends Component {
 
                 <th>Location</th>
 
-                <th colSpan="2">Action</th>
               </tr>
             </thead>
 
