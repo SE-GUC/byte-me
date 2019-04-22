@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import HomeVacancy from './components/HomeVacancy';
+import HomeVacancy from "./components/HomeVacancy";
 
 class App extends Component {
   render() {
@@ -20,38 +19,35 @@ class App extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
+                <li className="nav-item">
+                  <Link to={"/partner"} className="nav-link">
+                    Partner
+                  </Link>
+                </li>
 
-<Link to={'/partner'} className="nav-link">Partner</Link>
+                <li className="nav-item">
+                  <Link to={"/member"} className="nav-link">
+                    Member
+                  </Link>
+                </li>
 
-</li>
+                <li className="nav-item">
+                  <Link to={"/vacancy"} className="nav-link">
+                    Vacancy
+                  </Link>
+                </li>
 
-<li className="nav-item">
-
-<Link to={'/member'} className="nav-link">Member</Link>
-
-</li>
-
-<li className="nav-item">
-
-<Link to={'/vacancy'} className="nav-link">Vacancy</Link>
-
-</li>
-
-<li className="nav-item">
-
-<Link to={'/event'} className="nav-link">Event</Link>
-
-</li>
-<li className="nav-item">
-
-<Link to={'/coworking'} className="nav-link">CoWorking</Link>
-
-</li>
-            
-
+                <li className="nav-item">
+                  <Link to={"/event"} className="nav-link">
+                    Event
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/coworking"} className="nav-link">
+                    CoWorking
+                  </Link>
+                </li>
               </ul>
-
             </div>
           </nav>
 
@@ -62,13 +58,7 @@ class App extends Component {
           </div>
 
           <Switch>
-            {/* <Route exact path='/create/:id' component={ EventPost } /> */}
-
-            {/* <Route path='/update/:id' component={ Edit } /> */}
-
-           
             <Route path={"/vacancy"} component={HomeVacancy} />
-            
           </Switch>
         </div>
       </Router>
