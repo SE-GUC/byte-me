@@ -2,12 +2,13 @@ import React, { Component } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import HomeVacancyPartner from "./HomeVacancyPartner"
-import HomeVacancyMember from "./HomeVacancyMember";
-import HomeVacancyCo from "./HomeVacancyCo";
+import HomeEventPartner from "./HomeEventPartner"
+import HomeEventMember from "./HomeEventMember"
+import HomeEventCo from "./HomeEventCo"
 
 
-class WhichEntity extends Component {
+
+class WhichEntityevent extends Component {
   render() {
     return (
       <Router>
@@ -21,20 +22,20 @@ class WhichEntity extends Component {
             >
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link to={"/vacancy/partner"} className="nav-link">
-                    Partner
+                  <Link to={"/event/partner"} className="nav-link">
+                    Partner Event
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={"/vacancy/member"} className="nav-link">
-                    Member
+                  <Link to={"/event/member"} className="nav-link">
+                    Member Event
                   </Link>
                 </li>
                 
 
                 <li className="nav-item">
-                  <Link to={"/vacancy/coworking"} className="nav-link">
-                    CoWorking
+                  <Link to={"/event/coworking"} className="nav-link">
+                    CoWorking Event
                   </Link>
                 </li>
               </ul>
@@ -42,10 +43,10 @@ class WhichEntity extends Component {
           </nav>
 
           <Switch>
-            <Route path={"/vacancy/partner"} component={HomeVacancyPartner} />
-            <Route path={"/vacancy/member"} component={HomeVacancyMember} />
-            <Route path={"/vacancy/coworking"} component={HomeVacancyCo
-            } />
+            <Route path={"/event/partner"} component={HomeEventPartner} />
+            <Route path={"/event/member"} component={HomeEventMember} />
+             <Route path={"/event/coworking"} component={HomeEventCo }/>
+             
           </Switch>
         </div>
       </Router>
@@ -53,4 +54,4 @@ class WhichEntity extends Component {
   }
 }
 
-export default WhichEntity;
+export default WhichEntityevent

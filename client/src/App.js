@@ -4,8 +4,9 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import HomeEvent from "./components/HomeEventPartner";
-import WhichEntity from "./components/WhichEntity";
 
+import WhichEntity from "./components/WhichEntity";
+import WhichEntityevent from "./components/WhichEntityevent"
 class App extends Component {
   render() {
     return (
@@ -60,7 +61,10 @@ class App extends Component {
           </div>
 
           <Switch>
-            <Route path={"/event"} component={WhichEntity} />
+            <Route path={"/event"} component={WhichEntityevent} />
+            <Route path={"/vacancy"} component={WhichEntity} />
+            {/* <Route path={"/event"} component={HomeEvent} /> */}
+            
           </Switch>
         </div>
       </Router>

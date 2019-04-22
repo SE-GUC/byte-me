@@ -1,4 +1,3 @@
-// edit.component.js
 import React, { Component } from "react";
 import axios from "axios";
 import Calendar from "react-calendar";
