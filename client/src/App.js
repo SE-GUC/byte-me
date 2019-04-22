@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
-import "./App.css"
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";import HomeEvent from './components/HomeEvent';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import HomeEvent from "./components/HomeEventPartner";
+import WhichEntity from "./components/WhichEntity";
 
 class App extends Component {
   render() {
@@ -19,38 +21,35 @@ class App extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
+                <li className="nav-item">
+                  <Link to={"/partner"} className="nav-link">
+                    Partner
+                  </Link>
+                </li>
 
-<Link to={'/partner'} className="nav-link">Partner</Link>
+                <li className="nav-item">
+                  <Link to={"/member"} className="nav-link">
+                    Member
+                  </Link>
+                </li>
 
-</li>
+                <li className="nav-item">
+                  <Link to={"/vacancy"} className="nav-link">
+                    Vacancy
+                  </Link>
+                </li>
 
-<li className="nav-item">
-
-<Link to={'/member'} className="nav-link">Member</Link>
-
-</li>
-
-<li className="nav-item">
-
-<Link to={'/vacancy'} className="nav-link">Vacancy</Link>
-
-</li>
-
-<li className="nav-item">
-
-<Link to={'/event'} className="nav-link">Event</Link>
-
-</li>
-<li className="nav-item">
-
-<Link to={'/coworking'} className="nav-link">CoWorking</Link>
-
-</li>
-            
-
+                <li className="nav-item">
+                  <Link to={"/event"} className="nav-link">
+                    Event
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/coworking"} className="nav-link">
+                    CoWorking
+                  </Link>
+                </li>
               </ul>
-
             </div>
           </nav>
 
@@ -61,8 +60,7 @@ class App extends Component {
           </div>
 
           <Switch>
-            <Route path={"/event"} component={HomeEvent} />
-            
+            <Route path={"/event"} component={WhichEntity} />
           </Switch>
         </div>
       </Router>
