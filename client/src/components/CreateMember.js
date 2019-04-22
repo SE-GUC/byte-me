@@ -27,7 +27,7 @@ export default class CreateMember extends Component {
             firstName:'',
             lastName:'',
             email:'',
-            dateOfBirth:'',
+            dateOfBirth: new Date(),
             password:'',
             skills:[],
             skill1:'',
@@ -58,11 +58,10 @@ export default class CreateMember extends Component {
             email: e.target.value
         })
     }
-    onChangeDateOfBirth(e){
-        this.setState({
-            dateOfBirth: e.target.value
-        })
-    }
+    onChangeDateOfBirth = date => {
+        this.setState({ dateOfBirth: date });
+        console.log(this.state.dateOfBirth);
+      };
     onChangePassword(e){
         this.setState({
             password:e.target.value
@@ -155,7 +154,7 @@ export default class CreateMember extends Component {
             firstName:'',
             lastName:'',
             email:'',
-            dateOfBirth:'',
+            dateOfBirth: new Date(),
             password:'',
             skills:[],
             skill1:'',
@@ -218,8 +217,8 @@ export default class CreateMember extends Component {
                     <div className="form-group">
                         <label>Date Of Birth: </label>
                         <Calendar
-                            onChange={this.onChangeDateOfBirth}
                             value={this.state.dateOfBirth}
+                            onChange={this.onChangeDateOfBirth}
                         />
                     </div>
                     <div className="form-group">
