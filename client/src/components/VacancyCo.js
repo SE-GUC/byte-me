@@ -7,84 +7,9 @@ import axios from 'axios'
 
  
 
-class TableRowVacancy extends Component {
+class VacancyCo extends Component {
 
-    constructor(props) {
-
-        super(props);
-
-        this.delete = this.delete.bind(this);
-        this.edit = this.edit.bind(this);
-        this.apply = this.apply.bind(this);
-
-
-    }
-    delete() {
-
-        axios.delete('http://localhost:4000/api/vacancy/delete/'+this.props.obj._id)
-
-            .then(console.log('Deleted'))
-            .then(window.parent.location = window.parent.location.href)
-
-            .catch(err => console.log(err))
-
-    }
-    edit(){
-        axios.put('http://localhost:4000/api/vacancy/update/'+this.props.obj_id, {
-
-            dailyHours: this.state.dailyHours,
-    
-            description: this.state.description,
-    
-            duration: this.state.duration,
-    
-            startDate: this.state.startDate,
-
-            endDate: this.state.endDate,
-    
-            monthyWage: this.state.monthyWage,
-    
-            requiredSkills: this.state.requiredSkills,
-
-            location:this.state.location
-    
-        }, {
-    
-            headers: {
-    
-            'Content-Type': 'application/json'
-    
-            }
-    
-        })
-    
-        .then(res => {
-    
-            console.log(res.data)
-    
-        })
-    
-        .catch(error => {
-    
-            console.log(error)
-    
-        })
-        
-        
-        
-    }
-
-        
-
-    
-    apply(){
-      axios.put('http://localhost:4000/api/vacancy/apply/5ca0c819f792812168c302e0/'+this.props.obj._id)
-      .then(console.log('Applied'))
-      .then(window.parent.location = window.parent.location.href)
-
-      .catch(err => console.log(err))
-    }
-    
+  
     
 
   render() {
@@ -152,6 +77,6 @@ class TableRowVacancy extends Component {
 
  
 
-export default TableRowVacancy;
+export default VacancyCo;
 
  

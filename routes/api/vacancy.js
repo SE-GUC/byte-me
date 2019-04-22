@@ -10,6 +10,12 @@ router.get("/", async (req, res) => {
   const vacancy = await Vacancy.find();
   return res.json({ data: vacancy });
 });
+router.get("/:ownedBy", async (req, res) => {
+  var ownedBy = req.params.ownedBy;
+  await Vacancy.find({ ownedBy: ownedBy }, (err, vacancy) => {
+    return res.json({ data: vacancy });
+  });
+});
 
 router.post("/create/:id1", async (req, res) => {
   try {
@@ -23,6 +29,7 @@ router.post("/create/:id1", async (req, res) => {
         .status(400)
         .send({ error: isValidated.error.details[0].message });
     const newVacancy = await Vacancy.create(req.body);
+   // newVacancy = await Vacancy.update(newVacancy.ownedBy=id1)
     newVacancy.ownedBy = id1;
     partner.vacancyID.push(newVacancy.id);
     return res.json({
