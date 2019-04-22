@@ -171,7 +171,7 @@ export default class UpdateMember extends Component {
     }
     clickMe()
     {
-    // alert('test')
+        window.parent.location = window.parent.location.href;
     }
 
     render() {
