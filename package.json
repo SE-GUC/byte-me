@@ -11,9 +11,9 @@
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "engines":{
-    "npm":"6.4.1",
-    "node":"10.15.1"
+  "engines": {
+    "npm": "6.4.1",
+    "node": "10.15.1"
   },
   "keywords": [],
   "author": "",
@@ -29,19 +29,21 @@
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.4.15",
+    "mongoose": "^5.5.1",
     "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "react-calendar": "^2.18.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^2.1.8"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.5.0",
-    "jest": "^24.5.0",
-    "nodemon": "^1.18.10"
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "bulma": "^0.7.4",
-    "nodemon": "^1.18.10",
+    "jest": "^24.5.0",
+    "nodemon": "^1.18.11",
     "parcel": "^1.12.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

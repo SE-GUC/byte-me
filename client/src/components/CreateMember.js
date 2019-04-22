@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import axios from "axios";
+import Calendar from "react-calendar";
 
 export default class CreateMember extends Component {
     constructor(props){
@@ -216,12 +217,10 @@ export default class CreateMember extends Component {
                     </div>
                     <div className="form-group">
                         <label>Date Of Birth: </label>
-                            <input 
-                                type="text" 
-                                className="form-control"
-                                value={this.state.dateOfBirth}
-                                onChange={this.onChangeDateOfBirth}
-                                />
+                        <Calendar
+                            onChange={this.onChangeDateOfBirth}
+                            value={this.state.dateOfBirth}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Place Of Residence: </label>
