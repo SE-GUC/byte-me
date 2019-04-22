@@ -22,6 +22,8 @@ import DeletePartner from './components/DeletePartner';
 import SearchPartner from './components/SearchPartner';
 import CreatePartner from './components/CreatePartner';
 import EventPost from './components/EventPost';
+import Deletemember from './components/Deletemember';
+import Viewmember from './components/Viewmember';
 import './App.css';
 
 class App extends Component {
@@ -34,6 +36,8 @@ class App extends Component {
         <VacancyPost/>
         <CoProfile/>
         <CoEdit/>
+        <Deletemember/>
+        <Viewmember/>
       </div>,
       <Router>
       <div className="App">
