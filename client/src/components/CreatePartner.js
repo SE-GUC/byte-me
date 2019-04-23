@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from "react-dom";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
  class CreatePartner extends Component {
-//    state = {
-//      redirect: false
-//    }
-//  setRedirect = () => {
-//        this.setState({
-//        redirect: true
-//      })
-//    }
-//    renderRedirect = () => {
-//      if (this.state.redirect) {
-//        return <Redirect to='/Partner' />
-//      }
-//    }
+  //   state = {
+  //     redirect: false
+  //   }
+  // setRedirect = () => {
+  //       this.setState({
+  //       redirect: true
+  //     })
+  //   }
+  //   renderRedirect = () => {
+  //     if (this.state.redirect) {
+  //       return <Redirect to='/partner' />
+  //     }
+  //   }
 
     constructor (props){
         super(props);
@@ -34,7 +35,7 @@ import { Redirect } from 'react-router-dom';
         this.onChangeBoardMember3=this.onChangeBoardMember3.bind(this);  */
         this.onChangeFieldOfWork=this.onChangeFieldOfWork.bind(this);
         
-        this.onSubmit = this.onSubmit.bind(this);
+        //this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             organizationName: '',
             email: '',
@@ -119,26 +120,10 @@ import { Redirect } from 'react-router-dom';
           fieldOfWork: e.target.value
         })
       }
-      
-  onSubmit = (e) => {
-    e.preventDefault();
-    /*const obj ={
-        organizationName:this.state.organizationName,
-        email:this.state.email,
-        password:this.state.password,
-        description:this.state.description,
-        // partners:this.state.partners.concat([this.state.partner1,this.state.partner2,this.state.partner3]),
-        // partner1:this.state.partner1,
-        // partner2:this.state.partner2,
-        // partner3:this.state.partner3,
-        // boardMembers:this.state.boardMembers.concat([this.state.boardMember1,this.state.boardMember2,this.state.boardMember3]),
-        // boardMember1:this.state.boardMember1,
-        // boardMember2:this.state.boardMember2,
-        // boardMember3:this.state.boardMember3,
-        fieldOfWork:this.state.fieldOfWork
-
-    };
-   */
+  create (){    
+  // onSubmit = (e) => {
+  //   e.preventDefault();
+   
   console.log("--------------- "+this.state)
     axios.post('http://localhost:4000/api/partner/',{
         organizationName:this.state.organizationName,
@@ -147,14 +132,6 @@ import { Redirect } from 'react-router-dom';
         description:this.state.description,
         partners:this.state.partners,
         boardMembers:this.state.boardMembers,
-        // partners:this.state.partners.concat([this.state.partner1,this.state.partner2,this.state.partner3]),
-        // partner1:this.state.partner1,
-        // partner2:this.state.partner2,
-        // partner3:this.state.partner3,
-        // boardMembers:this.state.boardMembers.concat([this.state.boardMember1,this.state.boardMember2,this.boardMember3]),
-        // boardMember1:this.state.boardMember1,
-        // boardMember2:this.state.boardMember2,
-        // boardMember3:this.state.boardMember3,
         fieldOfWork:this.state.fieldOfWork
     })
     .then(res => {
@@ -163,29 +140,13 @@ import { Redirect } from 'react-router-dom';
     .catch(error => {
         console.log(error)
     })
-    /*this.setState ( {
-        organizationName: '',
-        email: '',
-        password: '',
-        description: '',
-        // partners: [],
-        // partner1:'',
-        // partner2:'',
-        // partner3:'',
-        // boardMembers:[],
-        // boardMember1: '',
-        // boardMember2: '',
-        // boardMember3: '',
-
-        fieldOfWork: ''
-       
-       
-    })*/
+   
   }
+//}
   clickMe()
   {
       // alert('test')
-     
+     //history.push("/partnerProfile")
       //this.setRedirect();
      // window.parent.location = window.parent.location.href;
   }
@@ -296,10 +257,10 @@ import { Redirect } from 'react-router-dom';
                       />
                 </div>
                 <div className="form-group">
-                 {/* {this.renderRedirect()}  */}
-                    <input type="submit" value="Sign up" className="btn btn-primary" onClick ={this.clickMe.bind(this)}  />
+                  {/* {this.renderRedirect()}   */}
+                     <input type="submit" value="Sign up" className="btn btn-primary" onClick ={this.clickMe.bind(this)}  /> 
                     
-                     
+                    {/* <Link to={"/partner/signUp"} value = "Sign up" className="btn btn-primary"onClick="create">sign up</Link>   */}
        
        
       
