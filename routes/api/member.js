@@ -6,7 +6,7 @@ const validator = require('../../validations/memberValidations')
 
 router.get('/', async (req,res) =>{
     const members = await Member.find()
-    res.json({data:members})
+    return res.json({data:members})
 })
 
 //Get my profile information (member)
@@ -14,7 +14,7 @@ router.get('/:id', async (req,res) => {
     const myID = req.params.id
     const mem = await Member.findById(myID)
     if(!mem) return res.status(404).send({error: 'There is no member with such ID'})
-    res.json({data:mem})
+    return res.json({data:mem})
 })
 
 
@@ -24,7 +24,7 @@ router.post('/', async (req,res) => {
     const isValidated = validator.createValidation(req.body)
     if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
     const newMember = await Member.create(req.body)
-    res.json({msg:'Member was created successfully', data: newMember})
+    return res.json({msg:'Member was created successfully', data: newMember})
    }
    catch(error) {
        // We will be handling the error later
@@ -46,7 +46,7 @@ router.put('/:id', async (req,res)=>{
     try {
      const id = req.params.id
      const deletedMember = await Member.findByIdAndRemove(id)
-     res.json({msg:'Member was deleted successfully', data: deletedMember})
+     return res.json({msg:'Member was deleted successfully', data: deletedMember})
     }
     catch(error) {
         // We will be handling the error later
@@ -72,7 +72,7 @@ Member.findOne({email:req.body.email})
  //view jobs
  router.get('/viewJobs/', async (req,res) => {
      const alljobs = await Vacancy.find()
-     res.json({data:alljobs})
+     return res.json({data:alljobs})
  })
 
  //view recommended jobs
@@ -138,7 +138,7 @@ Member.findOne({email:req.body.email})
              }
      
              
-         res.json({data:recommendedJobs})
+         return res.json({data:recommendedJobs})
 
      }
      catch(error){
