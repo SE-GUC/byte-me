@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
-class coworkingupdate extends Component {
+class coworkingUpdate extends Component {
     constructor (props) {
         super(props)
         this.onname=this.onname.bind(this)
@@ -23,7 +23,7 @@ class coworkingupdate extends Component {
             location: '',
             email:'',
             password:'',
-            rooms:'',
+            rooms:[{roomNo:""}],
             status:'',
             businessPlan:'',
             expiryDate:'',
@@ -78,7 +78,7 @@ class coworkingupdate extends Component {
       }
       oncontractLocation(c) {
         this.setState({
-          status: c.target.value
+          contractLocation: c.target.value
         })
       }
       
@@ -134,104 +134,170 @@ clickMe()
 }
     
 
-render() {
-  return(
-      <div style={{ marginTop: 10 }}>
-      <h3>Update Coworking</h3>
-      <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-              <label>Coworking Name:  </label>
-              <input 
-                type="text" 
-                className="form-control" 
-                value={this.state.name}
-                onChange={this.onname}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking Location: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.location}
-                onChange={this.onlocation}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking E-mail: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.email}
-                onChange={this.onemail}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking Password: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.password}
-                onChange={this.onpassword}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking Business Plan: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.businessPlan}
-                onChange={this.onbusinessPlan}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworkeing Rooms: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.rooms}
-                onChange={this.onrooms}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking Status: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.status}
-                onChange={this.onstatus}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking Expiry Date: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.expiryDate}
-                onChange={this.onexpiryDate}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking Contract Time: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.contractTime}
-                onChange={this.oncontractTime}
-                />
-          </div>
-          <div className="form-group">
-              <label>Coworking Contract Location: </label>
-              <input type="text" 
-                className="form-control"
-                value={this.state.contractLocation}
-                onChange={this.oncontractLocation}
-                />
-          </div>
-          <div className="form-group">
-              <input type="submit" value="Update" className="btn btn-primary" onClick ={this.clickMe.bind(this)} />
-          </div>
-      </form>
-  </div>
-  )
-}
+    render() {
+      
+        return(
+          
+          
+            <div style={{ marginTop: 10 }}>
+            <h3>Update Coworking</h3>
+            <form onSubmit={this.onSubmit}>
+            
+               
 
+                <div className="form-group">
+                    <label>Coworking Name:  </label>
+                    <input 
+                      type="text" 
+                      className="form-control" 
+                      value={this.state.name}
+                      onChange={this.onname}
+                      />
+                </div>
+                <div className="form-group">
+                    <label>Coworking Location: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.location}
+                      onChange={this.onlocation}
+                      />
+                </div>
+                <div className="form-group">
+                    <label>Coworking E-mail: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.email}
+                      onChange={this.onemail}
+                      />
+                </div>
+               
+                <div className="form-group">
+                    <label>Coworking Password: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.password}
+                      onChange={this.onpassword}
+                      />
+                </div>
+                <div className="form-group">
+                    <label>Coworking Business Plan: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.businessPlan}
+                      onChange={this.onbusinessPlan}
+                      />
+                </div>
+            
+                <div className="form-group">
+                    <label>Coworking Status: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.status}
+                      onChange={this.onstatus}
+                      />
+                </div>
+                <div className="form-group">
+                    <label>Coworking Expiry Date: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.expiryDate}
+                      onChange={this.onexpiryDate}
+                      />
+                </div>
+                <div className="form-group">
+                    <label>Coworking Contract Time: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.contractTime}
+                      onChange={this.oncontractTime}
+                      />
+                </div>
+                <div className="form-group">
+                    <label>Coworking Contract Location: </label>
+                    <input type="text" 
+                      className="form-control"
+                      value={this.state.contractLocation}
+                      onChange={this.oncontractLocation}
+                      />
+                </div>
+                <div className="form-group">
+               <label>rooms  </label>
+               {this.state.rooms.map((room, roomName) => (
+                <div className="rooms">
+                  <input
+                    type="text"
+                    placeholder={`room ${roomName + 1} `}
+                    value={room.name}
+                    onChange={this.handleroomNameChange(roomName)}
+                  />
+                  <button
+                    type="button"
+                    onClick={this.handleRemoveroom(roomName)}
+                    className="small"
+                  >
+                    -
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={this.handleAddroom}
+                className="small"
+              >
+                Add
+              </button>
+               
+               
+               </div>
+                <div className="form-group">
+                    <input type="submit" value="Create" className="btn btn-primary" onClick ={this.clickMe.bind(this)} />
+                </div>
+            </form>
+        </div>
+        )
+    }
+    
+    
+
+
+
+
+
+
+  handleroomNameChange = roomName => coworking => {
+    const newroom = this.state.rooms.map((room, rroomName) => {
+      if (roomName !== rroomName) return room;
+      return { ...room, name: coworking.target.value };
+    });
+
+    this.setState({ rooms: newroom });
+  };
+
+  handleAddroom = () => {
+    this.setState({
+      rooms: this.state.rooms.concat([{ name: "" }])
+    });
+  };
+
+  handleRemoveroom = roomName => () => {
+    this.setState({
+      rooms: this.state.rooms.filter((r, rroomName) => roomName !== rroomName)
+    });
+  };
+
+
+
+
+
+
+
+
+
+ 
 }
 ReactDOM.render(
-<coworkingPost subreddit='reactjs' />,
-document.getElementById('root')
-)
+    <coworkingPost subreddit='reactjs' />,
+      document.getElementById('root')
+  )
 
-export default coworkingupdate;
+export default coworkingUpdate;

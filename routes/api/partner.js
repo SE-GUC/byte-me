@@ -3,7 +3,7 @@ const router = express.Router()
 const Vacancy = require('../../models/Vacancy')
 const Partner = require('../../models/Partner')
 const validator = require('../../validations/partnerValidations')
-const Vacancy = require('../../models/Vacancy')
+
 const Event = require ('../../models/Event')
 
 
