@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import CreateMember from './components/CreateMember';
 import UpdateMember from './components/UpdateMember';
 import VacancyPost from './components/VacancyPost'
-import CoProfile from './components/Coworking/CoProfile';
+
 
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,10 +10,9 @@ import HomeVacancy from './components/HomeVacancy';
 import HomeEvent from './components/HomeEvent';
 import MemberHome from "./components/MemberHome";
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Cocreate from './components/Coworking/Cocreate';
-import Coupdate from './components/Coworking/Coupdate';
+
 import CoHome from './components/Coworking/CoHome';
-import searchbyname from './components/Coworking/searchbyname';
+
 import Header from './components/layout/Header';
 import UpdatePartner from './components/UpdatePartner';
 import GetPartners from './components/GetPartners';
@@ -32,7 +31,7 @@ class App extends Component {
         <CreateMember/>
         <UpdateMember/>
         <VacancyPost/>
-        <CoProfile/>
+       
         
       </div>,
       <Router>
@@ -40,16 +39,16 @@ class App extends Component {
         {/* <Cocreate/>
         <Coupdate/>
         <searchbyname/> */}
-        <CoHome/>
+        {/* <CoHome/> */}
         <div className="container">
           
           <Header />
           
-          <Route path="/SignUp" render={props => (
+          {/* <Route path="/SignUp" render={props => (
             <React.Fragment>
               <CreatePartner  />
             </React.Fragment>
-          )} />
+          )} /> */}
           <Route path="/Partner" render={props => (
             <React.Fragment>
             <DeletePartner  />
@@ -109,6 +108,7 @@ class App extends Component {
             <Route path={"/vacancy"} component={HomeVacancy} />
             <Route path={"/event"} component={HomeEvent} />
             <Route path={"/member"} component={MemberHome} />
+            <Route path={"/coworking"} component={CoHome} />
           </Switch>
         </div>
       </Router>
