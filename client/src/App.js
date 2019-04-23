@@ -3,7 +3,7 @@ import CreateMember from './components/CreateMember';
 import UpdateMember from './components/UpdateMember';
 import VacancyPost from './components/VacancyPost'
 import CoProfile from './components/Coworking/CoProfile';
-import CoEdit from './components/Coworking/CoEdit';
+
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomeVacancy from './components/HomeVacancy';
@@ -33,7 +33,7 @@ class App extends Component {
         <UpdateMember/>
         <VacancyPost/>
         <CoProfile/>
-        <CoEdit/>
+        
       </div>,
       <Router>
       <div className="App">
