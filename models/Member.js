@@ -26,11 +26,11 @@ const MemberSchema = new Schema({
         required: true
     },
     expiryDate: {
-        type: String,
+        type: Date,
         required: false
     },
     dateOfBirth: {
-        type: String,
+        type: Date,
         required:true
     },
     age:{

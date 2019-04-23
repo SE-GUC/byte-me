@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from "react-dom";
 import axios from "axios";
+import Calendar from 'react-calendar'
 
 export default class UpdateMember extends Component {
     constructor(props){
@@ -26,7 +27,7 @@ export default class UpdateMember extends Component {
             firstName:'',
             lastName:'',
             email:'',
-            dateOfBirth:'',
+            dateOfBirth: new Date(),
             password:'',
             skills:[],
             skill1:'',
@@ -57,11 +58,10 @@ export default class UpdateMember extends Component {
             email: e.target.value
         })
     }
-    onChangeDateOfBirth(e){
-        this.setState({
-            dateOfBirth: e.target.value
-        })
-    }
+    onChangeDateOfBirth = date => {
+        this.setState({ dateOfBirth: date });
+        console.log(this.state.dateOfBirth);
+      };
     onChangePassword(e){
         this.setState({
             password:e.target.value
@@ -154,7 +154,7 @@ export default class UpdateMember extends Component {
             firstName:'',
             lastName:'',
             email:'',
-            dateOfBirth:'',
+            dateOfBirth: new Date(),
             password:'',
             skills:[],
             skill1:'',
@@ -171,7 +171,7 @@ export default class UpdateMember extends Component {
     }
     clickMe()
     {
-    // alert('test')
+        window.parent.location = window.parent.location.href;
     }
 
     render() {
@@ -216,12 +216,10 @@ export default class UpdateMember extends Component {
                     </div>
                     <div className="form-group">
                         <label>Date Of Birth: </label>
-                            <input 
-                                type="text" 
-                                className="form-control"
-                                value={this.state.dateOfBirth}
-                                onChange={this.onChangeDateOfBirth}
-                                />
+                        <Calendar
+                            value={this.state.dateOfBirth}
+                            onChange={this.onChangeDateOfBirth}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Place Of Residence: </label>
