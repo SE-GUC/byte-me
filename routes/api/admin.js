@@ -15,17 +15,17 @@ router.get('/', async (req,res) => {
 })
 
 // getting a single admin 
-// router.get('/:id', async(req,res) =>{
-//     try{
-//         const id = req.param.id
-//         const admin = await Admin.findById(id)
-//         if(!admin) return res.status(404).send({error: 'Admin searched for does not exist'})
-//         res.json(admin)
-//     }
-//     catch(error){
-//         console.log(error)
-//     }
-// })
+ router.get('/:id', async(req,res) =>{
+    try{
+        const id = req.param.id
+        const admin = await Admin.findById(id)
+        if(!admin) return res.status(404).send({error: 'Admin searched for does not exist'})
+        res.json(admin)
+    }
+    catch(error){
+        console.log(error)
+    }
+})
 
 
 //Updating an admin 
