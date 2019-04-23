@@ -37,7 +37,7 @@ class TableRowVacancies extends Component {
             {this.props.obj.endDate}
           </td>
           <td>
-            <Link to={"/PartnerViewVacancies/"+this.props.obj._id} className="btn btn-primary">View vacancies</Link>
+            <Link to={"/PartnerViewApplicants/"+this.props.obj._id} className="btn btn-primary">View applicants</Link>
           </td>
           {/* <td>
             <button onClick={this.delete} className="btn btn-danger">Delete</button>

@@ -20,7 +20,7 @@ class PartnerViewVacancies extends Component {
     
     }
     getVacancy = () => {
-      axios.get('http://localhost:4000/api/partner/view/')
+      axios.get('http://localhost:4000/api/partner/view/5cb0bd7ba669143ee45eae56')
       .then(res => this.setState({ vacancy: res.data.data }))
       this.setState({ vacancy: this.state.vacancy});
       }

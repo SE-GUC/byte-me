@@ -19,70 +19,70 @@ router.get('/', async (req,res) => {
 
 //login 
 router.post('/login', async (req,res) => {
-    const { errors, isValid } = validateLoginInput(req.body);
-// Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-const email = req.body.email;
-  const password = req.body.password;
-// Find user by email
-  Partner.findOne({ email }).then(user => {
-    // Check if user exists
-    if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
-    }
-// Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (isMatch) {
-        // User matched
-        // Create JWT Payload
-        const payload = {
-          id: user.id,
-          organizationName: user.organizationName
-        };
-// Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926 // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
-      }
-    });
-  });
-    // try {
-    //     console.log('login')
-	// 	const { email, password } = req.body;
-	// 	const partner = await Partner.findOne({ email });
-	// 	if (!partner) return res.status(404).json({ email: 'Email does not exist' });
-	// 	const match = bcrypt.compareSync(password, partner.password);
-	// 	if (match) {
-    //         const payload = {
-    //             id: partner._id,
-    //             name: partner.organizationName,
-    //             email: partner.email
-    //         }
-    //         const token = jwt.sign(payload, tokenKey, { expiresIn: '5h' });
-    //         console.log(token);
-    //         store.set("token",token);
-    //         console.log(token.payload);
-    //         res.json({data: `Bearer ${token}`})
-    //         return res.json({ data: 'Token' })
-    //     }
-	// 	else return res.status(400).send({ password: 'Wrong password' });
-	// } catch (e) {}
+//     const { errors, isValid } = validateLoginInput(req.body);
+// // Check validation
+//   if (!isValid) {
+//     return res.status(400).json(errors);
+//   }
+// const email = req.body.email;
+//   const password = req.body.password;
+// // Find user by email
+//   Partner.findOne({ email }).then(user => {
+//     // Check if user exists
+//     if (!user) {
+//       return res.status(404).json({ emailnotfound: "Email not found" });
+//     }
+// // Check password
+//     bcrypt.compare(password, user.password).then(isMatch => {
+//       if (isMatch) {
+//         // User matched
+//         // Create JWT Payload
+//         const payload = {
+//           id: user.id,
+//           organizationName: user.organizationName
+//         };
+// // Sign token
+//         jwt.sign(
+//           payload,
+//           keys.secretOrKey,
+//           {
+//             expiresIn: 31556926 // 1 year in seconds
+//           },
+//           (err, token) => {
+//             res.json({
+//               success: true,
+//               token: "Bearer " + token
+//             });
+//           }
+//         );
+//       } else {
+//         return res
+//           .status(400)
+//           .json({ passwordincorrect: "Password incorrect" });
+//       }
+//     });
+//   });
+     try {
+         console.log('login')
+	 	const { email, password } = req.body;
+	 	const partner = await Partner.findOne({ email });
+	 	if (!partner) return res.status(404).json({ email: 'Email does not exist' });
+	 	const match = bcrypt.compareSync(password, partner.password);
+	 	if (match) {
+             const payload = {
+                 id: partner._id,
+                 name: partner.organizationName,
+                 email: partner.email
+             }
+             const token = jwt.sign(payload, tokenKey, { expiresIn: '5h' });
+             console.log(token);
+             store.set("token",token);
+             console.log(token.payload);
+             res.json({data: `Bearer ${token}`})
+             return res.json({ data: 'Token' })
+         }
+	 	else return res.status(400).send({ password: 'Wrong password' });
+	 } catch (e) {}
 });
 router.get('/logout', async (req, res)=> {
     console.log("logout");
@@ -111,18 +111,18 @@ router.get('/', async (req,res) => {
 })
 //As a partner i should get my profile information 
 router.get('/viewProfile/:id', async (req,res) => {
-    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
-        if(err)
-        {
-            console.log('ERROR:could not connect to the protected route');
-            res.sendStatus(403);
-        }else{
+    // jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+    //     if(err)
+    //     {
+    //         console.log('ERROR:could not connect to the protected route');
+    //         res.sendStatus(403);
+    //     }else{
             Partner.findById(req.params.id,function(err,partner){
                 if(err) return res.json({Message:'No partner matches the requested id'});
                 res.json({data: [partner]});
                 })
-   }
-    });
+//    }
+//     });
     
 });
 
@@ -146,20 +146,20 @@ router.post('/', async (req,res) => {
  //update profile 
  
 router.put('/:id', async (req,res) => {
-    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
-        if(err)
-        {
-            console.log('ERROR:could not connect to the protected route');
-            res.sendStatus(403);
-        }else{
+    // jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+    //     if(err)
+    //     {
+    //         console.log('ERROR:could not connect to the protected route');
+    //         res.sendStatus(403);
+    //     }else{
             Partner.findByIdAndUpdate(req.params.id,req.body,{new:true},(err,e)=>{
                 if(err){
                     return res.json({error:'Cannot update this partner'})
                 }
                 else return res.json({data:e})
             })    
-   }
-    });
+//    }
+//     });
    
 })
 //Add board members
@@ -227,66 +227,66 @@ router.put('/addPartners/:id',async (req, res)=> {
 });
 //delete profile 
  router.delete('/delete/:id', async (req,res) => {
-     jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
-         if(err)
-         {
-             console.log('ERROR:could not connect to the protected route');
-             res.sendStatus(403);
-         }else{
+    //  jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+    //      if(err)
+    //      {
+    //          console.log('ERROR:could not connect to the protected route');
+    //          res.sendStatus(403);
+    //      }else{
          Partner.findByIdAndRemove(req.params.id,function(err,partner){
             if (err) return res.json({Message:'error'});
             res.json({msg:'Partner was deleted successfully'}); 
         })
-    }
-     });
+    // }
+    //  });
       
  });
 
  //view my vacancies
  router.get('/view/:id',async (req,res)=>{
      
-    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
-        if(err)
-        {
-            console.log('ERROR:could not connect to the protected route');
-            res.sendStatus(403);
-        }else{
+    // jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+    //     if(err)
+    //     {
+    //         console.log('ERROR:could not connect to the protected route');
+    //         res.sendStatus(403);
+    //     }else{
             Vacancy.find({ownedBy:req.params.id},function(err,vacancy){
                 if(err) return res.json({Message:'Partner has no vacacncies'});
                 res.json({data: vacancy});  
             })
             
-   }
-    });
+//    }
+//     });
     
 });
 //view my events
 router.get('/viewEvent/:id',async (req,res)=>{
      
-    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
-        if(err)
-        {
-            console.log('ERROR:could not connect to the protected route');
-            res.sendStatus(403);
-        }else{
+    // jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+    //     if(err)
+    //     {
+    //         console.log('ERROR:could not connect to the protected route');
+    //         res.sendStatus(403);
+    //     }else{
             
             Event.find({organizedBy:req.params.id},function(err,event){
                 if(err) return res.json({Message:'Partner has no events'});
                 res.json({data: event});  
             })
                  
-   }
-    });
+//    }
+//     });
    
 });
 //get vacancy applicants
 router.get('/viewApplicants/:id',async (req,res)=>{
-    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
-        if(err)
-        {
-            console.log('ERROR:could not connect to the protected route');
-            res.sendStatus(403);
-        }else{
+    // jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+    //     if(err)
+    //     {
+    //         console.log('ERROR:could not connect to the protected route');
+    //         res.sendStatus(403);
+    //     }else{
             Vacancy.findOne()
             .exec()
             .then(doc => {
@@ -302,20 +302,20 @@ router.get('/viewApplicants/:id',async (req,res)=>{
                  
             
                  
-   }
-    });
+//    }
+//     });
     
    
 });
 //get event attendees 
 router.get('/viewAttendees/:id',async (req,res)=>{
      
-    jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
-        if(err)
-        {
-            console.log('ERROR:could not connect to the protected route');
-            res.sendStatus(403);
-        }else{
+    // jwt.verify(store.get('token'),tokenKey,async(err,authorizedData)=> {
+    //     if(err)
+    //     {
+    //         console.log('ERROR:could not connect to the protected route');
+    //         res.sendStatus(403);
+    //     }else{
            
             Event.findOne()
             .exec()
@@ -331,8 +331,8 @@ router.get('/viewAttendees/:id',async (req,res)=>{
             .catch(err =>{console.log(err); return res.json({Message:`no events`})});
                
                  
-   }
-    });
+//    }
+//     });
     
    
 });

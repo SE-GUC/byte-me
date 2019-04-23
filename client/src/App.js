@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import React, { Component } from 'react';
 //import Dropdown from 'react-drop-down';
-import Header from './components/layout/Header';
+
 import UpdatePartner from './components/UpdatePartner';
 import GetPartners from './components/GetPartners';
 import GetPartner from './components/GetPartner';

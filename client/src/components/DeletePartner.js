@@ -13,7 +13,7 @@ class DeletePartner extends Component {
             
     }
     delete(){
-      axios.delete('http://localhost:4000/api/partner/delete/')
+      axios.delete('http://localhost:4000/api/partner/delete/5cbe74851607de05b4ae7c42')
       .then(console.log('Deleted'))
            .catch(err => console.log(err))
     }

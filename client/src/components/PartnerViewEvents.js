@@ -20,7 +20,7 @@ class PartnerViewEvents extends Component {
     
     }
     getEvent = () => {
-      axios.get('http://localhost:4000/api/partner/viewEvents/')
+      axios.get('http://localhost:4000/api/partner/viewEvents/5cb0bd7ba669143ee45eae56')
       .then(res => this.setState({ event: res.data.data }))
       this.setState({ event: this.state.vacancy});
       }

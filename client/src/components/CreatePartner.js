@@ -120,9 +120,9 @@ import { Redirect } from 'react-router-dom';
           fieldOfWork: e.target.value
         })
       }
-  create (){    
-  // onSubmit = (e) => {
-  //   e.preventDefault();
+     
+   onSubmit = (e) => {
+     e.preventDefault();
    
   console.log("--------------- "+this.state)
     axios.post('http://localhost:4000/api/partner/',{
@@ -257,7 +257,7 @@ import { Redirect } from 'react-router-dom';
                       />
                 </div>
                 <div className="form-group">
-                  {/* {this.renderRedirect()}   */}
+                
                      <input type="submit" value="Sign up" className="btn btn-primary" onClick ={this.clickMe.bind(this)}  /> 
                     
                     {/* <Link to={"/partner/signUp"} value = "Sign up" className="btn btn-primary"onClick="create">sign up</Link>   */}

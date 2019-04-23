@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import GetPartner from "./GetPartner";
 import DeletePartner from "./DeletePartner";
 import UpdatePartner from "./UpdatePartner";
-
+import GetPartners from './GetPartners';
 import SearchEmail from "./SearchEmail";
 import SearchDescription from "./SearchDescription";
 import SearchBoardMembers from "./SearchBoardMembers";
@@ -46,13 +46,13 @@ class HomePartner extends Component {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to={"/partnerViewVacancies"} className="nav-link">
+                    <Link to={"/viewMyVacancies"} className="nav-link">
                       view my vacancies
                     </Link>
                   </li>
                   
                   <li className="nav-item">
-                    <Link to={"/partnerViewEvents"} className="nav-link">
+                    <Link to={"/viewMyEvents"} className="nav-link">
                       view my events
                     </Link>
                   </li>
@@ -94,7 +94,11 @@ class HomePartner extends Component {
                     </Link>
                   </li>
                   
-                 
+                  <li className="nav-item">
+                    <Link to={"/GetPartners"} className="nav-link">
+                      view all partners
+                    </Link>
+                  </li>
                  
                    
                 </ul>
@@ -111,7 +115,7 @@ class HomePartner extends Component {
              <Route path='/updateMyProfile' component={ UpdatePartner} />
              <Route path='/viewMyVacancies' component={ PartnerViewVacancies} />
              <Route path='/viewMyEvents' component={ PartnerViewEvents} />
-             
+             <Route path= '/GetPartners' component={GetPartners} />
 
              <Route path='/search1' component={ SearchEmail} />
              <Route path='/search2' component={ SearchOrganizationName} />

@@ -77,7 +77,7 @@ class UpdatePartner extends Component {
     
       onSubmit(e) {
         e.preventDefault();
-        axios.put('http://localhost:4000/api/partner/5ca0f7a134ede009c00c3f42/', {
+        axios.put('http://localhost:4000/api/partner/5cb0bd7ba669143ee45eae56/', {
             partner:this.state.partner,
             boardMember: this.state.boardMember,
             organizationName: this.state.organizationName,
