@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import Partners from "./Partners";
-export default class SearchPartner extends Component {
+export default class searchOrganizationName extends Component {
     constructor(props) {
 
         super(props);
@@ -28,7 +28,7 @@ export default class SearchPartner extends Component {
     try {
       var criteria = this.state.value;
       axios
-        .get("http://localhost:4000/api/partner/searchfieldOfWork/" + criteria)
+        .get("http://localhost:4000/api/partner/searchOrganizationName/" + criteria)
         .then(res => {
             const result = res.data.data;
             this.setState({partner :res.data.data})
@@ -52,11 +52,11 @@ export default class SearchPartner extends Component {
 
       <div>
       
-        <h3 align="center">Search For partners:</h3>
+        {/* <h3 align="center">Search For partners:</h3> */}
         <div>
     <input
       type="text"
-      placeholder="Search by field of work.."
+      placeholder="Search by organization name.."
       onChange={this.onChange}
     />
     <div>
@@ -66,7 +66,7 @@ export default class SearchPartner extends Component {
         name="action"
         onClick={this.getResult}
       >
-        Search
+        Search organization name
       </button>
     </div>
         <table className="table table-striped" style={{ marginTop: 10 }}>

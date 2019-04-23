@@ -23,7 +23,7 @@ class coworkingPost extends Component {
             location: '',
             email:'',
             password:'',
-            rooms:'',
+            rooms:[{roomNo:""}],
             status:'',
             businessPlan:'',
             expiryDate:'',
@@ -135,10 +135,16 @@ clickMe()
     
 
     render() {
+      
         return(
+          
+          
             <div style={{ marginTop: 10 }}>
             <h3>Add New Coworking</h3>
             <form onSubmit={this.onSubmit}>
+            
+               
+
                 <div className="form-group">
                     <label>Coworking Name:  </label>
                     <input 
@@ -164,6 +170,7 @@ clickMe()
                       onChange={this.onemail}
                       />
                 </div>
+               
                 <div className="form-group">
                     <label>Coworking Password: </label>
                     <input type="text" 
@@ -180,14 +187,7 @@ clickMe()
                       onChange={this.onbusinessPlan}
                       />
                 </div>
-                <div className="form-group">
-                    <label>Coworkeing Rooms: </label>
-                    <input type="text" 
-                      className="form-control"
-                      value={this.state.rooms}
-                      onChange={this.onrooms}
-                      />
-                </div>
+            
                 <div className="form-group">
                     <label>Coworking Status: </label>
                     <input type="text" 
@@ -221,13 +221,79 @@ clickMe()
                       />
                 </div>
                 <div className="form-group">
+               <label>rooms  </label>
+               {this.state.rooms.map((room, roomName) => (
+                <div className="rooms">
+                  <input
+                    type="text"
+                    placeholder={`room ${roomName + 1} `}
+                    value={room.name}
+                    onChange={this.handleroomNameChange(roomName)}
+                  />
+                  <button
+                    type="button"
+                    onClick={this.handleRemoveroom(roomName)}
+                    className="small"
+                  >
+                    -
+                  </button>
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={this.handleAddroom}
+                className="small"
+              >
+                Add
+              </button>
+               
+               
+               </div>
+                <div className="form-group">
                     <input type="submit" value="Create" className="btn btn-primary" onClick ={this.clickMe.bind(this)} />
                 </div>
             </form>
         </div>
         )
     }
+    
+    
 
+
+
+
+
+
+  handleroomNameChange = roomName => coworking => {
+    const newroom = this.state.rooms.map((room, rroomName) => {
+      if (roomName !== rroomName) return room;
+      return { ...room, name: coworking.target.value };
+    });
+
+    this.setState({ rooms: newroom });
+  };
+
+  handleAddroom = () => {
+    this.setState({
+      rooms: this.state.rooms.concat([{ name: "" }])
+    });
+  };
+
+  handleRemoveroom = roomName => () => {
+    this.setState({
+      rooms: this.state.rooms.filter((r, rroomName) => roomName !== rroomName)
+    });
+  };
+
+
+
+
+
+
+
+
+
+ 
 }
 ReactDOM.render(
     <coworkingPost subreddit='reactjs' />,

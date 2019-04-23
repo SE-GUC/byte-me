@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableRow from './TableRow';
+import TableRowCo from './TableRowCo';
+
 // import {createStackNavigator, createAppContainer} from 'react-navigation';
 
-export default class showevents extends Component {
+export default class IndexCo extends Component {
 
 constructor(props) {
 super(props);
 this.state = {event: []};
 }
+
+
 componentDidMount(){
 axios.get('http://localhost:4000/api/event/')
 .then(event => {
@@ -18,12 +21,11 @@ this.setState({ event: event.data.data });
 .catch(function (error) {
 console.log(error);
 })
-// const eventsg = await axios.get('http://localhost:3000/api/event')
-// return eventsg.data
+
 }
 tabRow(){
 return this.state.event.map(function(object, i){
-return <TableRow obj={object} key={i} />;
+return <TableRowCo obj={object} key={i} />;
 });
 }
 
@@ -41,7 +43,6 @@ return (
              <th>Location</th>
              <th>Duration</th>
              <th>Date</th>
-             <th colSpan="2">Action</th>
           </tr>
         </thead>
       <tbody>
