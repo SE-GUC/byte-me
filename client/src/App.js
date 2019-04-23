@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import HomeEvent from "./components/HomeEventPartner";
-
+import './App.css';
 
 //import Dropdown from 'react-drop-down';
 import CoHome from './components/Coworking/CoHome';
