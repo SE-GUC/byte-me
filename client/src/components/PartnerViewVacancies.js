@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import TableRow from './TableRow'
+import TableRowVacancies from './TableRowVacancies'
 
 
 class PartnerViewVacancies extends Component {
@@ -20,13 +20,13 @@ class PartnerViewVacancies extends Component {
     
     }
     getVacancy = () => {
-      axios.get('http://localhost:4000/api/partner/view/')
+      axios.get('http://localhost:4000/api/partner/view/5cb0bd7ba669143ee45eae56')
       .then(res => this.setState({ vacancy: res.data.data }))
       this.setState({ vacancy: this.state.vacancy});
       }
       tabRow(){
         return this.state.vacancy.map(function(object, i){
-          return <TableRow obj={object} key={i} />;
+          return <TableRowVacancies obj={object} key={i} />;
         })
       }
       

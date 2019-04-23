@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const passport = require("passport");
 const bodyParser = require('body-parser')
 const coworkingSpace = require('./routes/api/coworking')
 const partner = require('./routes/api/partner')
@@ -40,7 +41,12 @@ app.use('/api/event', event)
 
 app.use((req, res) => {
     res.status(404).send({err: 'We can not find what you are looking for'});
-})
-
+ })
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require("./config/passport")(passport);
+// Routes
+//app.use("/api/partner", partners);
 const port = process.env.PORT || 4000
 app.listen(port, () => console.log(`Server up and running on port ${port}`))

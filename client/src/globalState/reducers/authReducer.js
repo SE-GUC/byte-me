@@ -1,9 +1,13 @@
-import { LOGIN, LOGOUT } from '../actions/actionTypes'
+import { LOGIN, LOGOUT, SET_CURRENT_USER,
+    USER_LOADING } from '../actions/actionTypes'
+    const isEmpty = require("is-empty");
 
 const initialState = {
     isLoggedIn: false,
-    loggedUser:{},
-    checkType:null
+    isAuthenticated: false,
+    loading: false,
+    loggedUser: {}
+    
 }
 
 export default function(state = initialState, action) {
@@ -19,9 +23,19 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 isLoggedIn: false,
-                loggedUser: {},
-                checkType: null
+                loggedUser: {}
             }
+            case SET_CURRENT_USER:
+      return {
+        ...state,
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      };
+    case USER_LOADING:
+      return {
+        ...state,
+        loading: true
+      };
             default: return state
         }
 }
