@@ -7,7 +7,7 @@ import axios from 'axios'
 
  
 
-class TableRowVacancy extends Component {
+class Vacancypartner extends Component {
 
     constructor(props) {
 
@@ -15,7 +15,7 @@ class TableRowVacancy extends Component {
 
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
-        // this.apply = this.apply.bind(this);
+
 
 
     }
@@ -77,14 +77,7 @@ class TableRowVacancy extends Component {
         
 
     
-    // apply(){
-    //   axios.put('http://localhost:4000/api/vacancy/apply/5ca0c819f792812168c302e0/'+this.props.obj._id)
-    //   .then(console.log('Applied'))
-    //   .then(window.parent.location = window.parent.location.href)
-
-    //   .catch(err => console.log(err))
-    // }
-    
+   
     
 
   render() {
@@ -140,7 +133,7 @@ class TableRowVacancy extends Component {
 
           <td>
 
-          <Link to={"/vacancy/partner/update/"+this.props.obj._id} className="btn btn-primary" onClick="edit">Edit</Link>
+          <Link to={"/vacancy/update/"+this.props.obj._id} className="btn btn-primary" onClick="edit">Edit</Link>
 
           </td>
 
@@ -149,12 +142,8 @@ class TableRowVacancy extends Component {
           <button onClick={this.delete}className="btn btn-danger">Delete</button >
           
 
-          </td><td>
-  
-  {/* <button onClick={this.apply}className="btn btn-danger">Apply</button > */}
-  
-
-  </td>
+          </td>
+        
 
         </tr>
 
@@ -167,6 +156,6 @@ class TableRowVacancy extends Component {
 
  
 
-export default TableRowVacancy;
+export default Vacancypartner;
 
  

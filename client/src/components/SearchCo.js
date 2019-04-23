@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import TableRow from "./TableRow";
-export default class Search extends Component {
+import TableRowCo from "./TableRowCo";
+export default class SearchCo extends Component {
     constructor(props) {
 
         super(props);
@@ -42,7 +42,7 @@ export default class Search extends Component {
 
     return this.state.event.map(function(object, i){
 
-        return <TableRow obj={object} key={i} />;
+        return <TableRowCo obj={object} key={i} />;
 
     });
   }
@@ -81,7 +81,7 @@ export default class Search extends Component {
              <th>Location</th>
              <th>Duration</th>
              <th>Date</th>
-             <th colSpan="2">Action</th>
+             
 
             </tr>
 
