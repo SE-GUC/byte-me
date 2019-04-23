@@ -2,7 +2,8 @@ import { LOGIN, LOGOUT } from '../actions/actionTypes'
 
 const initialState = {
     isLoggedIn: false,
-    loggedUser: {}
+    loggedUser:{},
+    checkType:null
 }
 
 export default function(state = initialState, action) {
@@ -11,13 +12,15 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 isLoggedIn: true,
-                loggedUser: action.payload
+                loggedUser: action.payload,
+                checkType: action.payload.type
             }
             case LOGOUT: 
             return {
                 ...state,
                 isLoggedIn: false,
-                loggedUser: {}
+                loggedUser: {},
+                checkType: null
             }
             default: return state
         }
